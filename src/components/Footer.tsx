@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-white self-stretch w-full overflow-hidden mt-[51px] pb-12 px-20 max-md:max-w-full max-md:mt-10 max-md:px-5">
-      <div className="border-t border-gray-200 w-full h-px mb-8" />
-      <div className="flex w-full items-start justify-between gap-16 flex-wrap max-md:max-w-full max-md:gap-8">
+    <footer className="bg-white self-stretch w-full overflow-hidden mt-10 md:mt-[51px] pb-8 md:pb-12 px-4 md:px-20">
+      <div className="border-t border-gray-200 w-full h-px mb-6 md:mb-8" />
+      <div className="flex w-full items-start justify-between gap-8 md:gap-16 flex-wrap">
         {/* Logo on left */}
         <div className="flex-shrink-0">
           <img
@@ -15,7 +15,7 @@ const Footer = () => {
         </div>
         
         {/* 3 columns on right */}
-        <div className="flex gap-12 max-md:flex-col max-md:gap-8 max-md:w-full">
+        <div className="flex gap-6 md:gap-12 max-md:flex-col max-md:w-full">
           {/* Index Column */}
           <nav className="flex flex-col text-base text-[#797B8A] font-medium gap-4">
             <div className="text-black font-semibold mb-2">Index</div>
@@ -48,10 +48,10 @@ const Footer = () => {
       </div>
       
       {/* Line break */}
-      <div className="border-t border-gray-200 w-full h-px my-8" />
+      <div className="border-t border-gray-200 w-full h-px my-6 md:my-8" />
       
       {/* Copyright */}
-      <div className="text-center text-sm text-[#797B8A]">
+      <div className="text-center text-xs md:text-sm text-[#797B8A] px-4">
         Kendall Square Technology and Services Private Limited © 2025
       </div>
     </footer>

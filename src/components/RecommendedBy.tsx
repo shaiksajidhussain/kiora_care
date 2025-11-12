@@ -2,7 +2,7 @@ import React from 'react';
 
 const RecommendedBy = () => {
   return (
-    <section className="flex flex-col items-center px-4 py-16">
+    <section className="flex flex-col items-center px-4 py-8 md:py-16">
       <p className="text-foreground text-[clamp(16px,2.5vw,20px)] font-normal leading-normal tracking-tight text-center">
         Recommended by experts from
       </p>

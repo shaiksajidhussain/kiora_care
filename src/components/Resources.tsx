@@ -20,19 +20,19 @@ const Resources = () => {
   ];
 
   return (
-    <section className="flex flex-col items-center">
-      <h2 className="text-black text-[64px] font-[510] leading-none tracking-[-1.28px] text-center mt-[324px] max-md:text-[40px] max-md:mt-10">
+    <section className="flex flex-col items-center px-4 py-10 md:py-20">
+      <h2 className="text-black text-[clamp(40px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] text-center mt-10 md:mt-[324px]">
         Resources
       </h2>
-      <p className="text-black text-2xl font-normal leading-[3] tracking-[-0.48px] text-center max-md:max-w-full">
+      <p className="text-black text-xl md:text-2xl font-normal tracking-[-0.48px] text-center max-w-full mt-4">
         Expert-curated resources on kidney health, nutrition, and mental well-being.
       </p>
       
-      <div className="w-[1115px] max-w-full mt-[80px] max-md:mt-10">
-        <div className="gap-5 flex max-md:flex-col max-md:items-stretch">
+      <div className="w-full max-w-[1115px] mt-8 md:mt-[80px]">
+        <div className="gap-4 md:gap-5 flex max-md:flex-col max-md:items-stretch">
           {resources.map((resource, index) => (
             <article key={index} className="w-[33%] max-md:w-full max-md:ml-0">
-              <div className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.25)] flex flex-col items-center aspect-[1] w-full rounded-[10px] max-md:mt-10 transition-transform duration-300 hover:scale-105">
+              <div className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.25)] flex flex-col items-center aspect-[1] w-full rounded-[10px] max-md:mt-6 transition-transform duration-300 hover:scale-105">
                 <div className="border flex flex-col items-stretch px-5 py-[22px] rounded-[10px] border-[rgba(34,34,34,0.1)] border-solid">
                   <img
                     src={resource.image}
@@ -52,7 +52,7 @@ const Resources = () => {
         </div>
       </div>
       
-      <button className="bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] flex items-center justify-center text-primary-foreground px-9 py-2.5 rounded-xl hover:opacity-90 transition-opacity mt-[92px] max-md:mt-10">
+      <button className="bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] flex items-center justify-center text-primary-foreground px-9 py-2.5 rounded-xl hover:opacity-90 transition-opacity mt-8 md:mt-[92px]">
         Explore More
       </button>
     </section>

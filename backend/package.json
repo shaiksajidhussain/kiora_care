@@ -1,0 +1,16 @@
+{
+  "name": "kiora-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Kiora website contact form",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "resend": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@vercel/node": "^3.0.0"
+  }
+}
+

@@ -35,16 +35,16 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="flex flex-col items-center">
-      <h2 className="text-black text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center mt-[200px] max-md:mt-10">
+    <section id="about" className="flex flex-col items-center px-4 py-10 md:py-20">
+      <h2 className="text-black text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center mt-10 md:mt-[200px]">
         About Us
       </h2>
-      <p className="text-black text-2xl font-normal leading-[3] tracking-[-0.48px] text-center max-md:max-w-full">
+      <p className="text-black text-xl md:text-2xl font-normal leading-[3] tracking-[-0.48px] text-center max-w-full mt-4">
         Deep commitment to improving healthcare outcomes
       </p>
       
-      <div className="w-full max-w-[1146px] mt-[80px] max-md:mt-10 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+      <div className="w-full max-w-[1146px] mt-8 md:mt-[80px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
           {teamMembers.map((member, index) => (
             <article key={index} className="h-full">
               <div className="bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full pt-3 pb-6 px-[clamp(10px,1.5vw,13px)] rounded-[33px] border-[rgba(228,228,228,1)] border-solid h-full transition-transform duration-300 hover:scale-105">

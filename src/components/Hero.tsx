@@ -14,7 +14,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative flex flex-col items-center text-center px-4 pb-32 overflow-hidden min-h-[100vh] justify-center w-full rounded-[25px]"
+      className="relative flex flex-col items-center text-center px-4 pb-16 md:pb-32 overflow-hidden min-h-[100vh] justify-center w-full rounded-[25px]"
       style={{
         background: `
           radial-gradient(circle at 50% 30%, #E3E4E7 20%, transparent 60%),
@@ -23,7 +23,7 @@ const Hero = () => {
       }}
     >
       <div className="relative z-10 mb-12">
-        <h1 className="text-foreground font-normal mt-[156px] max-w-[1200px] mx-auto">
+        <h1 className="text-foreground font-normal mt-20 md:mt-[156px] max-w-[1200px] mx-auto">
           <span className="block text-[clamp(48px,8vw,128px)] leading-[1.1] tracking-tight">
             Life is Beautiful.
           </span>

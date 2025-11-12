@@ -14,6 +14,9 @@ interface FormData {
 const ContactForm = () => {
   const [showForm, setShowForm] = useState(false);
   const [userTypeError, setUserTypeError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
     const handleOpenForm = (event: Event) => {
@@ -56,7 +59,7 @@ const ContactForm = () => {
     setUserTypeError(''); // Clear error when user selects a type
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate user type is selected
@@ -66,24 +69,72 @@ const ContactForm = () => {
     }
     
     setUserTypeError('');
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+    setSubmitError('');
+    setIsSubmitting(true);
+    setSubmitSuccess(false);
+
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || import.meta.env.NEXT_PUBLIC_BACKEND_URL;
+      
+      if (!backendUrl) {
+        throw new Error('Backend URL is not configured. Please set VITE_BACKEND_URL or NEXT_PUBLIC_BACKEND_URL environment variable.');
+      }
+
+      const response = await fetch(`${backendUrl}/api/send-contact-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Failed to send email' }));
+        throw new Error(errorData.error || 'Failed to send email');
+      }
+
+      // Success
+      setSubmitSuccess(true);
+      
+      // Reset form
+      setFormData({
+        userType: null,
+        fullName: '',
+        phoneNumber: '',
+        emailAddress: '',
+        city: '',
+        pincode: '',
+        message: '',
+        agreeToContact: false
+      });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 5000);
+
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError(error instanceof Error ? error.message : 'Failed to submit form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section id="contact" className="flex flex-col items-center">
-      <div className="w-full max-w-[1445px] px-4 mt-[220px] max-md:mt-10">
-        <div className="bg-[rgba(17,144,255,1)] flex w-full flex-col overflow-hidden items-center text-white font-normal text-center justify-center px-20 py-16 rounded-[72px] max-md:px-5">
+    <section id="contact" className="flex flex-col items-center px-4 py-10 md:py-20">
+      <div className="w-full max-w-[1445px] mt-10 md:mt-[220px]">
+        <div className="bg-[rgba(17,144,255,1)] flex w-full flex-col overflow-hidden items-center text-white font-normal text-center justify-center px-6 md:px-20 py-10 md:py-16 rounded-[32px] md:rounded-[72px]">
         <div className="flex w-[772px] max-w-full flex-col items-center">
-          <h2 className="text-[64px] font-[510] leading-none tracking-[-1.28px] self-stretch max-md:max-w-full max-md:text-[40px]">
+          <h2 className="text-[clamp(32px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] self-stretch max-w-full">
             Join others on their journey to better care
           </h2>
-          <p className="text-lg leading-none mt-[55px] max-md:max-w-full max-md:mt-10">
+          <p className="text-base md:text-lg leading-none mt-6 md:mt-[55px] max-w-full">
             Get in touch to discover personalized solutions for kidney disease management.
           </p>
           <button 
             onClick={() => setShowForm(!showForm)}
-            className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-[17px] text-black tracking-[-0.34px] mt-[72px] px-9 py-2.5 rounded-xl max-md:mt-10 hover:bg-gray-100 transition-colors"
+            className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-[17px] text-black tracking-[-0.34px] mt-8 md:mt-[72px] px-9 py-2.5 rounded-xl hover:bg-gray-100 transition-colors"
           >
             Reach Out to Us
           </button>
@@ -92,17 +143,17 @@ const ContactForm = () => {
       </div>
       
       {showForm && (
-        <div className="w-full max-w-[1445px] px-4 mt-[26px] max-md:max-w-full">
-        <div className="gap-8 flex max-md:flex-col max-md:items-stretch">
+        <div className="w-full max-w-[1445px] mt-6 md:mt-[26px]">
+        <div className="gap-6 md:gap-8 flex max-md:flex-col max-md:items-stretch">
           <div className="w-1/2 max-md:w-full max-md:ml-0">
             <img
               src="/images/contact-illustration.png"
-              className="aspect-[0.86] object-contain w-full grow rounded-[72px] max-md:max-w-full max-md:mt-10"
+              className="aspect-[0.86] object-contain w-full grow rounded-[32px] md:rounded-[72px] max-md:max-w-full max-md:mt-6"
               alt="Contact illustration"
             />
           </div>
           <div className="w-1/2 max-md:w-full max-md:ml-0">
-            <div className="w-full mt-[22px] max-md:max-w-full max-md:mt-10 pr-8">
+            <div className="w-full mt-6 md:mt-[22px] max-md:max-w-full pr-0 md:pr-8">
               <form onSubmit={handleSubmit} className="max-md:max-w-full">
                 <div className="grow text-black max-md:mt-[18px]">
                   <h3 className="text-[55px] font-normal leading-none tracking-[-2.2px] mr-[30px] max-md:text-[40px] max-md:mr-2.5">
@@ -236,11 +287,24 @@ const ContactForm = () => {
                     </label>
                   </div>
                   
+                  {submitSuccess && (
+                    <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-800">
+                      <p className="font-medium">Thank you! Your message has been sent successfully. We'll get back to you soon.</p>
+                    </div>
+                  )}
+                  
+                  {submitError && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-800">
+                      <p className="font-medium">{submitError}</p>
+                    </div>
+                  )}
+                  
                   <button
                     type="submit"
-                    className="bg-[rgba(17,144,255,1)] shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden items-center text-white whitespace-nowrap text-center justify-center mt-[30px] px-[70px] py-[15px] rounded-xl max-md:max-w-full max-md:px-5 hover:bg-blue-600 transition-colors"
+                    disabled={isSubmitting}
+                    className="bg-[rgba(17,144,255,1)] shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden items-center text-white whitespace-nowrap text-center justify-center mt-[30px] px-[70px] py-[15px] rounded-xl max-md:max-w-full max-md:px-5 hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Submit
+                    {isSubmitting ? 'Submitting...' : 'Submit'}
                   </button>
                 </div>
               </form>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="flex flex-col items-center px-4 py-20">
+    <section id="how-it-works" className="flex flex-col items-center px-4 py-10 md:py-20">
       <h2 className="text-foreground text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center">
         How it Works
       </h2>
@@ -10,10 +10,10 @@ const HowItWorks = () => {
         Personalized, coordinated, evidence-based support
       </p>
       
-      <div className="w-full max-w-[1175px] mt-[80px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="w-full max-w-[1175px] mt-8 md:mt-[80px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Card 1 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-[570px]">
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[570px]">
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Holistic Support
             </h3>
@@ -28,7 +28,7 @@ const HowItWorks = () => {
           </article>
           
           {/* Card 2 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-[496px]">
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[496px]">
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Ongoing Monitoring & Protocols
             </h3>
@@ -43,7 +43,7 @@ const HowItWorks = () => {
           </article>
           
           {/* Card 3 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-[489px]">
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[489px]">
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Built for India
             </h3>
@@ -58,7 +58,7 @@ const HowItWorks = () => {
           </article>
           
           {/* Card 4 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-[563px] -mt-[74px]">
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[563px] md:-mt-[74px]">
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Personalized Care Plan
             </h3>
@@ -73,7 +73,6 @@ const HowItWorks = () => {
           </article>
         </div>
       </div>
-      <br/><br/><br/>
     </section>
   );
 };
