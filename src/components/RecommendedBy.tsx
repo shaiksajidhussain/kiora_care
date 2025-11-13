@@ -10,7 +10,7 @@ const RecommendedBy = () => {
       <div className="flex items-center justify-center gap-8">
         <img
           src="/images/hospitals.png"
-          className="h-[clamp(12 0px,12vw,200px)] object-contain opacity-80 hover:opacity-100 transition-opacity"
+          className="h-[clamp(12 0px,12vw,200px)] object-contain opacity-100 transition-opacity"
         />
       </div>
     </section>

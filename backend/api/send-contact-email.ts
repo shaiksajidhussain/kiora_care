@@ -1,21 +1,27 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 
-interface ContactFormPayload {
-  userType: 'doctor' | 'patient' | null;
-  fullName: string;
-  phoneNumber: string;
-  emailAddress: string;
-  city: string;
-  pincode: string;
-  message: string;
-  agreeToContact: boolean;
-}
-
 function setCorsHeaders(res: VercelResponse, origin: string | undefined) {
   const allowedOrigin = process.env.ALLOWED_ORIGIN || '*';
-  // If origin is provided and matches allowed origin, use it; otherwise use allowed origin from env
-  const originToUse = origin && (allowedOrigin === '*' || origin === allowedOrigin) ? origin : allowedOrigin;
+  
+  // Always set a valid origin value
+  let originToUse: string;
+  
+  if (allowedOrigin === '*') {
+    // If wildcard is allowed, use the request origin if present, otherwise use '*'
+    originToUse = origin ? origin.trim() : '*';
+  } else {
+    // If specific origin is required, check if it matches
+    if (origin && origin.trim() === allowedOrigin) {
+      originToUse = origin.trim();
+    } else {
+      originToUse = allowedOrigin;
+    }
+  }
+  
+  // Ensure no invalid characters (newlines, carriage returns)
+  originToUse = originToUse.replace(/[\r\n]/g, '');
+  
   res.setHeader('Access-Control-Allow-Origin', originToUse);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -25,190 +31,128 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse
 ) {
-  const origin = req.headers.origin;
-  setCorsHeaders(res, origin);
+  try {
+    const origin = typeof req.headers?.origin === 'string' ? req.headers.origin : undefined;
+    setCorsHeaders(res, origin);
+  } catch (error) {
+    // If CORS setup fails, still set basic headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
 
-  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const body: ContactFormPayload = req.body;
-
-    // Validation
-    const errors: string[] = [];
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     
+    // Validate required fields
     if (!body.fullName || typeof body.fullName !== 'string' || body.fullName.trim() === '') {
-      errors.push('fullName is required');
+      return res.status(400).json({ error: 'fullName is required' });
     }
-    
     if (!body.phoneNumber || typeof body.phoneNumber !== 'string' || body.phoneNumber.trim() === '') {
-      errors.push('phoneNumber is required');
+      return res.status(400).json({ error: 'phoneNumber is required' });
     }
-    
     if (!body.emailAddress || typeof body.emailAddress !== 'string' || body.emailAddress.trim() === '') {
-      errors.push('emailAddress is required');
+      return res.status(400).json({ error: 'emailAddress is required' });
     }
-    
     if (!body.agreeToContact) {
-      errors.push('agreeToContact must be true');
+      return res.status(400).json({ error: 'agreeToContact must be true' });
     }
 
-    if (errors.length > 0) {
-      return res.status(400).json({
-        error: 'Validation error',
-        details: errors
-      });
-    }
-
-    // Initialize Resend
+    // Send email using Resend
     const resendApiKey = process.env.RESEND_API_KEY;
     if (!resendApiKey) {
       console.error('RESEND_API_KEY is not set');
-      return res.status(500).json({ error: 'Server configuration error' });
+      return res.status(500).json({ error: 'Server configuration error: RESEND_API_KEY missing' });
     }
 
+    console.log('Initializing Resend with API key (length):', resendApiKey.length);
     const resend = new Resend(resendApiKey);
-    const targetEmail = process.env.TARGET_EMAIL || 'jignesh.motwani@gmail.com';
-
-    // Format user type
+    const targetEmail = process.env.TARGET_EMAIL || 'care@kiora.care';
+    
     const userTypeLabel = body.userType === 'doctor' ? 'Doctor' : body.userType === 'patient' ? 'Patient' : 'Not specified';
+    
+    const escapeHtml = (text: string | null | undefined): string => {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    };
 
-    // Create HTML email
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-              color: #333;
-              max-width: 600px;
-              margin: 0 auto;
-              padding: 20px;
-            }
-            .header {
-              background-color: #1190ff;
-              color: white;
-              padding: 20px;
-              border-radius: 8px 8px 0 0;
-              text-align: center;
-            }
-            .content {
-              background-color: #f9f9f9;
-              padding: 20px;
-              border: 1px solid #ddd;
-              border-top: none;
-              border-radius: 0 0 8px 8px;
-            }
-            .field {
-              margin-bottom: 15px;
-              padding-bottom: 15px;
-              border-bottom: 1px solid #eee;
-            }
-            .field:last-child {
-              border-bottom: none;
-            }
-            .label {
-              font-weight: bold;
-              color: #555;
-              display: block;
-              margin-bottom: 5px;
-            }
-            .value {
-              color: #333;
-            }
-            .message-box {
-              background-color: white;
-              padding: 15px;
-              border-left: 4px solid #1190ff;
-              margin-top: 10px;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>New Contact Form Submission</h1>
-            <p>Kiora Website</p>
-          </div>
-          <div class="content">
-            <div class="field">
-              <span class="label">User Type:</span>
-              <span class="value">${userTypeLabel}</span>
-            </div>
-            <div class="field">
-              <span class="label">Full Name:</span>
-              <span class="value">${escapeHtml(body.fullName)}</span>
-            </div>
-            <div class="field">
-              <span class="label">Phone Number:</span>
-              <span class="value">${escapeHtml(body.phoneNumber)}</span>
-            </div>
-            <div class="field">
-              <span class="label">Email Address:</span>
-              <span class="value">${escapeHtml(body.emailAddress)}</span>
-            </div>
-            <div class="field">
-              <span class="label">City:</span>
-              <span class="value">${escapeHtml(body.city || 'Not provided')}</span>
-            </div>
-            <div class="field">
-              <span class="label">Pincode:</span>
-              <span class="value">${escapeHtml(body.pincode || 'Not provided')}</span>
-            </div>
-            <div class="field">
-              <span class="label">Message:</span>
-              <div class="message-box">
-                ${body.message ? escapeHtml(body.message).replace(/\n/g, '<br>') : 'No message provided'}
-              </div>
-            </div>
-            <div class="field">
-              <span class="label">Agreed to Contact:</span>
-              <span class="value">${body.agreeToContact ? 'Yes' : 'No'}</span>
-            </div>
-          </div>
-        </body>
-      </html>
-    `;
+    const safeFullName = escapeHtml(body.fullName);
+    const safePhone = escapeHtml(body.phoneNumber);
+    const safeEmail = escapeHtml(body.emailAddress);
+    const safeCity = escapeHtml(body.city) || 'Not provided';
+    const safePincode = escapeHtml(body.pincode) || 'Not provided';
+    const safeMessage = body.message ? escapeHtml(body.message).replace(/\n/g, '<br>') : 'No message provided';
 
-    // Send email
-    const emailResult = await resend.emails.send({
-      from: 'Kiora Care <onboarding@resend.dev>',
-      to: targetEmail,
-      subject: 'New Contact Form Submission from Kiora Website',
-      html: htmlContent,
-    });
+    const htmlContent = 
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><style>' +
+      'body{font-family:Arial,sans-serif;line-height:1.6;color:#333;max-width:600px;margin:0 auto;padding:20px}' +
+      '.header{background-color:#1190ff;color:white;padding:20px;border-radius:8px 8px 0 0;text-align:center}' +
+      '.content{background-color:#f9f9f9;padding:20px;border:1px solid #ddd;border-top:none;border-radius:0 0 8px 8px}' +
+      '.field{margin-bottom:15px;padding-bottom:15px;border-bottom:1px solid #eee}' +
+      '.field:last-child{border-bottom:none}' +
+      '.label{font-weight:bold;color:#555;display:block;margin-bottom:5px}' +
+      '.value{color:#333}' +
+      '.message-box{background-color:white;padding:15px;border-left:4px solid #1190ff;margin-top:10px}' +
+      '</style></head><body>' +
+      '<div class="header"><h1>New Contact Form Submission</h1><p>Kiora Website</p></div>' +
+      '<div class="content">' +
+      '<div class="field"><span class="label">User Type:</span><span class="value">' + userTypeLabel + '</span></div>' +
+      '<div class="field"><span class="label">Full Name:</span><span class="value">' + safeFullName + '</span></div>' +
+      '<div class="field"><span class="label">Phone Number:</span><span class="value">' + safePhone + '</span></div>' +
+      '<div class="field"><span class="label">Email Address:</span><span class="value">' + safeEmail + '</span></div>' +
+      '<div class="field"><span class="label">City:</span><span class="value">' + safeCity + '</span></div>' +
+      '<div class="field"><span class="label">Pincode:</span><span class="value">' + safePincode + '</span></div>' +
+      '<div class="field"><span class="label">Message:</span><div class="message-box">' + safeMessage + '</div></div>' +
+      '<div class="field"><span class="label">Agreed to Contact:</span><span class="value">' + (body.agreeToContact ? 'Yes' : 'No') + '</span></div>' +
+      '</div></body></html>';
 
-    if (emailResult.error) {
-      console.error('Resend API error:', emailResult.error);
-      return res.status(500).json({ error: 'Failed to send email' });
+    try {
+      const emailResult = await resend.emails.send({
+        from: 'Kiora Care <noreply@kiora.care>',
+        to: targetEmail,
+        subject: 'New Contact Form Submission from Kiora Website',
+        html: htmlContent,
+      });
+
+      if (emailResult.error) {
+        console.error('Resend API error:', JSON.stringify(emailResult.error, null, 2));
+        // Return error details for debugging
+        return res.status(500).json({ 
+          error: 'Failed to send email',
+          details: emailResult.error,
+          message: emailResult.error?.message || 'Unknown Resend error'
+        });
+      }
+
+      console.log('Email sent successfully:', emailResult.data);
+      return res.status(200).json({ message: 'Email sent successfully', data: emailResult.data });
+    } catch (resendError) {
+      console.error('Resend exception:', resendError);
+      return res.status(500).json({ 
+        error: 'Failed to send email',
+        message: resendError instanceof Error ? resendError.message : 'Resend API exception',
+        details: resendError
+      });
     }
-
-    return res.status(200).json({ message: 'Email sent successfully' });
 
   } catch (error) {
     console.error('Error processing contact form:', error);
-    return res.status(500).json({ error: 'Failed to send email' });
+    return res.status(500).json({ 
+      error: 'Failed to send email',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
 }
-
-// Helper function to escape HTML
-function escapeHtml(text: string): string {
-  const map: { [key: string]: string } = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  };
-  return text.replace(/[&<>"']/g, (m) => map[m]);
-}
-

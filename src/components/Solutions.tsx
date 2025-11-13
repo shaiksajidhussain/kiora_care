@@ -50,7 +50,7 @@ const Solutions = () => {
               </p>
               <button 
                 onClick={() => handleLearnMore('preventive')}
-                className="mt-6 text-white text-[clamp(18px,2vw,24px)] font-medium tracking-tight px-6 py-3 rounded-xl flex items-center gap-3 border border-[#303030] border-[1.5px] border-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
+                className="mt-6 text-white text-[clamp(18px,2vw,24px)] font-medium tracking-tight px-6 py-3 rounded-xl flex items-center gap-3 border-[1.5px] border-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
                 style={{
                   background: 'linear-gradient(to bottom, #424242, #303030)',
                   borderWidth: '1px',
@@ -79,7 +79,7 @@ const Solutions = () => {
               </p>
               <button 
                 onClick={() => handleLearnMore('dialysis')}
-                className="mt-6 text-white text-[clamp(18px,2vw,24px)] font-medium tracking-tight px-6 py-3 rounded-xl flex items-center gap-3 border border-white border-[1px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
+                className="mt-6 text-white text-[clamp(18px,2vw,24px)] font-medium tracking-tight px-6 py-3 rounded-xl flex items-center gap-3 border-white border-[1px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
                 style={{
                   background: 'linear-gradient(to bottom, #424242, #303030)'
                 }}

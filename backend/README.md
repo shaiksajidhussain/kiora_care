@@ -11,7 +11,7 @@ This backend exposes a single API endpoint that receives contact form submission
 Set these in your Vercel project settings or via `vercel env`:
 
 - `RESEND_API_KEY` - Your Resend API key (get one at https://resend.com)
-- `TARGET_EMAIL` - Email address to receive contact form submissions (defaults to jignesh.motwani@gmail.com)
+- `TARGET_EMAIL` - Email address to receive contact form submissions (defaults to care@kiora.care)
 - `ALLOWED_ORIGIN` - The frontend domain URL for CORS (e.g., https://your-frontend-domain.vercel.app)
 
 ## Local Development
