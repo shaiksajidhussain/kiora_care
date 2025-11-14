@@ -139,7 +139,7 @@ const ContactForm = () => {
             Reach Out to Us
           </button>
         </div>
-      </div>
+        </div>
       </div>
       
       {showForm && (
@@ -155,10 +155,10 @@ const ContactForm = () => {
           <div className="w-1/2 max-md:w-full max-md:ml-0">
             <div className="w-full mt-6 md:mt-[22px] max-md:max-w-full pr-0 md:pr-8">
               <form onSubmit={handleSubmit} className="max-md:max-w-full">
-                <div className="grow text-black max-md:mt-[18px]">
-                  <h3 className="text-[55px] font-normal leading-none tracking-[-2.2px] mr-[30px] max-md:text-[40px] max-md:mr-2.5">
-                    Join the Waitlist
-                  </h3>
+                    <div className="grow text-black max-md:mt-[18px]">
+                      <h3 className="text-[55px] font-normal leading-none tracking-[-2.2px] mr-[30px] max-md:text-[40px] max-md:mr-2.5">
+                        Join the Waitlist
+                      </h3>
                   <div className="flex w-full flex-col text-[17px] font-[510] tracking-[-0.34px] mt-8 pl-[9px] max-md:mt-10">
                         <div className="flex items-stretch gap-9">
                           <div className="flex flex-col items-stretch">
@@ -235,29 +235,29 @@ const ContactForm = () => {
                         <div className="flex gap-4 mt-4">
                           <div className="flex flex-col">
                             <label htmlFor="city">City</label>
-                            <input
-                              type="text"
-                              id="city"
-                              name="city"
-                              value={formData.city}
-                              onChange={handleInputChange}
+                        <input
+                          type="text"
+                          id="city"
+                          name="city"
+                          value={formData.city}
+                          onChange={handleInputChange}
                               className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[203px] shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
-                              required
-                            />
-                          </div>
+                          required
+                        />
+                      </div>
                           <div className="flex flex-col ml-auto">
-                            <label htmlFor="pincode">Pincode</label>
-                            <input
-                              type="text"
-                              id="pincode"
-                              name="pincode"
-                              value={formData.pincode}
-                              onChange={handleInputChange}
-                              className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
-                              required
-                            />
+                      <label htmlFor="pincode">Pincode</label>
+                      <input
+                        type="text"
+                        id="pincode"
+                        name="pincode"
+                        value={formData.pincode}
+                        onChange={handleInputChange}
+                        className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
+                        required
+                      />
                           </div>
-                        </div>
+                    </div>
                   </div>
                 </div>
                 

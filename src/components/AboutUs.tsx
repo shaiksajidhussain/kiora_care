@@ -39,16 +39,17 @@ const AboutUs = () => {
       <h2 className="text-black text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center mt-10 md:mt-[200px]">
         About Us
       </h2>
-      <p className="text-black text-xl md:text-2xl font-normal leading-[3] tracking-[-0.48px] text-center max-w-full mt-4">
+      <p className="text-black text-xl md:text-2xl font-normal tracking-[-0.48px] text-center max-w-full mt-4">
         Deep commitment to improving healthcare outcomes
       </p>
       
       <div className="w-full max-w-[1146px] mt-8 md:mt-[80px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
-          {teamMembers.map((member, index) => (
-            <article key={index} className="h-full">
+          {teamMembers.map((member, index) => {
+            const isAnupam = member.name === "Anupam Dey";
+            const CardContent = (
               <div className="bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full pt-3 pb-6 px-[clamp(10px,1.5vw,13px)] rounded-[33px] border-[rgba(228,228,228,1)] border-solid h-full transition-transform duration-300 hover:scale-105">
-                <div className="bg-[rgba(183,214,236,1)] self-stretch overflow-hidden pt-2.5 rounded-[33px]">
+                <div className="self-stretch overflow-hidden pt-2.5 rounded-[33px]">
                   <img
                     src={member.image}
                     className="aspect-[0.91] object-contain w-full"
@@ -62,8 +63,25 @@ const AboutUs = () => {
                   {member.role}
                 </p>
               </div>
-            </article>
-          ))}
+            );
+
+            return (
+              <article key={index} className="h-full">
+                {isAnupam ? (
+                  <a
+                    href="https://www.linkedin.com/in/anupam-d/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full cursor-pointer"
+                  >
+                    {CardContent}
+                  </a>
+                ) : (
+                  CardContent
+                )}
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

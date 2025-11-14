@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import RecommendedBy from '@/components/RecommendedBy';
+import TheDifferenceWeMake from '@/components/TheDifferenceWeMake';
 import HowItWorks from '@/components/HowItWorks';
 import Solutions from '@/components/Solutions';
 import Technology from '@/components/Technology';
@@ -21,6 +22,7 @@ const Index = () => {
       </main>
       
       <RecommendedBy />
+      <TheDifferenceWeMake />
       <HowItWorks />
       <Solutions />
       <Technology />

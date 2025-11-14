@@ -7,12 +7,12 @@ const Footer = () => {
       <div className="flex w-full items-start justify-between gap-8 md:gap-16 flex-wrap">
         {/* Logo on left */}
         <div className="flex-shrink-0">
-          <img
+        <img
             src="/images/logo.png"
             className="aspect-[1.41] object-contain w-[165px] max-w-full"
-            alt="Kiora Logo"
-          />
-        </div>
+          alt="Kiora Logo"
+        />
+              </div>
         
         {/* 3 columns on right */}
         <div className="flex gap-6 md:gap-12 max-md:flex-col max-md:w-full">
@@ -24,22 +24,22 @@ const Footer = () => {
             <a href="#about" className="hover:text-gray-900 transition-colors">About Us</a>
             <a href="#resources" className="hover:text-gray-900 transition-colors">Resources</a>
             <a href="#contact" className="hover:text-gray-900 transition-colors">Contact Us</a>
-          </nav>
+            </nav>
           
           {/* Contact Column */}
           <div className="flex flex-col text-base font-medium gap-4">
             <div className="text-black font-semibold mb-2">Contact</div>
             <a href="mailto:care@kiora.care" className="text-[#797B8A] hover:text-gray-900 transition-colors">
-              care@kiora.care
-            </a>
-          </div>
+                  care@kiora.care
+                </a>
+              </div>
           
           {/* Legal Column */}
           <div className="flex flex-col text-base font-medium gap-4">
             <div className="text-black font-semibold mb-2">Legal</div>
             <a href="#privacy" className="text-[#797B8A] hover:text-gray-900 transition-colors">
-              Privacy Policy
-            </a>
+                  Privacy Policy
+                </a>
             <a href="#terms" className="text-[#797B8A] hover:text-gray-900 transition-colors">
               Terms of Service
             </a>

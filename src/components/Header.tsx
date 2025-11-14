@@ -21,11 +21,19 @@ const Header = () => {
       className="fixed top-[30px] left-1/2 -translate-x-1/2 z-50 w-[calc(100%-40px)] max-w-[1008px]"
     >
       <div className={`bg-white flex items-center justify-between px-[18px] rounded-xl transition-all duration-300 `}>
+        <button
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="cursor-pointer hover:opacity-80 transition-opacity"
+          aria-label="Scroll to top"
+        >
         <img
-          src="/images/logo.png"
+            src="/images/logo.png"
           className="aspect-[1.55] object-contain w-[93px]"
           alt="Kiora Logo"
         />
+        </button>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-11 text-[#797B8A]">

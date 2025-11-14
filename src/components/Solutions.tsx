@@ -2,14 +2,14 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const Solutions = () => {
-  const handleLearnMore = (solutionType: 'preventive' | 'dialysis') => {
+  const handleLearnMore = (solutionType: 'managed' | 'dialysis') => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       // Small delay to ensure scroll completes before opening form
       setTimeout(() => {
-        const message = solutionType === 'preventive' 
-          ? 'I am interested in learning more about Preventive Care.'
+        const message = solutionType === 'managed' 
+          ? 'I am interested in learning more about Managed Care.'
           : 'I am interested in learning more about Dialysis Care.';
         window.dispatchEvent(new CustomEvent('openContactForm', { detail: { message } }));
       }, 500);
@@ -26,7 +26,7 @@ const Solutions = () => {
       </p>
       <div className="w-full max-w-[1387px] mt-8 md:mt-[80px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          {/* Preventive Care Card */}
+          {/* Managed Care Card */}
           <article 
             className="rounded-3xl shadow-[0px_1px_250px_rgba(0,0,0,0.25)] overflow-hidden"
             style={{
@@ -36,20 +36,20 @@ const Solutions = () => {
             <div className="p-4 md:p-6">
               <img
                 src="/images/preventive-care.png"
-                alt="Preventive Care"
+                alt="Managed Care"
                 className="w-full h-auto object-cover rounded-xl"
               />
             </div>
             
             <div className="px-6 md:px-10 py-6 md:py-8">
               <h3 className="text-white text-[clamp(28px,3vw,36px)] font-normal leading-tight tracking-tight">
-                Preventive Care
+                Managed Care
               </h3>
               <p className="text-[#828282] text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4">
-                A trusted partner in your preventive care journey- keeping track, offering guidance, and helping you stay ahead of health risks.
+                Your trusted partner in slowing kidney disease progression. Our proactive health monitoring, clinical guidance, and timely interventions help you stay ahead of risks.
               </p>
               <button 
-                onClick={() => handleLearnMore('preventive')}
+                onClick={() => handleLearnMore('managed')}
                 className="mt-6 text-white text-[clamp(18px,2vw,24px)] font-medium tracking-tight px-6 py-3 rounded-xl flex items-center gap-3 border-[1.5px] border-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
                 style={{
                   background: 'linear-gradient(to bottom, #424242, #303030)',

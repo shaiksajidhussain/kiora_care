@@ -7,58 +7,13 @@ const HowItWorks = () => {
         How it Works
       </h2>
       <p className="text-foreground text-[clamp(18px,2vw,24px)] font-normal leading-relaxed tracking-tight text-center mt-4 max-w-[800px]">
-        Personalized, coordinated, evidence-based support
+        Personalized, coordinated, evidence-based treatment
       </p>
       
       <div className="w-full max-w-[1175px] mt-8 md:mt-[80px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {/* Card 1 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[570px]">
-            <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
-              Holistic Support
-            </h3>
-            <p className="text-muted-foreground text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4 text-center">
-              Nutrition, mental well-being, and lifestyle guidance from certified specialists.
-            </p>
-            <img
-              src="/images/holistic-support.png"
-              alt="Holistic Support"
-              className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
-            />
-          </article>
-          
-          {/* Card 2 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[496px]">
-            <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
-              Ongoing Monitoring & Protocols
-            </h3>
-            <p className="text-muted-foreground text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4 text-center">
-              Automated scheduling of lab tests, vitals monitoring, and medication with expert supervision.
-            </p>
-            <img
-              src="/images/monitoring-protocols.png"
-              alt="Ongoing Monitoring & Protocols"
-              className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
-            />
-          </article>
-          
-          {/* Card 3 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[489px]">
-            <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
-              Built for India
-            </h3>
-            <p className="text-muted-foreground text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4 text-center">
-              Simple, WhatsApp-based, and privacy-first. All data is encrypted and securely managed in compliance with healthcare standards.
-            </p>
-            <img
-              src="/images/built-for-india.png"
-              alt="Built for India"
-              className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
-            />
-          </article>
-          
-          {/* Card 4 */}
-          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[563px] md:-mt-[74px]">
+          {/* Card 1 - Personalized Care Plan */}
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[575px]">
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Personalized Care Plan
             </h3>
@@ -68,6 +23,51 @@ const HowItWorks = () => {
             <img
               src="/images/personalized-care-plan.png"
               alt="Personalized Care Plan"
+              className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
+            />
+          </article>
+          
+          {/* Card 2 - Continuous Monitoring & Protocols */}
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[490px]">
+            <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
+              Continuous Monitoring & Protocols
+            </h3>
+            <p className="text-muted-foreground text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4 text-center">
+              Automated scheduling of lab tests, vitals monitoring, and medication with expert supervision.
+            </p>
+            <img
+              src="/images/monitoring-protocols.png"
+              alt="Continuous Monitoring & Protocols"
+              className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
+            />
+          </article>
+          
+          {/* Card 3 - Holistic Care */}
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[490px]">
+            <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
+              Holistic Care
+            </h3>
+            <p className="text-muted-foreground text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4 text-center">
+              Nutrition, mental well-being, and lifestyle guidance from certified specialists.
+            </p>
+            <img
+              src="/images/holistic-support.png"
+              alt="Holistic Care"
+              className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
+            />
+          </article>
+          
+          {/* Card 4 - Built for India */}
+          <article className="bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[575px] md:-mt-[85px]">
+            <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
+              Built for India
+            </h3>
+            <p className="text-muted-foreground text-[clamp(16px,2vw,20px)] font-normal leading-relaxed tracking-tight mt-4 text-center">
+              Simple, WhatsApp-based, and privacy-first. All data is encrypted and securely managed in compliance with healthcare standards.
+            </p>
+            <img
+              src="/images/built-for-india.png"
+              alt="Built for India"
               className="w-full h-auto rounded-b-[22px] mt-auto mb-6 object-contain"
             />
           </article>
