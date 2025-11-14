@@ -14,23 +14,25 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="bg-white flex flex-col overflow-hidden">
+    <div className="bg-white flex flex-col overflow-x-hidden min-h-screen w-full">
       <Header />
       
-      <main className="w-full flex flex-col overflow-hidden items-center rounded-[25px] mx-4 mt-4 max-w-[calc(100%-32px)] self-center">
+      <main className="w-full flex flex-col overflow-hidden items-center rounded-[25px] mx-auto mt-4 max-w-full px-4 md:px-4 lg:px-6">
         <Hero />
       </main>
       
-      <RecommendedBy />
-      <TheDifferenceWeMake />
-      <HowItWorks />
-      <Solutions />
-      <Technology />
-      <AboutUs />
-      <AdvisoryBoard />
-      <Resources />
-      <ContactForm />
-      <Footer />
+      <div className="w-full px-4 md:px-4 lg:px-6 max-w-full overflow-x-hidden">
+        <RecommendedBy />
+        <TheDifferenceWeMake />
+        <HowItWorks />
+        <Solutions />
+        <Technology />
+        <AboutUs />
+        <AdvisoryBoard />
+        <Resources />
+        <ContactForm />
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Hero = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
   const handleContactClick = () => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -24,15 +29,15 @@ const Hero = () => {
     >
       <div className="relative z-10 mb-12">
         <h1 className="text-foreground font-normal mt-20 md:mt-[156px] max-w-[1200px] mx-auto">
-        <span className="block text-[clamp(48px,8vw,128px)] leading-[1.1] tracking-tight">
+        <span className={`block text-[clamp(48px,8vw,128px)] leading-[1.1] tracking-tight transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           Life is Beautiful.
         </span>
-        <span className="block text-[clamp(32px,5vw,64px)] leading-[1.2] tracking-tight mt-4">
+        <span className={`block text-[clamp(32px,5vw,64px)] leading-[1.2] tracking-tight mt-4 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           Even for those with kidney conditions.
         </span>
       </h1>
       
-        <p className="text-foreground text-[clamp(16px,2vw,20px)] leading-[1.2] tracking-tight max-w-[1042px] mt-[18px] px-4">
+        <p className={`text-foreground text-[clamp(16px,2vw,20px)] leading-[1.2] tracking-tight max-w-[1042px] mt-[18px] px-4 transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         India's first comprehensive renal care solution.
         <br />
         Powered by AI and clinical expertise, preventing dialysis, restoring life.
@@ -40,7 +45,7 @@ const Hero = () => {
       
         <button 
           onClick={handleContactClick}
-          className="bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] text-primary-foreground mt-12 px-9 py-2.5 rounded-xl hover:opacity-90 transition-opacity"
+          className={`bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] text-primary-foreground mt-12 px-9 py-2.5 rounded-xl hover:opacity-90 transition-all duration-1000 delay-500 hover:scale-105 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
         Contact Us
       </button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface FormData {
   userType: 'doctor' | 'patient' | null;
@@ -12,11 +12,34 @@ interface FormData {
 }
 
 const ContactForm = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [userTypeError, setUserTypeError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const handleOpenForm = (event: Event) => {
@@ -122,9 +145,13 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="flex flex-col items-center px-4 py-10 md:py-20">
+    <section 
+      ref={sectionRef}
+      id="contact" 
+      className="flex flex-col items-center px-4 py-10 md:py-20"
+    >
       <div className="w-full max-w-[1445px] mt-10 md:mt-[220px]">
-        <div className="bg-[rgba(17,144,255,1)] flex w-full flex-col overflow-hidden items-center text-white font-normal text-center justify-center px-6 md:px-20 py-10 md:py-16 rounded-[32px] md:rounded-[72px]">
+        <div className={`bg-[rgba(17,144,255,1)] flex w-full flex-col overflow-hidden items-center text-white font-normal text-center justify-center px-6 md:px-20 py-10 md:py-16 rounded-[32px] md:rounded-[72px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         <div className="flex w-[772px] max-w-full flex-col items-center">
           <h2 className="text-[clamp(32px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] self-stretch max-w-full">
             Join others on their journey to better care
@@ -134,7 +161,7 @@ const ContactForm = () => {
           </p>
           <button 
             onClick={() => setShowForm(!showForm)}
-            className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-[17px] text-black tracking-[-0.34px] mt-8 md:mt-[72px] px-9 py-2.5 rounded-xl hover:bg-gray-100 transition-colors"
+            className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-[17px] text-black tracking-[-0.34px] mt-8 md:mt-[72px] px-9 py-2.5 rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105"
           >
             Reach Out to Us
           </button>
@@ -143,12 +170,12 @@ const ContactForm = () => {
       </div>
       
       {showForm && (
-        <div className="w-full max-w-[1445px] mt-6 md:mt-[26px]">
+        <div className={`w-full max-w-[1445px] mt-6 md:mt-[26px] animate-in fade-in slide-in-from-bottom-4 duration-500`}>
         <div className="gap-6 md:gap-8 flex max-md:flex-col max-md:items-stretch">
           <div className="w-1/2 max-md:w-full max-md:ml-0">
             <img
               src="/images/contact-illustration.png"
-              className="aspect-[0.86] object-contain w-full grow rounded-[32px] md:rounded-[72px] max-md:max-w-full max-md:mt-6"
+              className="aspect-[0.86] object-contain w-full grow rounded-[32px] md:rounded-[72px] max-md:hidden"
               alt="Contact illustration"
             />
           </div>
@@ -206,7 +233,7 @@ const ContactForm = () => {
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleInputChange}
-                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border self-stretch flex shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
+                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border self-stretch flex shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
                           required
                         />
                         
@@ -217,7 +244,7 @@ const ContactForm = () => {
                           name="phoneNumber"
                           value={formData.phoneNumber}
                           onChange={handleInputChange}
-                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[216px] shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
+                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[216px] shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
                           required
                         />
                         
@@ -228,11 +255,11 @@ const ContactForm = () => {
                           name="emailAddress"
                           value={formData.emailAddress}
                           onChange={handleInputChange}
-                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[263px] shrink-0 max-w-full h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
+                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[263px] shrink-0 max-w-full h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
                           required
                         />
                         
-                        <div className="flex gap-4 mt-4">
+                        <div className="flex max-md:flex-col gap-4 mt-4">
                           <div className="flex flex-col">
                             <label htmlFor="city">City</label>
                         <input
@@ -241,11 +268,11 @@ const ContactForm = () => {
                           name="city"
                           value={formData.city}
                           onChange={handleInputChange}
-                              className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[203px] shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
+                              className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[203px] max-md:w-full shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
                           required
                         />
                       </div>
-                          <div className="flex flex-col ml-auto">
+                          <div className="flex flex-col max-md:ml-0 ml-auto">
                       <label htmlFor="pincode">Pincode</label>
                       <input
                         type="text"
@@ -253,7 +280,7 @@ const ContactForm = () => {
                         name="pincode"
                         value={formData.pincode}
                         onChange={handleInputChange}
-                        className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3"
+                        className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 max-md:w-full h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
                         required
                       />
                           </div>
@@ -268,7 +295,7 @@ const ContactForm = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 h-[115px] mt-[5px] rounded-xl border-[rgba(228,228,228,1)] border-solid max-md:max-w-full px-3 py-2 resize-none"
+                    className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 h-[115px] mt-[5px] rounded-xl border-[rgba(228,228,228,1)] border-solid max-md:max-w-full px-3 py-2 resize-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
                     rows={5}
                   />
                   
@@ -302,7 +329,7 @@ const ContactForm = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-[rgba(17,144,255,1)] shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden items-center text-white whitespace-nowrap text-center justify-center mt-[30px] px-[70px] py-[15px] rounded-xl max-md:max-w-full max-md:px-5 hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-[rgba(17,144,255,1)] shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden items-center text-white whitespace-nowrap text-center justify-center mt-[30px] px-[70px] py-[15px] rounded-xl max-md:max-w-full max-md:px-5 hover:bg-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-[0px_6px_30px_rgba(0,0,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                   </button>

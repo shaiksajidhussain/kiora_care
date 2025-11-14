@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 const Solutions = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: '0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
   const handleLearnMore = (solutionType: 'managed' | 'dialysis') => {
     const contactSection = document.getElementById('contact');
     if (contactSection) {
@@ -17,18 +40,22 @@ const Solutions = () => {
   };
 
   return (
-    <section id="solutions" className="flex flex-col items-center px-4 py-10 md:py-20">
-      <h2 className="text-foreground text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center">
+    <section 
+      ref={sectionRef}
+      id="solutions" 
+      className="flex flex-col items-center px-4 py-10 md:py-20"
+    >
+      <h2 className={`text-foreground text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Our Solutions
       </h2>
-      <p className="text-foreground text-[clamp(18px,2vw,24px)] font-normal leading-relaxed tracking-tight text-center mt-4 max-w-[900px]">
+      <p className={`text-foreground text-[clamp(18px,2vw,24px)] font-normal leading-relaxed tracking-tight text-center mt-4 max-w-[900px] transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Built with patented technology and clinical expertise to serve every stage of kidney care
       </p>
       <div className="w-full max-w-[1387px] mt-8 md:mt-[80px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {/* Managed Care Card */}
           <article 
-            className="rounded-3xl shadow-[0px_1px_250px_rgba(0,0,0,0.25)] overflow-hidden"
+            className={`rounded-3xl shadow-[0px_1px_250px_rgba(0,0,0,0.25)] overflow-hidden transition-all duration-700 delay-200 hover:scale-[1.02] hover:shadow-[0px_1px_300px_rgba(0,0,0,0.35)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
             style={{
               background: 'linear-gradient(to bottom, #373737 0%, #171717 100%)'
             }}
@@ -65,7 +92,7 @@ const Solutions = () => {
           
           {/* Dialysis Care Card */}
           <article 
-            className="rounded-3xl shadow-[0px_1px_250px_rgba(0,0,0,0.25)] overflow-hidden"
+            className={`rounded-3xl shadow-[0px_1px_250px_rgba(0,0,0,0.25)] overflow-hidden transition-all duration-700 delay-300 hover:scale-[1.02] hover:shadow-[0px_1px_300px_rgba(0,0,0,0.35)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
             style={{
               background: 'linear-gradient(to bottom, #373737 0%, #171717 100%)'
             }}
