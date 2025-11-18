@@ -22,7 +22,7 @@ const Index = () => {
       </main>
       
       <div className="w-full px-4 md:px-4 lg:px-6 max-w-full overflow-x-hidden">
-        <RecommendedBy />
+        {/* <RecommendedBy /> */}
         <TheDifferenceWeMake />
         <HowItWorks />
         <Solutions />

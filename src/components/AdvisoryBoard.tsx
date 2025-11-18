@@ -124,7 +124,7 @@ const AdvisoryBoard = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
           <div 
             ref={modalRef}
-            className="bg-[#F5F5F5] rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-[rgba(228,228,228,0.8)] relative w-full max-w-[800px] max-h-[90vh] overflow-y-auto"
+            className="bg-[#F5F5F5] rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-[rgba(228,228,228,0.8)] relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto"
             style={{
               boxShadow: '0px 4px 20px rgba(0,0,0,0.25), inset 0px 0px 0px 1px rgba(228,228,228,0.8)'
             }}
@@ -159,12 +159,12 @@ const AdvisoryBoard = () => {
               </div>
 
               {/* Name */}
-              <h3 className="text-black text-2xl md:text-3xl font-bold text-center mb-6">
+              <h3 className="text-black text-[clamp(22px,3vw,36px)] font-bold text-center mb-6">
                 {selectedAdvisor.name}
               </h3>
 
               {/* Details */}
-              <div className="text-black text-base md:text-lg leading-relaxed whitespace-pre-line">
+              <div className="text-black text-[clamp(15px,1.8vw,20px)] leading-relaxed whitespace-pre-line">
                 {selectedAdvisor.details.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4 last:mb-0">
                     {paragraph}

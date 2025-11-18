@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Linkedin } from 'lucide-react';
 
 interface TeamMember {
   name: string;
@@ -108,45 +108,46 @@ const AboutUs = () => {
       <div className="w-full max-w-[1146px] mt-8 md:mt-[80px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
           {teamMembers.map((member, index) => {
-            const CardContent = (
-              <div 
-                onClick={() => member.details && setSelectedMember(member)}
-                className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full pt-3 pb-6 px-[clamp(10px,1.5vw,13px)] rounded-[33px] border-[rgba(228,228,228,1)] border-solid h-full transition-transform duration-300 hover:scale-105 ${member.details ? 'cursor-pointer' : ''}`}
-              >
-                <div className="self-stretch overflow-hidden pt-2.5 rounded-[33px]">
-                  <img
-                    src={member.image}
-                    className="aspect-[0.91] object-contain w-full"
-                    alt={member.name}
-                  />
-                </div>
-                <h3 className="text-black text-[clamp(18px,2vw,24px)] font-bold tracking-[-0.48px] mt-3">
-                  {member.name}
-                </h3>
-                <p className="text-black text-[clamp(14px,1.5vw,20px)] font-normal tracking-[-0.4px]">
-                  {member.role}
-                </p>
-              </div>
-            );
-
             return (
               <article 
                 key={index} 
                 className={`h-full transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
                 style={{ transitionDelay: `${200 + index * 50}ms` }}
               >
-                {member.linkedinUrl && !member.details ? (
-                  <a
-                    href={member.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-full cursor-pointer"
-                  >
-                    {CardContent}
-                  </a>
-                ) : (
-                  CardContent
-                )}
+                <div 
+                  onClick={() => member.details && setSelectedMember(member)}
+                  className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full pt-3 pb-6 px-[clamp(10px,1.5vw,13px)] rounded-[33px] border-[rgba(228,228,228,1)] border-solid h-full transition-transform duration-300 hover:scale-105 ${member.details ? 'cursor-pointer' : ''}`}
+                >
+                  <div className="self-stretch overflow-hidden pt-2.5 rounded-[33px]">
+                    <img
+                      src={member.image}
+                      className="aspect-[0.91] object-contain w-full"
+                      alt={member.name}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between gap-2 mt-3 pr-2">
+                    <div className="flex-1">
+                      <h3 className="text-black text-[clamp(18px,2vw,24px)] font-bold tracking-[-0.48px]">
+                        {member.name}
+                      </h3>
+                      <p className="text-black text-[clamp(14px,1.5vw,20px)] font-normal tracking-[-0.4px]">
+                        {member.role}
+                      </p>
+                    </div>
+                    {member.linkedinUrl && (
+                      <a
+                        href={member.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex-shrink-0 text-[#0077b5] hover:text-[#005885] transition-colors mr-1"
+                        aria-label={`${member.name}'s LinkedIn`}
+                      >
+                        <Linkedin className="w-5 h-5 md:w-6 md:h-6" />
+                      </a>
+                    )}
+                  </div>
+                </div>
               </article>
             );
           })}
@@ -158,7 +159,7 @@ const AboutUs = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
           <div 
             ref={modalRef}
-            className="bg-[#F5F5F5] rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-[rgba(228,228,228,0.8)] relative w-full max-w-[800px] max-h-[90vh] overflow-y-auto"
+            className="bg-[#F5F5F5] rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-[rgba(228,228,228,0.8)] relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto"
             style={{
               boxShadow: '0px 4px 20px rgba(0,0,0,0.25), inset 0px 0px 0px 1px rgba(228,228,228,0.8)'
             }}
@@ -193,12 +194,12 @@ const AboutUs = () => {
               </div>
 
               {/* Name */}
-              <h3 className="text-black text-2xl md:text-3xl font-bold text-center mb-6">
+              <h3 className="text-black text-[clamp(22px,3vw,36px)] font-bold text-center mb-6">
                 {selectedMember.name}
               </h3>
 
               {/* Details */}
-              <div className="text-black text-base md:text-lg leading-relaxed whitespace-pre-line">
+              <div className="text-black text-[clamp(15px,1.8vw,20px)] leading-relaxed whitespace-pre-line">
                 {selectedMember.details.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4 last:mb-0">
                     {paragraph}
