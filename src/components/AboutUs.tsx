@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Linkedin } from 'lucide-react';
+import { X } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 interface TeamMember {
   name: string;
@@ -143,7 +145,7 @@ const AboutUs = () => {
                         className="flex-shrink-0 text-[#0077b5] hover:text-[#005885] transition-colors mr-1"
                         aria-label={`${member.name}'s LinkedIn`}
                       >
-                        <Linkedin className="w-5 h-5 md:w-6 md:h-6" />
+                        <FontAwesomeIcon icon={faLinkedin} className="w-8 h-8 md:w-8 md:h-8" />
                       </a>
                     )}
                   </div>
