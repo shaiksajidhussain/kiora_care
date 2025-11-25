@@ -9,6 +9,7 @@ import Technology from '@/components/Technology';
 import AboutUs from '@/components/AboutUs';
 import AdvisoryBoard from '@/components/AdvisoryBoard';
 import Resources from '@/components/Resources';
+import Vlogs from '@/components/Vlogs';
 import ContactForm from '@/components/ContactForm';
 import Footer from '@/components/Footer';
 
@@ -30,6 +31,7 @@ const Index = () => {
         <AboutUs />
         <AdvisoryBoard />
         <Resources />
+        <Vlogs />
         <ContactForm />
         <Footer />
       </div>

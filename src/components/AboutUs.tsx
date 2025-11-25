@@ -69,6 +69,7 @@ const AboutUs = () => {
       name: "Dr. K S Nayak",
       role: "Co-founder, Chief Medical Officer",
       image: "/images/team-dr-nayak.png",
+      linkedinUrl: "https://www.linkedin.com/in/dr-k-s-nayak-59509612/",
       details: "Dr. K. S. Nayak is Director of the Department of Nephrology and Renal Transplant Services at Gleneagles Hospitals, Hyderabad Cluster, and a Visiting Scientist at the Renal Research Institute, New York. A globally recognized nephrologist and transplant specialist, he has made pioneering contributions to dialysis innovation, transplant medicine, and renal replacement therapy in India.\n\nA Fellow of the American Society of Nephrology (FASN, USA) and the Royal College of Physicians (FRCP, London), Dr. Nayak has served as Past President of the International Society of Blood Purification and is widely respected for his leadership in advancing high-quality, patient-centered kidney care.\n\nThrough his clinical excellence, research, and teaching, Dr. Nayak continues to bridge global best practices with local innovation, shaping the future of nephrology and renal transplantation in South Asia and beyond."
     },
     {
@@ -123,7 +124,7 @@ const AboutUs = () => {
                   <div className="self-stretch overflow-hidden pt-2.5 rounded-[33px]">
                     <img
                       src={member.image}
-                      className="aspect-[0.91] object-contain w-full"
+                      className="aspect-[0.91] object-contain w-full rounded-[33px]"
                       alt={member.name}
                     />
                   </div>
@@ -142,10 +143,10 @@ const AboutUs = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="flex-shrink-0 text-[#0077b5] hover:text-[#005885] transition-colors mr-1"
+                        className="flex-shrink-0 text-[#0077b5] hover:text-[#005885] transition-colors mr-1 self-start"
                         aria-label={`${member.name}'s LinkedIn`}
                       >
-                        <FontAwesomeIcon icon={faLinkedin} className="w-8 h-8 md:w-8 md:h-8" />
+                        <FontAwesomeIcon icon={faLinkedin} className="w-7 h-7 md:w-7 md:h-7" />
                       </a>
                     )}
                   </div>
@@ -180,16 +181,11 @@ const AboutUs = () => {
               {/* Image */}
               <div className="flex justify-center mb-6">
                 <div 
-                  className="rounded-[12px] overflow-hidden"
-                  style={{
-                    backgroundColor: '#B2D5ED',
-                    padding: '8px',
-                    borderRadius: '12px'
-                  }}
+                  className="overflow-hidden rounded-[12px]"
                 >
                   <img
                     src={selectedMember.image}
-                    className="w-[200px] h-[240px] object-cover rounded-[8px]"
+                    className="w-[200px] h-[240px] object-cover rounded-[12px]"
                     alt={selectedMember.name}
                   />
                 </div>

@@ -1,17 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogoClick = () => {
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
+
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    const sectionId = hash.replace('#', '');
+    
+    if (location.pathname === '/') {
+      // If on home page, scroll to section
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // If on another page, navigate to home first
+      navigate('/', { replace: false });
+      // After navigation, scroll to section
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Update URL hash
+          window.history.replaceState(null, '', hash);
+        }
+      }, 100);
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // Small delay to ensure scroll completes before opening form
+    if (location.pathname === '/') {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Small delay to ensure scroll completes before opening form
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('openContactForm'));
+        }, 500);
+      }
+    } else {
+      // If on another page, navigate to home first
+      navigate('/', { replace: false });
+      // After navigation, scroll to contact section and open form
       setTimeout(() => {
-        window.dispatchEvent(new CustomEvent('openContactForm'));
-      }, 500);
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.history.replaceState(null, '', '#contact');
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('openContactForm'));
+          }, 500);
+        }
+      }, 100);
     }
     setIsMobileMenuOpen(false);
   };
@@ -22,11 +75,9 @@ const Header = () => {
     >
       <div className={`bg-white flex items-center justify-between px-[18px] rounded-xl transition-all duration-300 `}>
         <button
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
+          onClick={handleLogoClick}
           className="cursor-pointer hover:opacity-80 transition-opacity"
-          aria-label="Scroll to top"
+          aria-label="Go to home"
         >
         <img
             src="/images/logo.png"
@@ -37,9 +88,9 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-11 text-[#797B8A]">
-          <a href="#how-it-works" className="hover:text-foreground transition-colors">How it Works</a>
-          <a href="#solutions" className="hover:text-foreground transition-colors">Our Solutions</a>
-          <a href="#about" className="hover:text-foreground transition-colors">About Us</a>
+          <a href="#how-it-works" onClick={(e) => handleNavLinkClick(e, '#how-it-works')} className="hover:text-foreground transition-colors">How it Works</a>
+          <a href="#solutions" onClick={(e) => handleNavLinkClick(e, '#solutions')} className="hover:text-foreground transition-colors">Our Solutions</a>
+          <a href="#about" onClick={(e) => handleNavLinkClick(e, '#about')} className="hover:text-foreground transition-colors">About Us</a>
         </nav>
         
         {/* Desktop Contact Button */}
@@ -66,21 +117,21 @@ const Header = () => {
             <a 
               href="#how-it-works" 
               className="px-6 py-4 hover:bg-accent transition-colors border-b border-border"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleNavLinkClick(e, '#how-it-works')}
             >
               How it Works
             </a>
             <a 
               href="#solutions" 
               className="px-6 py-4 hover:bg-accent transition-colors border-b border-border"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleNavLinkClick(e, '#solutions')}
             >
               Our Solutions
             </a>
             <a 
               href="#about" 
               className="px-6 py-4 hover:bg-accent transition-colors border-b border-border"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(e) => handleNavLinkClick(e, '#about')}
             >
               About Us
             </a>

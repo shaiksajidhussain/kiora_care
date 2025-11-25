@@ -4,7 +4,16 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
+import InfectionsAndCkd from "./pages/resources/InfectionsAndCkd";
+import CaringForYourMind from "./pages/resources/CaringForYourMind";
+import ManagingStress from "./pages/resources/ManagingStress";
+import EasyExercise from "./pages/resources/EasyExercise";
+import LivingWithCkdGuide from "./pages/resources/LivingWithCkdGuide";
+import ProtectingYourKidneys from "./pages/resources/ProtectingYourKidneys";
+import ScrollToTop from "./helpers/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -14,8 +23,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/resources/infections-and-ckd" element={<InfectionsAndCkd />} />
+          <Route path="/resources/caring-for-your-mind-during-the-festive-season" element={<CaringForYourMind />} />
+          <Route path="/resources/managing-stress-for-better-renal-health" element={<ManagingStress />} />
+          <Route path="/resources/easy-exercise-for-ckd" element={<EasyExercise />} />
+          <Route path="/resources/living-with-ckd-guide" element={<LivingWithCkdGuide />} />
+          <Route path="/resources/protecting-your-kidneys" element={<ProtectingYourKidneys />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

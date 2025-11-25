@@ -1,6 +1,46 @@
 import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleIndexLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    const sectionId = hash.replace('#', '');
+    
+    if (location.pathname === '/') {
+      // If on home page, scroll to section
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Handle contact form opening
+        if (hash === '#contact') {
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('openContactForm'));
+          }, 500);
+        }
+      }
+    } else {
+      // If on another page, navigate to home with hash
+      navigate('/', { replace: false });
+      // Use a slightly longer timeout to ensure page has loaded
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Update URL hash
+          window.history.replaceState(null, '', hash);
+          if (hash === '#contact') {
+            setTimeout(() => {
+              window.dispatchEvent(new CustomEvent('openContactForm'));
+            }, 500);
+          }
+        }
+      }, 100);
+    }
+  };
+
   return (
     <footer className="bg-white self-stretch w-full overflow-hidden mt-10 md:mt-[51px] pb-8 md:pb-12 px-4 md:px-20">
       <div className="border-t border-gray-200 w-full h-px mb-6 md:mb-8" />
@@ -19,11 +59,11 @@ const Footer = () => {
           {/* Index Column */}
           <nav className="flex flex-col text-base text-[#797B8A] font-medium gap-4">
             <div className="text-black font-semibold mb-2">Index</div>
-            <a href="#how-it-works" className="hover:text-gray-900 transition-colors">How it Works</a>
-            <a href="#solutions" className="hover:text-gray-900 transition-colors">Our Solutions</a>
-            <a href="#about" className="hover:text-gray-900 transition-colors">About Us</a>
-            <a href="#resources" className="hover:text-gray-900 transition-colors">Resources</a>
-            <a href="#contact" className="hover:text-gray-900 transition-colors">Contact Us</a>
+            <a href="#how-it-works" onClick={(e) => handleIndexLinkClick(e, '#how-it-works')} className="hover:text-gray-900 transition-colors">How it Works</a>
+            <a href="#solutions" onClick={(e) => handleIndexLinkClick(e, '#solutions')} className="hover:text-gray-900 transition-colors">Our Solutions</a>
+            <a href="#about" onClick={(e) => handleIndexLinkClick(e, '#about')} className="hover:text-gray-900 transition-colors">About Us</a>
+            <a href="#resources" onClick={(e) => handleIndexLinkClick(e, '#resources')} className="hover:text-gray-900 transition-colors">Resources</a>
+            <a href="#contact" onClick={(e) => handleIndexLinkClick(e, '#contact')} className="hover:text-gray-900 transition-colors">Contact Us</a>
             </nav>
           
           {/* Contact Column */}
@@ -37,11 +77,11 @@ const Footer = () => {
           {/* Legal Column */}
           <div className="flex flex-col text-base font-medium gap-4">
             <div className="text-black font-semibold mb-2">Legal</div>
-            <a href="#privacy" className="text-[#797B8A] hover:text-gray-900 transition-colors">
+            <a href="/privacy" className="text-[#797B8A] hover:text-gray-900 transition-colors">
                   Privacy Policy
                 </a>
-            <a href="#terms" className="text-[#797B8A] hover:text-gray-900 transition-colors">
-              Terms of Service
+            <a href="/terms" className="text-[#797B8A] hover:text-gray-900 transition-colors">
+              Terms of Use
             </a>
           </div>
         </div>

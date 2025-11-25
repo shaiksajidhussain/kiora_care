@@ -145,8 +145,6 @@ const AdvisoryBoard = () => {
                 <div 
                   className="rounded-[12px] overflow-hidden"
                   style={{
-                    backgroundColor: '#B2D5ED',
-                    padding: '8px',
                     borderRadius: '12px'
                   }}
                 >

@@ -1,8 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { resourceArticles } from "@/data/resources";
 
 const Resources = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
+  const itemsPerPage = 3;
+  const totalArticles = resourceArticles.length;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,23 +30,24 @@ const Resources = () => {
       }
     };
   }, []);
-  const resources = [
-    {
-      title: "Managing Common Problems During Dialysis",
-      date: "12 Nov 2025",
-      image: "/images/resource-dialysis.png"
-    },
-    {
-      title: "Monsoon & Your Kidneys: Staying Safe During Flu Season",
-      date: "23 Oct 2025",
-      image: "/images/resource-monsoon.png"
-    },
-    {
-      title: "Managing Stress for Better Renal Health",
-      date: "13 Sep 2025",
-      image: "/images/resource-mind-kidney.png"
+  const visibleResources = useMemo(() => {
+    if (!totalArticles) {
+      return [];
     }
-  ];
+
+    return resourceArticles.slice(0, Math.min(visibleCount, totalArticles));
+  }, [visibleCount, totalArticles]);
+
+  const handleExploreMore = () => {
+    if (!totalArticles) {
+      return;
+    }
+    setVisibleCount((prev) => Math.min(prev + itemsPerPage, totalArticles));
+  };
+
+  const handleNavigate = (slug: string) => {
+    navigate(`/resources/${slug}`);
+  };
 
   return (
     <section 
@@ -55,36 +62,60 @@ const Resources = () => {
       </p>
       
       <div className="w-full max-w-[1115px] mt-8 md:mt-[80px]">
-        <div className="gap-4 md:gap-5 flex max-md:flex-col max-md:items-stretch">
-          {resources.map((resource, index) => (
-            <article 
-              key={index} 
-              className={`w-[33%] max-md:w-full max-md:ml-0 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-              style={{ transitionDelay: `${200 + index * 100}ms` }}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {visibleResources.map((resource, index) => (
+            <article
+              key={resource.slug}
+              role="button"
+              tabIndex={0}
+              onClick={() => handleNavigate(resource.slug)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  handleNavigate(resource.slug);
+                }
+              }}
+              className={`group h-full cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-[10px] transition-all duration-700 ${
+                isVisible ? "opacity-100 translate-y-0 animate-fade-slide" : "opacity-0 translate-y-12"
+              }`}
             >
-              <div className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.25)] flex flex-col items-center aspect-[1] w-full rounded-[10px] max-md:mt-6 transition-all duration-300 hover:scale-105 hover:shadow-[0px_6px_30px_rgba(0,0,0,0.35)]">
-                <div className="border flex flex-col items-stretch px-5 py-[22px] rounded-[10px] border-[rgba(34,34,34,0.1)] border-solid">
-                  <img
-                    src={resource.image}
-                    className="aspect-[1.39] object-contain w-full rounded-lg"
-                    alt={resource.title}
-                  />
-                  <h3 className="text-black text-xl font-[590] leading-6 tracking-[-0.4px] mr-6 mt-4 max-md:mr-2.5">
-                    {resource.title}
-                  </h3>
-                  <time className="text-[#171717] text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-[13px]">
-                    {resource.date}
-                  </time>
+              <div className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.25)] flex h-full flex-col rounded-[10px] border border-[rgba(34,34,34,0.08)] p-4 transition-all duration-300 group-hover:scale-[1.015] group-hover:shadow-[0px_6px_30px_rgba(0,0,0,0.2)]">
+                <div className="relative w-full rounded-lg">
+                  <div className="aspect-[4/3] w-full flex items-center justify-center">
+                    <img
+                      src={resource.image}
+                      className="h-full w-full object-contain"
+                      alt={resource.title}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
+                <h3 className="text-black text-xl font-semibold leading-6 tracking-tight mt-4">
+                  {resource.title}
+                </h3>
+                <p className="text-[#4b4b4b] text-sm mt-2 min-h-[48px] overflow-hidden">
+                  {resource.excerpt}
+                </p>
+                <time className="text-[#171717] text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-auto">
+                  {resource.date}
+                </time>
               </div>
             </article>
           ))}
         </div>
       </div>
       
-      <button className={`bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] flex items-center justify-center text-primary-foreground px-9 py-2.5 rounded-xl hover:opacity-90 transition-all duration-700 delay-500 hover:scale-105 hover:shadow-[0px_6px_30px_rgba(0,0,0,0.35)] mt-8 md:mt-[92px] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        Explore More
-      </button>
+      {visibleCount < totalArticles && (
+        <button
+          type="button"
+          onClick={handleExploreMore}
+          className={`bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] flex items-center justify-center text-primary-foreground px-9 py-2.5 rounded-xl transition-all duration-700 delay-500 mt-8 md:mt-[92px] ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          } hover:opacity-90 hover:scale-105 hover:shadow-[0px_6px_30px_rgba(0,0,0,0.35)]`}
+        >
+          Explore More
+        </button>
+      )}
     </section>
   );
 };
