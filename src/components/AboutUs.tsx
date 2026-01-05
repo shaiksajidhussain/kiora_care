@@ -107,7 +107,7 @@ const AboutUs = () => {
                       alt={member.name}
                     />
                   </div>
-                  <div className="flex items-center justify-between gap-2 mt-3 pr-2">
+                  <div className="flex items-center justify-between gap-2 mt-2 pr-2">
                     <div className="flex-1">
                       <h3 className="text-black text-[clamp(18px,2vw,24px)] font-bold tracking-[-0.48px]">
                         {member.name}

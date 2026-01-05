@@ -114,7 +114,7 @@ const AdvisoryBoard = () => {
                     alt={advisor.name}
                   />
                 </div>
-                <h3 className="text-black text-2xl font-bold  tracking-[-0.48px] mt-[19px] max-md:ml-2 mx-2 md:mx-3">
+                <h3 className="text-black text-2xl font-bold  tracking-[-0.48px] mt-[8px] max-md:ml-2 mx-2 md:mx-3">
                   {advisor.name}
                 </h3>
                 <p className="text-black text-xl font-normal leading-6 tracking-[-0.4px] mt-1 max-md:ml-2 mx-2 md:mx-3">
