@@ -71,27 +71,6 @@ const AboutUs = () => {
       image: "/images/team-dr-nayak.png",
       linkedinUrl: "https://www.linkedin.com/in/dr-k-s-nayak-59509612/",
       details: "Dr. K. S. Nayak is Director of the Department of Nephrology and Renal Transplant Services at Gleneagles Hospitals, Hyderabad Cluster, and a Visiting Scientist at the Renal Research Institute, New York. A globally recognized nephrologist and transplant specialist, he has made pioneering contributions to dialysis innovation, transplant medicine, and renal replacement therapy in India.\n\nA Fellow of the American Society of Nephrology (FASN, USA) and the Royal College of Physicians (FRCP, London), Dr. Nayak has served as Past President of the International Society of Blood Purification and is widely respected for his leadership in advancing high-quality, patient-centered kidney care.\n\nThrough his clinical excellence, research, and teaching, Dr. Nayak continues to bridge global best practices with local innovation, shaping the future of nephrology and renal transplantation in South Asia and beyond."
-    },
-    {
-      name: "Dr. P V Lakshmi",
-      role: "Clinical Nutritionist",
-      image: "/images/team-dr-lakshmi.png",
-      details: "Dr. P. V. Lakshmi previously served as Chief Dietician and Head of Nutrition and Dietetics at Gleneagles Hospital, Chennai, with over 24 years of expertise in clinical nutrition, critical care, and patient-centered dietary management. She has led nutrition services across major hospitals including Global, CARE, and Lazarus Hospitals, and has trained and mentored numerous dieticians and healthcare professionals.\n\nA Ph.D. in Food Science and Nutrition, Dr. Lakshmi blends clinical excellence with academic research and holistic wellness. Her advanced training spans ESPEN-certified modules in renal, critical care, and metabolic nutrition, along with postgraduate degrees in Hospital Management, Yoga & Naturopathy, and Sociology.\n\nA recipient of the Young Investigator Award from the Tamil Nadu Kidney Research Foundation, she has published extensively in renal and metabolic nutrition and remains an active voice in professional bodies such as the Indian Dietetic Association (IDA) and ISPEN, promoting evidence-based and integrated nutrition care."
-    },
-    {
-      name: "Shruti Mahesh",
-      role: "Product Designer",
-      image: "/images/team-shruti-mahesh.png"
-    },
-    {
-      name: "Jignesh Motwani",
-      role: "Backend & Cloud Infra Engineer",
-      image: "/images/team-jignesh-motwani.png"
-    },
-    {
-      name: "Syarifah Fitria Hannan",
-      role: "Designer",
-      image: "/images/team-syarifah-fitria.png"
     }
   ];
 
@@ -109,22 +88,22 @@ const AboutUs = () => {
       </p>
       
       <div className="w-full max-w-[1146px] mt-8 md:mt-[80px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8 items-stretch">
           {teamMembers.map((member, index) => {
             return (
               <article 
                 key={index} 
-                className={`h-full transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+                className={`w-full max-w-[280px] flex transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
                 style={{ transitionDelay: `${200 + index * 50}ms` }}
               >
                 <div 
                   onClick={() => member.details && setSelectedMember(member)}
-                  className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full pt-3 pb-6 px-[clamp(10px,1.5vw,13px)] rounded-[33px] border-[rgba(228,228,228,1)] border-solid h-full transition-transform duration-300 hover:scale-105 ${member.details ? 'cursor-pointer' : ''}`}
+                  className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full h-full pt-3 pb-[27px] px-[13px] rounded-[33px] border-[rgba(228,228,228,1)] border-solid transition-transform duration-300 hover:scale-105 ${member.details ? 'cursor-pointer' : ''}`}
                 >
-                  <div className="self-stretch overflow-hidden pt-2.5 rounded-[33px]">
+                  <div className="self-stretch overflow-hidden rounded-[33px]">
                     <img
                       src={member.image}
-                      className="aspect-[0.91] object-contain w-full rounded-[33px]"
+                      className="aspect-[0.88] object-contain w-full"
                       alt={member.name}
                     />
                   </div>

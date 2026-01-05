@@ -63,6 +63,12 @@ const AdvisoryBoard = () => {
       details: "Professor Sandeep Mahajan is a leading nephrologist and academic based at the All India Institute of Medical Sciences (AIIMS), New Delhi, where he has been a full-time faculty member since 2002. Over the past two decades, he has trained numerous nephrology fellows and contributed extensively to advancing renal medicine in India.\n\nHis work spans clinical research, policy, and advocacy with more than 100 peer-reviewed publications, key roles in global studies like the ISCHEMIA-CKD trial, and contributions to multiple national kidney-care guidelines. Professor Mahajan also serves on expert panels of the Government of India, NITI Aayog, and the World Health Organization, helping shape the future of kidney-health programs.\n\nAs a mentor and advisor, he continues to drive evidence-based, patient-centered innovations in nephrology, building bridges between academia, technology, and public health."
     },
     {
+      name: "Dr. Narendra Dedhia",
+      role: "Senior Nephrologist & Medical Director, Mumbai",
+      image: "/images/advisor-narendra-dedhia.png",
+      details: "Distinguished nephrologist and physician with over 30 years of experience in clinical nephrology, academic medicine, and hospital leadership. Former Professor and Head of the Department of Nephrology at Sir J.J. Group of Hospitals & Grant Medical College, Mumbai, where he served for over two decades and mentored generations of medical professionals. Widely regarded as the architect of the “Bombay Model of Dialysis,” he played a pivotal role in simplifying and standardizing dialysis protocols, significantly improving access to high-quality renal replacement therapy across India.\n\nHe has served as Nephrologist/Physician to the Governor of Maharashtra and currently serves as Managing Director of Parakh Hospital, while continuing his clinical practice as Honorary Nephrologist at Criticare Hospital and Somaiya Super Speciality Hospital, Mumbai. He has also held honorary positions at leading corporate hospitals including Nanavati Hospital, Sir H.N. Reliance Hospital, and Hiranandani Hospital.\n\nIn recognition of his exceptional contributions to medical education, mentorship, and clinical excellence, he was awarded the prestigious Dronacharya Award in August 2025.",
+    },
+    {
       name: "Dr. Mayoor Prabhu",
       role: "Head, Dept of Nephrology, Manipal Hospital, Mangalore",
       image: "/images/advisor-mayoor-prabhu.png",
@@ -73,7 +79,8 @@ const AdvisoryBoard = () => {
       role: "Senior Nephrologist, Gleneagles Hospital, Mumbai",
       image: "/images/advisor-shruti-tapiawala.png",
       details: "Dr. Shruti Tapiawala is a Senior Consultant Nephrologist and Multi-Organ Transplant Physician at Gleneagles Hospitals and Nanavati Max Super Speciality Hospital, Mumbai. With over two decades of experience in nephrology, renal nutrition, and transplant immunology, she is among India's foremost experts in kidney and solid-organ transplantation.\n\nA Fellow of the American Society of Transplantation, Dr. Tapiawala trained in Clinical Nephrology and HLA Medicine at the University Health Network, Canada. She directs Advanced Transplant Diagnostics and Immunogenetics Pvt. Ltd., Mumbai's leading center for transplant immunology and HLA testing, and established India's first Sensitized Organ Recipient Transplant Exchange Registry (SORTER).\n\nWith over 40 peer-reviewed publications and leadership roles in national nephrology bodies, she continues to drive precision medicine and patient-centered innovations in transplantation."
-    }
+    },
+    
   ];
 
   return (
@@ -89,16 +96,16 @@ const AdvisoryBoard = () => {
       </p>
       
       <div className="w-full max-w-[1147px] mt-8 md:mt-[80px]">
-        <div className="gap-4 md:gap-5 flex max-md:flex-col max-md:items-stretch">
+        <div className="gap-4 md:gap-5 flex items-stretch max-md:flex-col max-md:items-stretch">
           {advisors.map((advisor, index) => (
             <article 
               key={index} 
-              className={`w-[33%] max-md:w-full max-md:ml-0 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              className={`w-[33%] max-md:w-full max-md:ml-0 flex transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: `${200 + index * 100}ms` }}
             >
               <div 
                 onClick={() => advisor.details && setSelectedAdvisor(advisor)}
-                className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex grow flex-col overflow-hidden w-full pt-3 pb-[27px] px-[13px] rounded-[33px] border-[rgba(228,228,228,1)] border-solid max-md:mt-6 transition-all duration-300 hover:scale-105 hover:shadow-[0px_2px_80px_rgba(0,0,0,0.35)] ${advisor.details ? 'cursor-pointer' : ''}`}
+                className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full h-full pt-3 pb-[27px] px-[13px] rounded-[33px] border-[rgba(228,228,228,1)] border-solid max-md:mt-6 transition-all duration-300 hover:scale-105 hover:shadow-[0px_2px_80px_rgba(0,0,0,0.35)] ${advisor.details ? 'cursor-pointer' : ''}`}
               >
                 <div className="self-stretch overflow-hidden rounded-[33px]">
                   <img

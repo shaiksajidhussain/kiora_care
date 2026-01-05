@@ -41,31 +41,8 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handleContactClick = () => {
-    if (location.pathname === '/') {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Small delay to ensure scroll completes before opening form
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent('openContactForm'));
-        }, 500);
-      }
-    } else {
-      // If on another page, navigate to home first
-      navigate('/', { replace: false });
-      // After navigation, scroll to contact section and open form
-      setTimeout(() => {
-        const contactSection = document.getElementById('contact');
-        if (contactSection) {
-          contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          window.history.replaceState(null, '', '#contact');
-          setTimeout(() => {
-            window.dispatchEvent(new CustomEvent('openContactForm'));
-          }, 500);
-        }
-      }, 100);
-    }
+  const handleLoginClick = () => {
+    window.location.href = 'https://app.kiora.care';
     setIsMobileMenuOpen(false);
   };
 
@@ -93,12 +70,12 @@ const Header = () => {
           <a href="#about" onClick={(e) => handleNavLinkClick(e, '#about')} className="hover:text-foreground transition-colors">About Us</a>
         </nav>
         
-        {/* Desktop Contact Button */}
+        {/* Desktop Login Button */}
         <button 
-          onClick={handleContactClick}
+          onClick={handleLoginClick}
           className="hidden md:flex bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] items-center justify-center text-primary-foreground px-9 py-2.5 rounded-xl hover:opacity-90 transition-opacity"
         >
-          Contact Us
+          Login
         </button>
 
         {/* Mobile Menu Button */}
@@ -136,10 +113,10 @@ const Header = () => {
               About Us
             </a>
             <button 
-              onClick={handleContactClick}
+              onClick={handleLoginClick}
               className="mx-4 my-4 bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.4)] text-primary-foreground px-6 py-3 rounded-xl hover:opacity-90 transition-opacity"
             >
-              Contact Us
+              Login
             </button>
           </nav>
         </div>

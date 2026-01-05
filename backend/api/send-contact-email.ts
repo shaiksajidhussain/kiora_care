@@ -11,11 +11,19 @@ function setCorsHeaders(res: VercelResponse, origin: string | undefined) {
     // If wildcard is allowed, use the request origin if present, otherwise use '*'
     originToUse = origin ? origin.trim() : '*';
   } else {
-    // If specific origin is required, check if it matches
-    if (origin && origin.trim() === allowedOrigin) {
-      originToUse = origin.trim();
+    // Support multiple origins separated by comma
+    const allowedOrigins = allowedOrigin.split(',').map(o => o.trim());
+    const requestOrigin = origin ? origin.trim() : '';
+    
+    // Check if the request origin matches any allowed origin
+    if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+      originToUse = requestOrigin;
+    } else if (allowedOrigins.length === 1) {
+      // Single origin - use it
+      originToUse = allowedOrigins[0];
     } else {
-      originToUse = allowedOrigin;
+      // Default to first allowed origin if no match
+      originToUse = allowedOrigins[0];
     }
   }
   
