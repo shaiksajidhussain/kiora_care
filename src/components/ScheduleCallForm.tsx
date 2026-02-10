@@ -100,7 +100,7 @@ const ScheduleCallForm = ({ open, onOpenChange }: ScheduleCallFormProps) => {
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
         className={cn(
-          'max-w-[min(920px,95vw)] max-h-[90vh] overflow-hidden p-0 gap-0',
+          'max-w-[min(920px,95vw)] max-h-[100vh] md:max-h-[90vh] overflow-y-auto md:overflow-hidden p-0 gap-0',
           'rounded-2xl md:rounded-3xl border-border shadow-2xl',
           'data-[state=open]:animate-in data-[state=closed]:animate-out',
           'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
