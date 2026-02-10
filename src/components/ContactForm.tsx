@@ -14,7 +14,7 @@ interface FormData {
 const ContactForm = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(true);
   const [userTypeError, setUserTypeError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -161,7 +161,7 @@ const ContactForm = () => {
           </p>
           <button 
             onClick={() => setShowForm(!showForm)}
-            className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-[17px] text-black tracking-[-0.34px] mt-8 md:mt-[72px] px-9 py-2.5 rounded-xl hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+            className="bg-card shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-center text-[17px] text-foreground tracking-[-0.34px] mt-8 md:mt-[72px] px-9 py-2.5 rounded-xl hover:bg-accent transition-all duration-300 hover:scale-105"
           >
             Reach Out to Us
           </button>
@@ -170,175 +170,194 @@ const ContactForm = () => {
       </div>
       
       {showForm && (
-        <div className={`w-full max-w-[1445px] mt-6 md:mt-[26px] animate-in fade-in slide-in-from-bottom-4 duration-500`}>
-        <div className="gap-6 md:gap-8 flex max-md:flex-col max-md:items-stretch">
-          <div className="w-1/2 max-md:w-full max-md:ml-0">
-            <img
-              src="/images/contact-illustration.png"
-              className="aspect-[0.86] object-contain w-full grow rounded-[32px] md:rounded-[72px] max-md:hidden"
-              alt="Contact illustration"
-            />
-          </div>
-          <div className="w-1/2 max-md:w-full max-md:ml-0">
-            <div className="w-full mt-6 md:mt-[22px] max-md:max-w-full pr-0 md:pr-8">
-              <form onSubmit={handleSubmit} className="max-md:max-w-full">
-                    <div className="grow text-black max-md:mt-[18px]">
-                      <h3 className="text-[55px] font-normal leading-none tracking-[-2.2px] mr-[30px] max-md:text-[40px] max-md:mr-2.5">
-                        Join the Waitlist
-                      </h3>
-                  <div className="flex w-full flex-col text-[17px] font-[510] tracking-[-0.34px] mt-8 pl-[9px] max-md:mt-10">
-                        <div className="flex items-stretch gap-9">
-                          <div className="flex flex-col items-stretch">
-                            <label htmlFor="userType" className="mb-[13px]">You are a</label>
-                            <div className="flex gap-4">
-                              <button
-                                type="button"
-                                onClick={() => handleUserTypeChange('doctor')}
-                                className={`shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex items-center gap-2.5 overflow-hidden whitespace-nowrap text-center px-[13px] py-2 rounded-xl border-[rgba(228,228,228,1)] border-solid ${
-                                  formData.userType === 'doctor' ? 'bg-blue-50' : 'bg-white'
-                                }`}
-                              >
-                                <div className={`flex w-[18px] shrink-0 h-[18px] rounded-[50%] border-2 ${
-                                  formData.userType === 'doctor' 
-                                    ? 'bg-blue-500 border-blue-500' 
-                                    : 'bg-white shadow-[0px_1px_4px_rgba(0,0,0,0.25)] border-[rgba(228,228,228,1)]'
-                                }`} />
-                                <span>Doctor</span>
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleUserTypeChange('patient')}
-                                className={`shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex items-center gap-[11px] overflow-hidden whitespace-nowrap text-center px-3 py-2 rounded-xl border-[rgba(228,228,228,1)] border-solid ${
-                                  formData.userType === 'patient' ? 'bg-blue-50' : 'bg-white'
-                                }`}
-                              >
-                                <div className={`flex w-[18px] shrink-0 h-[18px] rounded-[50%] border-2 ${
-                                  formData.userType === 'patient' 
-                                    ? 'bg-blue-500 border-blue-500' 
-                                    : 'bg-white shadow-[0px_1px_4px_rgba(0,0,0,0.25)] border-[rgba(228,228,228,1)]'
-                                }`} />
-                                <span>Patient</span>
-                              </button>
-                            </div>
-                            {userTypeError && (
-                              <p className="text-red-500 text-sm mt-2">{userTypeError}</p>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <label htmlFor="fullName" className="mt-4">Full Name</label>
-                        <input
-                          type="text"
-                          id="fullName"
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleInputChange}
-                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border self-stretch flex shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
-                          required
-                        />
-                        
-                        <label htmlFor="phoneNumber" className="mt-4">Phone Number</label>
+        <div className={`w-full max-w-[1445px] mt-8 md:mt-12 animate-in fade-in slide-in-from-bottom-4 duration-500`}>
+          <div className="flex gap-8 md:gap-12 max-md:flex-col">
+            {/* Left: image */}
+            <div className="w-full md:w-[48%] flex-shrink-0 rounded-3xl md:rounded-[40px] overflow-hidden min-h-[280px] md:min-h-[420px] bg-muted/30">
+              <img
+                src="https://kimshospital.in/wp-content/uploads/2022/12/doctor-nurses-special-equipment.webp"
+                className="w-full h-full min-h-[280px] md:min-h-[420px] object-cover"
+                alt="Doctor and nurses with special equipment"
+              />
+            </div>
+
+            {/* Right: form */}
+            <div className="w-full md:flex-1 flex flex-col justify-center">
+              <div className="bg-card border border-border rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-lg">
+                <h3 className="text-2xl md:text-3xl font-semibold text-foreground tracking-tight mb-1">
+                  Get in touch
+                </h3>
+                <p className="text-muted-foreground text-sm md:text-base mb-6">
+                  Share your details and we’ll get back to you shortly.
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <label htmlFor="userType" className="block text-sm font-medium text-foreground mb-2">
+                      You are a
+                    </label>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => handleUserTypeChange('doctor')}
+                        className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium border-2 transition-all ${
+                          formData.userType === 'doctor'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-md'
+                            : 'bg-background border-border text-foreground hover:border-primary/50 hover:bg-muted/30'
+                        }`}
+                      >
+                        <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                          formData.userType === 'doctor' ? 'border-primary bg-primary-foreground' : 'border-border'
+                        }`}>
+                          {formData.userType === 'doctor' && <span className="w-2 h-2 rounded-full bg-primary" />}
+                        </span>
+                        Doctor
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleUserTypeChange('patient')}
+                        className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium border-2 transition-all ${
+                          formData.userType === 'patient'
+                            ? 'bg-primary text-primary-foreground border-primary shadow-md'
+                            : 'bg-background border-border text-foreground hover:border-primary/50 hover:bg-muted/30'
+                        }`}
+                      >
+                        <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                          formData.userType === 'patient' ? 'border-primary bg-primary-foreground' : 'border-border'
+                        }`}>
+                          {formData.userType === 'patient' && <span className="w-2 h-2 rounded-full bg-primary" />}
+                        </span>
+                        Patient
+                      </button>
+                    </div>
+                    {userTypeError && (
+                      <p className="text-destructive text-sm mt-1.5">{userTypeError}</p>
+                    )}
+                  </div>
+
+                  <div className="grid gap-5 sm:grid-cols-1">
+                    <div>
+                      <label htmlFor="fullName" className="block text-sm font-medium text-foreground mb-1.5">Full Name</label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        placeholder="Your full name"
+                        className="w-full h-10 rounded-xl border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow"
+                        required
+                      />
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-5">
+                      <div>
+                        <label htmlFor="phoneNumber" className="block text-sm font-medium text-foreground mb-1.5">Phone Number</label>
                         <input
                           type="tel"
                           id="phoneNumber"
                           name="phoneNumber"
                           value={formData.phoneNumber}
                           onChange={handleInputChange}
-                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[216px] shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
+                          placeholder="Phone number"
+                          className="w-full h-10 rounded-xl border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow"
                           required
                         />
-                        
-                        <label htmlFor="emailAddress" className="mt-4">Email Address</label>
+                      </div>
+                      <div>
+                        <label htmlFor="emailAddress" className="block text-sm font-medium text-foreground mb-1.5">Email Address</label>
                         <input
                           type="email"
                           id="emailAddress"
                           name="emailAddress"
                           value={formData.emailAddress}
                           onChange={handleInputChange}
-                          className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[263px] shrink-0 max-w-full h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
+                          placeholder="you@example.com"
+                          className="w-full h-10 rounded-xl border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow"
                           required
                         />
-                        
-                        <div className="flex max-md:flex-col gap-4 mt-4">
-                          <div className="flex flex-col">
-                            <label htmlFor="city">City</label>
+                      </div>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-5">
+                      <div>
+                        <label htmlFor="city" className="block text-sm font-medium text-foreground mb-1.5">City</label>
                         <input
                           type="text"
                           id="city"
                           name="city"
                           value={formData.city}
                           onChange={handleInputChange}
-                              className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex w-[203px] max-md:w-full shrink-0 h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
+                          placeholder="City"
+                          className="w-full h-10 rounded-xl border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow"
                           required
                         />
                       </div>
-                          <div className="flex flex-col max-md:ml-0 ml-auto">
-                      <label htmlFor="pincode">Pincode</label>
-                      <input
-                        type="text"
-                        id="pincode"
-                        name="pincode"
-                        value={formData.pincode}
+                      <div>
+                        <label htmlFor="pincode" className="block text-sm font-medium text-foreground mb-1.5">Pincode</label>
+                        <input
+                          type="text"
+                          id="pincode"
+                          name="pincode"
+                          value={formData.pincode}
+                          onChange={handleInputChange}
+                          placeholder="e.g. 560001"
+                          className="w-full h-10 rounded-xl border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">Message</label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
                         onChange={handleInputChange}
-                        className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 max-md:w-full h-9 mt-2 rounded-xl border-[rgba(228,228,228,1)] border-solid px-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
+                        placeholder="How can we help?"
+                        rows={4}
+                        className="w-full min-h-[100px] resize-y py-3 rounded-xl border border-border bg-background px-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow"
                         required
                       />
-                          </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="flex w-full flex-col items-stretch text-[17px] text-black font-normal tracking-[-0.34px] mt-6 pl-[9px] max-md:max-w-full">
-                  <label htmlFor="message" className="font-[510]">Message</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    className="shadow-[0px_1px_8px_rgba(0,0,0,0.25)] border flex shrink-0 h-[115px] mt-[5px] rounded-xl border-[rgba(228,228,228,1)] border-solid max-md:max-w-full px-3 py-2 resize-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-[0px_2px_12px_rgba(17,144,255,0.3)]"
-                    rows={5}
-                  />
-                  
-                  <div className="flex items-stretch gap-2.5 text-base tracking-[-0.64px] mt-[15px]">
+
+                  <label className="flex items-start gap-3 cursor-pointer group">
                     <input
                       type="checkbox"
                       id="agreeToContact"
                       name="agreeToContact"
                       checked={formData.agreeToContact}
                       onChange={handleInputChange}
-                      className="bg-white shadow-[0px_1px_8px_rgba(0,0,0,0.25)] w-6 h-[22px]"
+                      className="mt-1 h-4 w-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
                       required
                     />
-                    <label htmlFor="agreeToContact" className="basis-auto grow shrink my-auto">
+                    <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
                       You agree to Kiora getting in touch with you
-                    </label>
-                  </div>
-                  
+                    </span>
+                  </label>
+
                   {submitSuccess && (
-                    <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl text-green-800">
-                      <p className="font-medium">Thank you! Your message has been sent successfully. We'll get back to you soon.</p>
+                    <div className="p-4 rounded-xl bg-green-500/10 border border-green-500/30 text-green-700 dark:text-green-400 text-sm font-medium">
+                      Thank you! Your message has been sent. We’ll get back to you soon.
                     </div>
                   )}
-                  
                   {submitError && (
-                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-xl text-red-800">
-                      <p className="font-medium">{submitError}</p>
+                    <div className="p-4 rounded-xl bg-destructive/10 border border-destructive/30 text-destructive text-sm font-medium">
+                      {submitError}
                     </div>
                   )}
-                  
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="bg-[rgba(17,144,255,1)] shadow-[0px_4px_20px_rgba(0,0,0,0.3)] flex flex-col overflow-hidden items-center text-white whitespace-nowrap text-center justify-center mt-[30px] px-[70px] py-[15px] rounded-xl max-md:max-w-full max-md:px-5 hover:bg-blue-600 transition-all duration-300 hover:scale-105 hover:shadow-[0px_6px_30px_rgba(0,0,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="w-full sm:w-auto bg-primary text-primary-foreground font-medium px-8 py-3 rounded-xl shadow-lg hover:opacity-90 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-lg"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                    {isSubmitting ? 'Sending...' : 'Submit'}
                   </button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       )}
     </section>
   );

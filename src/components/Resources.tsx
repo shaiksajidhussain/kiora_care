@@ -54,10 +54,10 @@ const Resources = () => {
       ref={sectionRef}
       className="flex flex-col items-center px-4 py-10 md:py-20"
     >
-      <h2 className={`text-black text-[clamp(40px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] text-center mt-10 md:mt-[324px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <h2 className={`text-foreground text-[clamp(40px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] text-center mt-10 md:mt-[324px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Resources
       </h2>
-      <p className={`text-black text-xl md:text-2xl font-normal tracking-[-0.48px] text-center max-w-full mt-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <p className={`text-foreground text-xl md:text-2xl font-normal tracking-[-0.48px] text-center max-w-full mt-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Expert-curated resources on kidney health, nutrition, and mental well-being.
       </p>
       
@@ -79,8 +79,8 @@ const Resources = () => {
                 isVisible ? "opacity-100 translate-y-0 animate-fade-slide" : "opacity-0 translate-y-12"
               }`}
             >
-              <div className="bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.25)] flex h-full flex-col rounded-[10px] border border-[rgba(34,34,34,0.08)] p-4 transition-all duration-300 group-hover:scale-[1.015] group-hover:shadow-[0px_6px_30px_rgba(0,0,0,0.2)]">
-                <div className="relative w-full rounded-lg">
+              <div className="bg-card shadow-[0px_4px_20px_rgba(0,0,0,0.25)] flex h-full flex-col rounded-[10px] border border-border p-4 transition-all duration-300 group-hover:scale-[1.015] group-hover:shadow-[0px_6px_30px_rgba(0,0,0,0.2)]">
+                <div className="relative w-full rounded-lg overflow-hidden bg-muted/40">
                   <div className="aspect-[4/3] w-full flex items-center justify-center">
                     <img
                       src={resource.image}
@@ -90,13 +90,13 @@ const Resources = () => {
                     />
                   </div>
                 </div>
-                <h3 className="text-black text-xl font-semibold leading-6 tracking-tight mt-4">
+                <h3 className="text-foreground text-xl font-semibold leading-6 tracking-tight mt-4">
                   {resource.title}
                 </h3>
-                <p className="text-[#4b4b4b] text-sm mt-2 min-h-[48px] overflow-hidden">
+                <p className="text-muted-foreground text-sm mt-2 min-h-[48px] overflow-hidden">
                   {resource.excerpt}
                 </p>
-                <time className="text-[#171717] text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-auto">
+                <time className="text-muted-foreground text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-auto">
                   {resource.date}
                 </time>
               </div>

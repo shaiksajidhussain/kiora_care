@@ -47,14 +47,17 @@ const AboutUs = () => {
 
     if (selectedMember) {
       document.addEventListener('mousedown', handleClickOutside);
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, [selectedMember]);
 
@@ -80,10 +83,10 @@ const AboutUs = () => {
       id="about" 
       className="flex flex-col items-center px-4 py-10 md:py-20"
     >
-      <h2 className={`text-black text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center mt-10 md:mt-[200px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <h2 className={`text-foreground text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight text-center mt-10 md:mt-[200px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         About Us
       </h2>
-      <p className={`text-black text-xl md:text-2xl font-normal tracking-[-0.48px] text-center max-w-full mt-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <p className={`text-foreground text-xl md:text-2xl font-normal tracking-[-0.48px] text-center max-w-full mt-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Deep commitment to improving healthcare outcomes
       </p>
       
@@ -98,7 +101,7 @@ const AboutUs = () => {
               >
                 <div 
                   onClick={() => member.details && setSelectedMember(member)}
-                  className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full h-full pt-3 pb-[27px] px-[13px] rounded-[33px] border-[rgba(228,228,228,1)] border-solid transition-transform duration-300 hover:scale-105 ${member.details ? 'cursor-pointer' : ''}`}
+                  className={`bg-card shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border border-border flex flex-col overflow-hidden w-full h-full pt-3 pb-[27px] px-[13px] rounded-[33px] transition-transform duration-300 hover:scale-105 ${member.details ? 'cursor-pointer' : ''}`}
                 >
                   <div className="self-stretch overflow-hidden rounded-[33px]">
                     <img
@@ -109,10 +112,10 @@ const AboutUs = () => {
                   </div>
                   <div className="flex items-center justify-between gap-2 mt-2 pr-2">
                     <div className="flex-1">
-                      <h3 className="text-black text-[clamp(18px,2vw,24px)] font-bold tracking-[-0.48px]">
+                      <h3 className="text-foreground text-[clamp(18px,2vw,24px)] font-bold tracking-[-0.48px]">
                         {member.name}
                       </h3>
-                      <p className="text-black text-[clamp(14px,1.5vw,20px)] font-normal tracking-[-0.4px]">
+                      <p className="text-foreground text-[clamp(14px,1.5vw,20px)] font-normal tracking-[-0.4px]">
                         {member.role}
                       </p>
                     </div>
@@ -141,7 +144,7 @@ const AboutUs = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
           <div 
             ref={modalRef}
-            className="bg-[#F5F5F5] rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-[rgba(228,228,228,0.8)] relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto"
+            className="bg-card rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-border relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto"
             style={{
               boxShadow: '0px 4px 20px rgba(0,0,0,0.25), inset 0px 0px 0px 1px rgba(228,228,228,0.8)'
             }}
@@ -149,10 +152,10 @@ const AboutUs = () => {
             {/* Close Button */}
             <button
               onClick={() => setSelectedMember(null)}
-              className="absolute top-4 right-4 z-10 p-2 hover:bg-gray-200 rounded-full transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 hover:bg-accent rounded-full transition-colors"
               aria-label="Close"
             >
-              <X className="w-6 h-6 text-black" />
+              <X className="w-6 h-6 text-foreground" />
             </button>
 
             {/* Content */}
@@ -171,12 +174,12 @@ const AboutUs = () => {
               </div>
 
               {/* Name */}
-              <h3 className="text-black text-[clamp(22px,3vw,36px)] font-bold text-center mb-6">
+              <h3 className="text-foreground text-[clamp(22px,3vw,36px)] font-bold text-center mb-6">
                 {selectedMember.name}
               </h3>
 
               {/* Details */}
-              <div className="text-black text-[clamp(15px,1.8vw,20px)] leading-relaxed whitespace-pre-line">
+              <div className="text-foreground text-[clamp(15px,1.8vw,20px)] leading-relaxed whitespace-pre-line">
                 {selectedMember.details.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4 last:mb-0">
                     {paragraph}

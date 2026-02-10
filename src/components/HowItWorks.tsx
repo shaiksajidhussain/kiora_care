@@ -41,7 +41,7 @@ const HowItWorks = () => {
       <div className="w-full max-w-[1175px] mt-8 md:mt-[80px]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Card 1 - Personalized Care Plan */}
-          <article className={`bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[575px] transition-all duration-700 delay-200 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <article className={`bg-card shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[575px] transition-all duration-700 delay-200 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Personalized Care Plan
             </h3>
@@ -56,7 +56,7 @@ const HowItWorks = () => {
           </article>
           
           {/* Card 2 - Continuous Monitoring & Protocols */}
-          <article className={`bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[490px] transition-all duration-700 delay-300 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <article className={`bg-card shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[490px] transition-all duration-700 delay-300 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Continuous Monitoring & Protocols
             </h3>
@@ -71,7 +71,7 @@ const HowItWorks = () => {
           </article>
           
           {/* Card 3 - Holistic Care */}
-          <article className={`bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[490px] transition-all duration-700 delay-400 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <article className={`bg-card shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[490px] transition-all duration-700 delay-400 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Holistic Care
             </h3>
@@ -86,7 +86,7 @@ const HowItWorks = () => {
           </article>
           
           {/* Card 4 - Built for India */}
-          <article className={`bg-white shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[575px] md:-mt-[85px] transition-all duration-700 delay-500 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <article className={`bg-card shadow-[0px_1px_30px_rgba(0,0,0,0.25)] border border-border rounded-[22px] px-6 pt-6 pb-0 flex flex-col h-auto md:h-[575px] md:-mt-[85px] transition-all duration-700 delay-500 hover:scale-[1.02] hover:shadow-[0px_1px_40px_rgba(0,0,0,0.3)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
             <h3 className="text-foreground text-[clamp(24px,3vw,32px)] font-semibold leading-tight tracking-tight text-center mt-6">
               Built for India
             </h3>

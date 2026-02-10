@@ -66,9 +66,9 @@ const OtherArticlesMarquee = ({ currentSlug }: OtherArticlesMarqueeProps) => {
       <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4">
         <header className="space-y-2 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">View other articles</p>
-          <h2 className="text-2xl font-bold tracking-tight text-black md:text-3xl">Explore more kidney health insights</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">Explore more kidney health insights</h2>
         </header>
-        <div className="relative overflow-hidden rounded-2xl border border-[rgba(34,34,34,0.08)] bg-white py-6">
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-card py-6">
           {/* 
             We render two sets of the same items to ensure seamless looping.
             The JS animation loop translates the track and resets after half the width is scrolled.
@@ -91,9 +91,9 @@ const OtherArticlesMarquee = ({ currentSlug }: OtherArticlesMarqueeProps) => {
                     navigate(`/resources/${article.slug}`);
                   }
                 }}
-                className="w-[280px] shrink-0 rounded-xl border border-[rgba(34,34,34,0.08)] bg-[#f8fbff] text-left transition-all duration-300 hover:-translate-y-1 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="w-[280px] shrink-0 rounded-xl border border-border bg-muted/50 text-left transition-all duration-300 hover:-translate-y-1 hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
-                <div className="relative w-full overflow-hidden rounded-t-xl bg-white">
+                <div className="relative w-full overflow-hidden rounded-t-xl bg-card">
                   <div className="aspect-[4/3] w-full flex items-center justify-center">
                     <img src={article.image} alt={article.title} className="h-full w-full object-contain p-4" loading="lazy" />
                   </div>

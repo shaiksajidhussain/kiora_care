@@ -44,14 +44,17 @@ const AdvisoryBoard = () => {
 
     if (selectedAdvisor) {
       document.addEventListener('mousedown', handleClickOutside);
+      document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
-      document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
     };
   }, [selectedAdvisor]);
 
@@ -88,10 +91,10 @@ const AdvisoryBoard = () => {
       ref={sectionRef}
       className="flex flex-col items-center px-4 py-10 md:py-20"
     >
-      <h2 className={`text-black text-[clamp(40px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] text-center mt-10 md:mt-[191px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <h2 className={`text-foreground text-[clamp(40px,8vw,64px)] font-[510] leading-none tracking-[-1.28px] text-center mt-10 md:mt-[191px] transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Advisory Board & Mentors
       </h2>
-      <p className={`text-black text-xl md:text-2xl font-normal leading-[3] tracking-[-0.48px] text-center mt-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <p className={`text-foreground text-xl md:text-2xl font-normal leading-[3] tracking-[-0.48px] text-center mt-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
         Guided by India's leading clinicians
       </p>
       
@@ -105,7 +108,7 @@ const AdvisoryBoard = () => {
             >
               <div 
                 onClick={() => advisor.details && setSelectedAdvisor(advisor)}
-                className={`bg-white shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border flex flex-col overflow-hidden w-full h-full pt-3 pb-[27px] px-[13px] rounded-[33px] border-[rgba(228,228,228,1)] border-solid max-md:mt-6 transition-all duration-300 hover:scale-105 hover:shadow-[0px_2px_80px_rgba(0,0,0,0.35)] ${advisor.details ? 'cursor-pointer' : ''}`}
+                className={`bg-card shadow-[0px_1px_60px_rgba(0,0,0,0.25)] border border-border flex flex-col overflow-hidden w-full h-full pt-3 pb-[27px] px-[13px] rounded-[33px] max-md:mt-6 transition-all duration-300 hover:scale-105 hover:shadow-[0px_2px_80px_rgba(0,0,0,0.35)] ${advisor.details ? 'cursor-pointer' : ''}`}
               >
                 <div className="self-stretch overflow-hidden rounded-[33px]">
                   <img
@@ -114,10 +117,10 @@ const AdvisoryBoard = () => {
                     alt={advisor.name}
                   />
                 </div>
-                <h3 className="text-black text-2xl font-bold  tracking-[-0.48px] mt-[8px] max-md:ml-2 mx-2 md:mx-3">
+                <h3 className="text-foreground text-2xl font-bold  tracking-[-0.48px] mt-[8px] max-md:ml-2 mx-2 md:mx-3">
                   {advisor.name}
                 </h3>
-                <p className="text-black text-xl font-normal leading-6 tracking-[-0.4px] mt-1 max-md:ml-2 mx-2 md:mx-3">
+                <p className="text-foreground text-xl font-normal leading-6 tracking-[-0.4px] mt-1 max-md:ml-2 mx-2 md:mx-3">
                   {advisor.role}
                 </p>
               </div>
@@ -131,7 +134,7 @@ const AdvisoryBoard = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
           <div 
             ref={modalRef}
-            className="bg-[#F5F5F5] rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-[rgba(228,228,228,0.8)] relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto"
+            className="bg-card rounded-[20px] shadow-[0px_4px_20px_rgba(0,0,0,0.25)] border border-border relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto"
             style={{
               boxShadow: '0px 4px 20px rgba(0,0,0,0.25), inset 0px 0px 0px 1px rgba(228,228,228,0.8)'
             }}
@@ -139,10 +142,10 @@ const AdvisoryBoard = () => {
             {/* Close Button */}
             <button
               onClick={() => setSelectedAdvisor(null)}
-              className="absolute top-4 right-4 z-10 p-2 hover:bg-gray-200 rounded-full transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 hover:bg-accent rounded-full transition-colors"
               aria-label="Close"
             >
-              <X className="w-6 h-6 text-black" />
+              <X className="w-6 h-6 text-foreground" />
             </button>
 
             {/* Content */}
@@ -164,12 +167,12 @@ const AdvisoryBoard = () => {
               </div>
 
               {/* Name */}
-              <h3 className="text-black text-[clamp(22px,3vw,36px)] font-bold text-center mb-6">
+              <h3 className="text-foreground text-[clamp(22px,3vw,36px)] font-bold text-center mb-6">
                 {selectedAdvisor.name}
               </h3>
 
               {/* Details */}
-              <div className="text-black text-[clamp(15px,1.8vw,20px)] leading-relaxed whitespace-pre-line">
+              <div className="text-foreground text-[clamp(15px,1.8vw,20px)] leading-relaxed whitespace-pre-line">
                 {selectedAdvisor.details.split('\n\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4 last:mb-0">
                     {paragraph}
