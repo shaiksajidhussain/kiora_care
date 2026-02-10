@@ -131,15 +131,15 @@ const ScheduleCallForm = ({ open, onOpenChange }: ScheduleCallFormProps) => {
           </div>
 
           {/* Right: form */}
-          <div className="flex-1 flex flex-col overflow-y-auto">
-            <DialogHeader className="p-6 pb-4 pr-12 md:p-8 md:pb-6 md:pr-14 text-left border-b border-border">
-              <DialogTitle className="text-2xl font-bold tracking-tight text-foreground">
+          <div className="flex-1 flex flex-col overflow-y-auto max-h-[100vh] md:max-h-none">
+            <DialogHeader className="sticky top-0 p-6 pb-4 pr-12 md:p-8 md:pb-6 md:pr-14 text-left border-b border-border bg-background/95 backdrop-blur">
+              <DialogTitle className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
                 Schedule a test
               </DialogTitle>
-              <DialogDescription className="text-muted-foreground text-sm mt-1">
+              <DialogDescription className="text-muted-foreground text-xs md:text-sm mt-1">
                 Fill in your details and preferred date & time for your test. We’ll get back to you shortly with a confirmation.
               </DialogDescription>
-              <p className="text-foreground/90 text-sm mt-3 leading-relaxed max-w-lg">
+              <p className="text-foreground/90 text-xs md:text-sm mt-3 leading-relaxed max-w-lg">
                 Structured renal care assessment and evidence-based diagnostic pathway designed by our clinical team. Schedule your test to understand your CKD stage and personalised intervention options.
               </p>
               <div className="flex items-baseline gap-2 mt-4">
@@ -162,7 +162,7 @@ const ScheduleCallForm = ({ open, onOpenChange }: ScheduleCallFormProps) => {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-5">
+              <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-5 pb-24">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
                     <Label htmlFor="schedule-name" className="text-foreground font-medium flex items-center gap-2">
@@ -326,17 +326,21 @@ const ScheduleCallForm = ({ open, onOpenChange }: ScheduleCallFormProps) => {
                   </p>
                 )}
 
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={cn(
-                    'w-full h-12 rounded-xl font-semibold text-primary-foreground',
-                    'bg-primary hover:opacity-90 hover:shadow-lg focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background',
-                    'transition-all duration-200 disabled:opacity-50'
-                  )}
-                >
-                  {isSubmitting ? 'Sending...' : 'Schedule my test'}
-                </Button>
+                <div className="sticky bottom-0 left-0 right-0 pt-3 -mx-6 md:-mx-8 pb-2 bg-gradient-to-t from-background via-background/95 to-background/60 backdrop-blur">
+                  <div className="px-6 md:px-8">
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={cn(
+                        'w-full h-12 rounded-xl font-semibold text-primary-foreground',
+                        'bg-primary hover:opacity-90 hover:shadow-lg focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background',
+                        'transition-all duration-200 disabled:opacity-50'
+                      )}
+                    >
+                      {isSubmitting ? 'Sending...' : 'Schedule my test'}
+                    </Button>
+                  </div>
+                </div>
               </form>
             )}
           </div>
