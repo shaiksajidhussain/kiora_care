@@ -153,7 +153,7 @@ const Hero = () => {
                         onClick={() => setScheduleFormOpen(true)}
                         className="bg-primary shadow-[0px_4px_20px_rgba(0,0,0,0.25),inset_0px_2px_6px_rgba(255,255,255,0.3)] text-primary-foreground rounded-xl px-9 py-2.5 transition-all duration-300 ease-out hover:scale-105 hover:opacity-90 hover:shadow-[0px_6px_28px_rgba(17,144,255,0.45)] focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
                       >
-                        Schedule a call
+                        Schedule a test
                       </button>
                     </div>
                   </div>
