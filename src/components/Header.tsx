@@ -61,25 +61,48 @@ const Header = () => {
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      if (location.pathname === '/') {
+    
+    if (location.pathname === '/') {
+      // If on home page, scroll to section
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
         contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         setTimeout(() => {
           window.dispatchEvent(new CustomEvent('openContactForm'));
         }, 500);
       } else {
-        navigate('/');
+        // If section not found, scroll to bottom and open form
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         setTimeout(() => {
-          const section = document.getElementById('contact');
-          if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setTimeout(() => {
-              window.dispatchEvent(new CustomEvent('openContactForm'));
-            }, 500);
-          }
-        }, 400);
+          window.dispatchEvent(new CustomEvent('openContactForm'));
+        }, 500);
       }
+    } else {
+      // If on another page, navigate to home first
+      navigate('/');
+      // Wait for navigation and page load, then scroll to contact
+      // Use a more reliable approach with multiple retries
+      let retries = 0;
+      const maxRetries = 20; // 2 seconds max wait
+      const scrollToContact = () => {
+        const section = document.getElementById('contact');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('openContactForm'));
+          }, 500);
+        } else if (retries < maxRetries) {
+          retries++;
+          setTimeout(scrollToContact, 100);
+        } else {
+          // Fallback: scroll to bottom and open form
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('openContactForm'));
+          }, 500);
+        }
+      };
+      setTimeout(scrollToContact, 200);
     }
     setIsMobileMenuOpen(false);
   };

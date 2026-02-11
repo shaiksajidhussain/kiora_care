@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import ScheduleTestInfo from "./pages/ScheduleTestInfo";
 import NotFound from "./pages/NotFound";
 import InfectionsAndCkd from "./pages/resources/InfectionsAndCkd";
 import CaringForYourMind from "./pages/resources/CaringForYourMind";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/schedule-test" element={<ScheduleTestInfo />} />
           <Route path="/resources/infections-and-ckd" element={<InfectionsAndCkd />} />
           <Route path="/resources/caring-for-your-mind-during-the-festive-season" element={<CaringForYourMind />} />
           <Route path="/resources/managing-stress-for-better-renal-health" element={<ManagingStress />} />
