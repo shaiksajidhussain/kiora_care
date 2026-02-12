@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, X, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Header from '@/components/Header';
 import ScheduleCallForm from '@/components/ScheduleCallForm';
 
@@ -164,10 +165,6 @@ const ScheduleTestInfo = () => {
                       Functional vitality metrics
                     </li>
                     <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-500">
-                      <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
-                      CKD Metrics
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-600">
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
                       Vitals & Health Metrics Tracking
                     </li>
@@ -363,6 +360,25 @@ const ScheduleTestInfo = () => {
                   </tr>
                   <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-150">
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
+                      Vitals & Health Metrics Tracking
+                    </td>
+                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
+                      <div className="flex justify-center">
+                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
+                        </div>
+                      </div>
+                    </td>
+                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
+                      <div className="flex justify-center">
+                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-175">
+                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
                       Continuous Monitoring (90 days)
                     </td>
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
@@ -494,45 +510,7 @@ const ScheduleTestInfo = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] bg-muted/10 animate-in fade-in slide-in-from-bottom-2 delay-800">
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-muted/10">
-                      CKD Metrics
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-muted/10">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-muted/10">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <X className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-850">
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
-                      Vitals & Health Metrics Tracking
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-900">
+                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-800">
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
                       Mental Health Support
                     </td>
@@ -579,6 +557,8 @@ const ScheduleTestInfo = () => {
           </div>
 
           {/* Test Categories Table */}
+          {/* Commented out - Feels like a lot of table on one page. Maybe We move this to FAQ section like what are tests and provide the details there */}
+          {/* 
           <div className="w-full overflow-x-auto mb-12 flex justify-center">
             <TooltipProvider>
               <table className="border-collapse w-full max-w-lg">
@@ -631,6 +611,171 @@ const ScheduleTestInfo = () => {
                 </tbody>
               </table>
             </TooltipProvider>
+          </div>
+          */}
+
+          {/* FAQ Section */}
+          <div className="w-full max-w-4xl mx-auto mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center animate-in fade-in slide-in-from-bottom-4 duration-700">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-4">
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem 
+                  value="what-tests"
+                  className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 mb-4"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
+                    What tests are included in my health assessment?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    <p className="mb-4">
+                      Our comprehensive health assessment includes multiple categories of tests to give you a complete picture of your kidney health and overall wellness:
+                    </p>
+                    <div className="space-y-4">
+                      {TEST_CATEGORIES.map((category, idx) => (
+                        <div 
+                          key={category.id} 
+                          className="border-l-2 border-primary/30 pl-4 rounded-r-lg bg-muted/20 p-3 hover:bg-muted/30 hover:shadow-sm transition-all duration-300 animate-in fade-in slide-in-from-left-2"
+                          style={{ animationDelay: `${idx * 50}ms` }}
+                        >
+                          <h4 className="font-semibold text-foreground mb-2">{category.category}</h4>
+                          <p className="text-sm mb-2">{category.explanation}</p>
+                          <ul className="list-disc list-inside space-y-1 text-sm ml-2">
+                            {category.checks.map((check, index) => (
+                              <li key={index} className="hover:text-foreground transition-colors duration-200">{check}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem 
+                  value="what-included-999"
+                  className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-75 mb-4"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
+                    What's included in the ₹999 One Time Test plan?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground px-4">
+                    <ul className="space-y-2">
+                      {[
+                        'Comprehensive Health Assessment',
+                        'Expert Analysis & Recommendations',
+                        'Anthropometric measurements and benchmarks',
+                        'Functional vitality metrics',
+                        'Vitals & Health Metrics Tracking'
+                      ].map((item, index) => (
+                        <li 
+                          key={index}
+                          className="flex items-start gap-2 animate-in fade-in slide-in-from-left-2 hover:text-foreground transition-all duration-200 hover:translate-x-1"
+                          style={{ animationDelay: `${index * 75}ms` }}
+                        >
+                          <Check className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5 hover:scale-110 transition-transform duration-200" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem 
+                  value="what-included-2999"
+                  className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-150 mb-4"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
+                    What's included in the ₹2999 90 Days Plan?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground px-4">
+                    <p className="mb-4 animate-in fade-in slide-in-from-bottom-2">
+                      The 90 Days Plan includes everything in the One Time Test, plus:
+                    </p>
+                    <ul className="space-y-2">
+                      {[
+                        'Continuous Monitoring (90 days)',
+                        'Follow-up Consultations',
+                        'Personalized Care Plan Updates',
+                        'Patient Portal Access',
+                        'Monthly Twice Test',
+                        'Diet Preference Tracking',
+                        'Medical Preference Management',
+                        'Vitals & Health Metrics Tracking',
+                        'Mental Health Support'
+                      ].map((item, index) => (
+                        <li 
+                          key={index}
+                          className="flex items-start gap-2 animate-in fade-in slide-in-from-left-2 hover:text-foreground transition-all duration-200 hover:translate-x-1"
+                          style={{ animationDelay: `${index * 75}ms` }}
+                        >
+                          <Check className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5 hover:scale-110 transition-transform duration-200" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem 
+                  value="how-long"
+                  className="rounded-lg border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-200"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
+                    How long does it take to get results?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground px-4">
+                    <p className="animate-in fade-in slide-in-from-bottom-2">
+                      Results from your comprehensive health assessment are typically available within 3-5 business days. For the 90 Days Plan, you'll receive regular updates and monitoring reports throughout your care period.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem 
+                  value="how-schedule"
+                  className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-300 mb-4"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
+                    How do I schedule a test?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground px-4">
+                    <p className="animate-in fade-in slide-in-from-bottom-2">
+                      Simply click the "Schedule Test" button on your preferred plan (One Time Test or 90 Days Plan), fill out the form with your details and preferred date & time, and we'll get back to you shortly with a confirmation.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem 
+                  value="what-vitals"
+                  className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-400 mb-4"
+                >
+                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
+                    What are Vitals & Health Metrics Tracking?
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground px-4">
+                    <p className="mb-4 animate-in fade-in slide-in-from-bottom-2">
+                      Vitals & Health Metrics Tracking includes monitoring of:
+                    </p>
+                    <ul className="space-y-2 list-disc list-inside">
+                      {[
+                        'Vital Foundations: Cardiovascular pressure, glucose levels, heart rate variability, and circulation baseline',
+                        'Body Architecture: Muscle mass, fat distribution, BMI, and skeletal health',
+                        'Functional Vitality: Grip strength, mobility, physical autonomy, and age-relative strength',
+                        'Fluid & Tissue Health: Fluid retention, protein reserves, tissue integrity, and edema screening'
+                      ].map((item, index) => (
+                        <li 
+                          key={index}
+                          className="animate-in fade-in slide-in-from-left-2 hover:text-foreground transition-colors duration-200"
+                          style={{ animationDelay: `${index * 75}ms` }}
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
           </div>
         </main>
       </div>

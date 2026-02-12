@@ -35,7 +35,7 @@ const HowItWorks = () => {
         How it Works
       </h2>
       <p className={`text-foreground text-[clamp(18px,2vw,24px)] font-normal leading-relaxed tracking-tight text-center mt-4 max-w-[800px] transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        Personalized, coordinated, evidence-based treatment
+        Personalized, coordinated, evidence-based Solutions
       </p>
       
       <div className="w-full max-w-[1175px] mt-8 md:mt-[80px]">
