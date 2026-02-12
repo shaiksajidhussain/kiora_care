@@ -10,6 +10,8 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import ScheduleCallForm from '@/components/ScheduleCallForm';
+import onePlatformImage from '../images/oneplatform.jpeg';
+import preventImage from '../images/prevent.jpeg';
 
 const TYPEWRITER_SPEED_MS = 55;
 
@@ -63,15 +65,14 @@ const SLIDES = [
     subtitle: 'Beyond dialysis.',
     description:
       'Early intervention, lifestyle support, and technology that helps you stay ahead of kidney disease. Schedule a call at a time that works for you.',
-    image:
-      'https://www.doctorsapp.in/uploads/blog_image/images/200325_1143_blog_image.png',
+    image: preventImage,
   },
   {
     title: 'Your health, simplified.',
     subtitle: 'One platform. One team.',
     description:
       'From diagnosis to daily management—integrated care that fits your life. Schedule a call at a time that works for you.',
-    image: 'https://hospitalmanagementasia.com/wp-content/uploads/2022/05/Digital-healthcare-1024x695.png',
+    image: onePlatformImage,
   },
 ];
 

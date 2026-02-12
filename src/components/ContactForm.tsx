@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import getInTouchImage from '../images/getintouch.jpeg';
 
 interface FormData {
   userType: 'doctor' | 'patient' | null;
@@ -175,9 +176,9 @@ const ContactForm = () => {
             {/* Left: image */}
             <div className="w-full md:w-[48%] flex-shrink-0 rounded-3xl md:rounded-[40px] overflow-hidden min-h-[280px] md:min-h-[420px] bg-muted/30">
               <img
-                src="https://kimshospital.in/wp-content/uploads/2022/12/doctor-nurses-special-equipment.webp"
+                src={getInTouchImage}
                 className="w-full h-full min-h-[280px] md:min-h-[420px] object-cover"
-                alt="Doctor and nurses with special equipment"
+                alt="Get in touch"
               />
             </div>
 
