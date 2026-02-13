@@ -248,13 +248,13 @@ const ScheduleTestInfo = () => {
           <div className="w-full mb-12 -mx-4 px-4 md:mx-0 md:px-0">
             <div className="relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-lg border border-border/50 bg-background animate-in fade-in slide-in-from-bottom-6 duration-700">
               <div className="overflow-x-auto overflow-y-visible" style={{ WebkitOverflowScrolling: 'touch' }}>
-                <table className="border-collapse w-full min-w-[600px]">
+                <table className="border-collapse w-full min-w-[600px] table-fixed">
                 <thead>
                   <tr>
-                    <th className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 text-left text-xs md:text-sm font-semibold text-foreground bg-muted/30">
+                    <th className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 text-left text-xs md:text-sm font-semibold text-foreground bg-muted/30 w-[50%]">
                       Features
                     </th>
-                    <th className="border-2 border-primary/30 px-3 py-3 md:px-6 md:py-4 text-center bg-gradient-to-br from-primary/8 via-muted/20 to-primary/5 relative">
+                    <th className="border-2 border-primary/30 px-3 py-3 md:px-6 md:py-4 text-center bg-gradient-to-br from-primary/8 via-muted/20 to-primary/5 relative w-[25%]">
                       <div className="absolute top-1 right-1 md:top-1 md:right-1">
                         <span className="px-1.5 py-0.5 text-[9px] md:text-[10px] font-semibold rounded-full bg-primary/20 text-primary whitespace-nowrap">
                           POPULAR
@@ -269,7 +269,7 @@ const ScheduleTestInfo = () => {
                         <span className="text-[9px] md:text-xs text-muted-foreground">per test</span>
                       </div>
                     </th>
-                    <th className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 text-center bg-muted/20">
+                    <th className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 text-center bg-muted/20 w-[25%]">
                       <div className="flex flex-col items-center gap-0.5 md:gap-1">
                         <span className="text-[10px] md:text-xs font-medium text-muted-foreground">90 Days Plan</span>
                         <div className="flex items-baseline gap-1 md:gap-2">
@@ -333,8 +333,8 @@ const ScheduleTestInfo = () => {
                     </td>
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
                       <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <X className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
+                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
                         </div>
                       </div>
                     </td>
@@ -352,8 +352,8 @@ const ScheduleTestInfo = () => {
                     </td>
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-muted/10">
                       <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <X className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
+                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
+                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
                         </div>
                       </div>
                     </td>
@@ -530,28 +530,32 @@ const ScheduleTestInfo = () => {
                     </td>
                   </tr>
                 </tbody>
+                <tfoot>
+                  <tr className="border-t border-border/50 bg-muted/10 animate-in fade-in slide-in-from-bottom-4 delay-1000">
+                    <td className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 bg-muted/10" />
+                    <td className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 bg-muted/10 align-middle">
+                      <div className="flex justify-center items-center">
+                        <Button
+                          onClick={() => setScheduleFormOpen(true)}
+                          className="w-full text-xs md:text-sm bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200 py-2.5"
+                        >
+                          Schedule Test
+                        </Button>
+                      </div>
+                    </td>
+                    <td className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 bg-muted/10 align-middle">
+                      <div className="flex justify-center items-center">
+                        <Button
+                          onClick={() => setScheduleFormOpen(true)}
+                          className="w-full text-xs md:text-sm bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200 py-2.5"
+                        >
+                          Schedule Test
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                </tfoot>
               </table>
-              
-              {/* CTA Buttons Row */}
-              <div className="grid grid-cols-3 border-t border-border/50 bg-muted/10 animate-in fade-in slide-in-from-bottom-4 delay-1000 min-w-[600px]">
-                <div className="px-3 py-3 md:px-6 md:py-4"></div>
-                <div className="px-3 py-3 md:px-6 md:py-4 border-x border-border/50">
-                  <Button
-                    onClick={() => setScheduleFormOpen(true)}
-                    className="w-full text-xs md:text-sm bg-background hover:bg-muted hover:scale-105 border border-border text-foreground transition-all duration-200 py-2 md:py-2"
-                  >
-                    Schedule Test
-                  </Button>
-                </div>
-                <div className="px-3 py-3 md:px-6 md:py-4">
-                  <Button
-                    onClick={() => setScheduleFormOpen(true)}
-                    className="w-full text-xs md:text-sm bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200 py-2 md:py-2"
-                  >
-                    Schedule Test
-                  </Button>
-                </div>
-              </div>
               </div>
             </div>
           </div>
