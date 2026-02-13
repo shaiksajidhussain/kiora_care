@@ -102,7 +102,7 @@ const Vlogs = () => {
                   </div>
                 </div>
                 <h3 className="text-foreground text-xl font-semibold leading-6 tracking-tight mt-4">{video.title}</h3>
-                <time className="text-muted-foreground text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-2">{video.date}</time>
+                {/* <time className="text-muted-foreground text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-2">{video.date}</time> */}
               </div>
             </article>
           ))}

@@ -96,9 +96,9 @@ const Resources = () => {
                 <p className="text-muted-foreground text-sm mt-2 min-h-[48px] overflow-hidden">
                   {resource.excerpt}
                 </p>
-                <time className="text-muted-foreground text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-auto">
+                {/* <time className="text-muted-foreground text-sm font-[510] leading-[1.4] tracking-[-0.45px] mt-auto">
                   {resource.date}
-                </time>
+                </time> */}
               </div>
             </article>
           ))}
