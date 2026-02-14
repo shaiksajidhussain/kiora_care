@@ -48,7 +48,7 @@ const SLIDES = [
     title: 'Life is Beautiful.',
     subtitle: 'Even for those with kidney conditions.',
     description:
-      "India's first comprehensive renal care solution. Talk to our team to see how we can help you prevent dialysis and restore life—schedule a call at a time that works for you.",
+      "India's first comprehensive renal care solution. Talk to our team to see how we can help you prevent dialysis and restore life.",
     image:
       'https://images.unsplash.com/photo-1666214277657-e60f05c40b04?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9jdG9yc3xlbnwwfHwwfHx8MA%3D%3D',
   },
@@ -56,7 +56,7 @@ const SLIDES = [
     title: 'Personalized care.',
     subtitle: 'Built around you.',
     description:
-      'Evidence-based plans, continuous monitoring, and a care team that understands your journey. Schedule a call at a time that works for you.',
+      'Evidence-based plans, continuous monitoring, and a care team that understands your journey. ',
     image:
       'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZG9jdG9yc3xlbnwwfHwwfHx8MA%3D%3D',
   },
@@ -64,14 +64,14 @@ const SLIDES = [
     title: 'Prevent. Restore. Thrive.',
     subtitle: 'Beyond dialysis.',
     description:
-      'Early intervention, lifestyle support, and technology that helps you stay ahead of kidney disease. Schedule a call at a time that works for you.',
+      'Early intervention, lifestyle support, and technology that helps you stay ahead of kidney disease. ',
     image: preventImage,
   },
   {
     title: 'Your health, simplified.',
     subtitle: 'One platform. One team.',
     description:
-      'From diagnosis to daily management—integrated care that fits your life. Schedule a call at a time that works for you.',
+      'From diagnosis to daily management—integrated care that fits your life. ',
     image: onePlatformImage,
   },
 ];
