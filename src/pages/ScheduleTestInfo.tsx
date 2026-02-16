@@ -89,6 +89,12 @@ const TEST_CATEGORIES = [
 const ScheduleTestInfo = () => {
   const navigate = useNavigate();
   const [scheduleFormOpen, setScheduleFormOpen] = useState(false);
+  const [selectedPlanForForm, setSelectedPlanForForm] = useState<'one-time' | '90-days' | null>(null);
+
+  const openScheduleForm = (plan: 'one-time' | '90-days') => {
+    setSelectedPlanForForm(plan);
+    setScheduleFormOpen(true);
+  };
 
   return (
     <>
@@ -140,7 +146,7 @@ const ScheduleTestInfo = () => {
                   <span className="text-sm text-muted-foreground">per test</span>
                 </div>
                 <Button
-                  onClick={() => setScheduleFormOpen(true)}
+                  onClick={() => openScheduleForm('one-time')}
                   className="w-full mb-6 bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200"
                 >
                   Schedule Test
@@ -194,7 +200,7 @@ const ScheduleTestInfo = () => {
                   <span className="text-sm text-muted-foreground">per plan</span>
                 </div>
                 <Button
-                  onClick={() => setScheduleFormOpen(true)}
+                  onClick={() => openScheduleForm('90-days')}
                   className="w-full mb-6 bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200"
                 >
                   Schedule Test
@@ -536,7 +542,7 @@ const ScheduleTestInfo = () => {
                     <td className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 bg-muted/10 align-middle">
                       <div className="flex justify-center items-center">
                         <Button
-                          onClick={() => setScheduleFormOpen(true)}
+                          onClick={() => openScheduleForm('one-time')}
                           className="w-full text-xs md:text-sm bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200 py-2.5"
                         >
                           Schedule Test
@@ -546,7 +552,7 @@ const ScheduleTestInfo = () => {
                     <td className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 bg-muted/10 align-middle">
                       <div className="flex justify-center items-center">
                         <Button
-                          onClick={() => setScheduleFormOpen(true)}
+                          onClick={() => openScheduleForm('90-days')}
                           className="w-full text-xs md:text-sm bg-primary hover:opacity-90 hover:scale-105 hover:shadow-lg text-primary-foreground transition-all duration-200 py-2.5"
                         >
                           Schedule Test
@@ -784,7 +790,7 @@ const ScheduleTestInfo = () => {
         </main>
       </div>
 
-      <ScheduleCallForm open={scheduleFormOpen} onOpenChange={setScheduleFormOpen} />
+      <ScheduleCallForm open={scheduleFormOpen} onOpenChange={setScheduleFormOpen} selectedPlan={selectedPlanForForm} />
     </>
   );
 };

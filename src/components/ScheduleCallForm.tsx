@@ -23,12 +23,14 @@ import { cn } from '@/lib/utils';
 export interface ScheduleCallFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** Plan selected on Schedule Test page: one-time (₹999) or 90-days (₹3,999). When null, defaults to one-time. */
+  selectedPlan?: 'one-time' | '90-days' | null;
 }
 
 const inputClass =
   'h-11 rounded-xl border-border bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow';
 
-const ScheduleCallForm = ({ open, onOpenChange }: ScheduleCallFormProps) => {
+const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleCallFormProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -143,9 +145,19 @@ const ScheduleCallForm = ({ open, onOpenChange }: ScheduleCallFormProps) => {
                 Structured renal care assessment and evidence-based diagnostic pathway designed by our clinical team. Schedule your test to understand your CKD stage and personalised intervention options.
               </p>
               <div className="flex items-baseline gap-2 mt-4">
-                <span className="text-muted-foreground text-sm line-through">₹1,299</span>
-                <span className="text-xl font-bold text-foreground">₹999</span>
-                <span className="text-muted-foreground text-xs">per test</span>
+                {selectedPlan === '90-days' ? (
+                  <>
+                    <span className="text-muted-foreground text-sm line-through">₹4,999</span>
+                    <span className="text-xl font-bold text-foreground">₹3,999</span>
+                    <span className="text-muted-foreground text-xs">per plan</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-muted-foreground text-sm line-through">₹1,299</span>
+                    <span className="text-xl font-bold text-foreground">₹999</span>
+                    <span className="text-muted-foreground text-xs">per test</span>
+                  </>
+                )}
               </div>
             </DialogHeader>
 
