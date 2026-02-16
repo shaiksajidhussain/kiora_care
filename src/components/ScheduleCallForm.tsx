@@ -119,7 +119,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
               </div>
               <h3 className="text-xl font-semibold tracking-tight text-foreground">Schedule a test</h3>
               <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
-                Pick a date and time that works for you. Our team will reach out to confirm your test slot.
+                Pick a date and time that works for you.
               </p>
             </div>
             <div className="relative mt-6 rounded-xl overflow-hidden h-40 bg-muted">

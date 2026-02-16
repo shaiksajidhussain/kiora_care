@@ -170,11 +170,7 @@ const ScheduleTestInfo = () => {
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
                       Functional vitality metrics
                     </li>
-                    <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-500">
-                      <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
-                      Vitals & Health Metrics Tracking
-                    </li>
-                  </ul>
+                    </ul>
                 </div>
               </div>
 
@@ -226,19 +222,11 @@ const ScheduleTestInfo = () => {
                     </li>
                     <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-300">
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
-                      Monthly Twice Test
+                      Fortnightly Check-ins
                     </li>
                     <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-350">
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
-                      Diet Preference Tracking
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-400">
-                      <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
-                      Medical Preference Management
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-450">
-                      <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
-                      Vitals & Health Metrics Tracking
+                      Clinical Nutrition Management
                     </li>
                     <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-500">
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
@@ -364,25 +352,6 @@ const ScheduleTestInfo = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-150">
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
-                      Vitals & Health Metrics Tracking
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
                   <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-175">
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
                       Continuous Monitoring (90 days)
@@ -461,7 +430,7 @@ const ScheduleTestInfo = () => {
                   </tr>
                   <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-500">
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
-                      Monthly Twice Test
+                      Fortnightly Check-ins
                     </td>
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
                       <div className="flex justify-center">
@@ -480,7 +449,7 @@ const ScheduleTestInfo = () => {
                   </tr>
                   <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] bg-muted/10 animate-in fade-in slide-in-from-bottom-2 delay-600">
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-muted/10">
-                      Diet Preference Tracking
+                      Clinical Nutrition Management
                     </td>
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-muted/10">
                       <div className="flex justify-center">
@@ -490,25 +459,6 @@ const ScheduleTestInfo = () => {
                       </div>
                     </td>
                     <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-muted/10">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="hover:bg-muted/5 transition-all duration-200 hover:scale-[1.01] animate-in fade-in slide-in-from-bottom-2 delay-700">
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-xs md:text-sm font-medium text-foreground bg-background">
-                      Medical Preference Management
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
-                      <div className="flex justify-center">
-                        <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-red-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
-                          <X className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                        </div>
-                      </div>
-                    </td>
-                    <td className="border-[0.5px] border-border/50 px-3 py-2.5 md:px-6 md:py-4 text-center bg-background">
                       <div className="flex justify-center">
                         <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-green-500 flex items-center justify-center hover:scale-110 transition-transform duration-200">
                           <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
@@ -676,8 +626,7 @@ const ScheduleTestInfo = () => {
                         'Expert Analysis & Recommendations',
                         'Anthropometric measurements and benchmarks',
                         'Functional vitality metrics',
-                        'Vitals & Health Metrics Tracking'
-                      ].map((item, index) => (
+                        ].map((item, index) => (
                         <li 
                           key={index}
                           className="flex items-start gap-2 animate-in fade-in slide-in-from-left-2 hover:text-foreground transition-all duration-200 hover:translate-x-1"
@@ -696,7 +645,7 @@ const ScheduleTestInfo = () => {
                   className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-150 mb-4"
                 >
                   <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
-                    What's included in the ₹2999 90 Days Plan?
+                    What's included in the ₹3,999 90 Days Plan?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground px-4">
                     <p className="mb-4 animate-in fade-in slide-in-from-bottom-2">
@@ -708,10 +657,8 @@ const ScheduleTestInfo = () => {
                         'Follow-up Consultations',
                         'Personalized Care Plan Updates',
                         'Patient Portal Access',
-                        'Monthly Twice Test',
-                        'Diet Preference Tracking',
-                        'Medical Preference Management',
-                        'Vitals & Health Metrics Tracking',
+                        'Fortnightly Check-ins',
+                        'Clinical Nutrition Management',
                         'Mental Health Support'
                       ].map((item, index) => (
                         <li 
@@ -750,41 +697,12 @@ const ScheduleTestInfo = () => {
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground px-4">
                     <p className="animate-in fade-in slide-in-from-bottom-2">
-                      Simply click the "Schedule Test" button on your preferred plan (One Time Test or 90 Days Plan), fill out the form with your details and preferred date & time, and we'll get back to you shortly with a confirmation.
+                      Simply click the "Schedule Test" button on your preferred plan (One Time Test or 90 Days Plan), fill out the form with your details and preferred date & time, and we'll get back to you shortly.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
 
-                <AccordionItem 
-                  value="what-vitals"
-                  className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-400 mb-4"
-                >
-                  <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
-                    What are Vitals & Health Metrics Tracking?
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground px-4">
-                    <p className="mb-4 animate-in fade-in slide-in-from-bottom-2">
-                      Vitals & Health Metrics Tracking includes monitoring of:
-                    </p>
-                    <ul className="space-y-2 list-disc list-inside">
-                      {[
-                        'Vital Foundations: Cardiovascular pressure, glucose levels, heart rate variability, and circulation baseline',
-                        'Body Architecture: Muscle mass, fat distribution, BMI, and skeletal health',
-                        'Functional Vitality: Grip strength, mobility, physical autonomy, and age-relative strength',
-                        'Fluid & Tissue Health: Fluid retention, protein reserves, tissue integrity, and edema screening'
-                      ].map((item, index) => (
-                        <li 
-                          key={index}
-                          className="animate-in fade-in slide-in-from-left-2 hover:text-foreground transition-colors duration-200"
-                          style={{ animationDelay: `${index * 75}ms` }}
-                        >
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                </Accordion>
             </div>
           </div>
         </main>

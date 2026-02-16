@@ -51,16 +51,14 @@ const SLIDES = [
     subtitle: 'Even for those with kidney conditions.',
     description:
       "India's first comprehensive renal care solution. Talk to our team to see how we can help you prevent dialysis and restore life.",
-    image:
-    lifeisbeautiful,
+    image: personalizedcare,
   },
   {
     title: 'Personalized care.',
     subtitle: 'Built around you.',
     description:
       'Evidence-based plans, continuous monitoring, and a care team that understands your journey. ',
-    image:
-      personalizedcare,
+    image: lifeisbeautiful,
   },
   {
     title: 'Prevent. Restore. Thrive.',
@@ -148,7 +146,7 @@ const Hero = () => {
                       className={`mt-10 text-[clamp(15px,1.8vw,18px)] text-white/90 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
                       style={{ transitionDelay: '400ms' }}
                     >
-                      Book a time that works for you—we’ll reach out to confirm.
+                      Book a time that works for you.
                     </p>
                     <div
                       className={`mt-6 flex flex-wrap items-center justify-center gap-4 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}
