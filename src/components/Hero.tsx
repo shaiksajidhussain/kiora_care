@@ -12,6 +12,8 @@ import {
 import ScheduleCallForm from '@/components/ScheduleCallForm';
 import onePlatformImage from '../images/oneplatform.jpeg';
 import preventImage from '../images/prevent.jpeg';
+import lifeisbeautiful from '../images/lifeisbeautiful.jpg';
+import personalizedcare from '../images/personalizedcare.jpg';
 
 const TYPEWRITER_SPEED_MS = 55;
 
@@ -50,7 +52,7 @@ const SLIDES = [
     description:
       "India's first comprehensive renal care solution. Talk to our team to see how we can help you prevent dialysis and restore life.",
     image:
-      'https://images.unsplash.com/photo-1666214277657-e60f05c40b04?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZG9jdG9yc3xlbnwwfHwwfHx8MA%3D%3D',
+    lifeisbeautiful,
   },
   {
     title: 'Personalized care.',
@@ -58,7 +60,7 @@ const SLIDES = [
     description:
       'Evidence-based plans, continuous monitoring, and a care team that understands your journey. ',
     image:
-      'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZG9jdG9yc3xlbnwwfHwwfHx8MA%3D%3D',
+      personalizedcare,
   },
   {
     title: 'Prevent. Restore. Thrive.',
