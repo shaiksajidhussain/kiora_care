@@ -18,6 +18,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
 export interface ScheduleCallFormProps {
@@ -34,6 +41,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
   const [address, setAddress] = useState('');
   const [mapLocation, setMapLocation] = useState('');
   const [pincode, setPincode] = useState('');
@@ -51,28 +59,38 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
 
     try {
       const backendUrl = import.meta.env.VITE_BACKEND_URL || import.meta.env.NEXT_PUBLIC_BACKEND_URL;
-      if (backendUrl) {
-        const response = await fetch(`${backendUrl}/api/send-contact-email`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userType: 'patient',
-            fullName: name,
-            emailAddress: email,
-            phoneNumber: phone,
-            city: address,
-            pincode,
-            message: `Schedule a test request.\nAddress: ${address}\nMap location: ${mapLocation}\nPreferred date: ${scheduleDate ? format(scheduleDate, 'PPP') : 'Not set'}\nPreferred time: ${scheduleTime || 'Not set'}`,
-            agreeToContact,
-          }),
-        });
-        if (!response.ok) throw new Error('Failed to submit');
+      if (!backendUrl) {
+        throw new Error('Backend URL is not configured. Please set VITE_BACKEND_URL or NEXT_PUBLIC_BACKEND_URL environment variable.');
+      }
+
+      const response = await fetch(`${backendUrl}/api/send-contact-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'schedule-test',
+          userType: 'patient',
+          fullName: name,
+          emailAddress: email,
+          phoneNumber: phone,
+          city: address,
+          pincode,
+          message: `Schedule a test request${selectedPlan === 'one-time' ? ' (Essential (One time test) - ₹999)' : selectedPlan === '90-days' ? ' (Signature (90 Days plan) - ₹3,999)' : ''}.\nGender: ${gender || 'Not specified'}\nAddress: ${address}\nMap location: ${mapLocation}\nPreferred date: ${scheduleDate ? format(scheduleDate, 'PPP') : 'Not set'}\nPreferred time: ${scheduleTime || 'Not set'}`,
+          agreeToContact,
+          selectedPlan: selectedPlan || null,
+          gender: gender || null,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Failed to send email' }));
+        throw new Error(errorData.error || 'Failed to send email');
       }
 
       setSubmitSuccess(true);
       setName('');
       setEmail('');
       setPhone('');
+      setGender('');
       setAddress('');
       setMapLocation('');
       setPincode('');
@@ -102,7 +120,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
         className={cn(
-          'max-w-[min(920px,95vw)] max-h-[100vh] md:max-h-[90vh] overflow-y-auto md:overflow-hidden p-0 gap-0',
+          'max-w-[min(920px,95vw)] max-h-[100vh] md:max-h-[90vh] overflow-hidden p-0 gap-0',
           'rounded-2xl md:rounded-3xl border-border shadow-2xl',
           'data-[state=open]:animate-in data-[state=closed]:animate-out',
           'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -133,7 +151,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
           </div>
 
           {/* Right: form */}
-          <div className="flex-1 flex flex-col overflow-y-auto max-h-[100vh] md:max-h-none">
+          <div className="flex-1 flex flex-col overflow-y-auto max-h-[100vh] md:max-h-[90vh]">
             <DialogHeader className="sticky top-0 p-6 pb-4 pr-12 md:p-8 md:pb-6 md:pr-14 text-left border-b border-border bg-background/95 backdrop-blur">
               <DialogTitle className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
                 Schedule a test
@@ -226,19 +244,37 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="schedule-address" className="text-foreground font-medium flex items-center gap-2">
-                      <MapPinned className="w-4 h-4 text-muted-foreground" />
-                      Address
+                    <Label htmlFor="schedule-gender" className="text-foreground font-medium flex items-center gap-2">
+                      <User className="w-4 h-4 text-muted-foreground" />
+                      Gender
                     </Label>
-                    <Input
-                      id="schedule-address"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      placeholder="Street, city, state"
-                      className={inputClass}
-                      required
-                    />
+                    <Select value={gender} onValueChange={setGender} required>
+                      <SelectTrigger className={cn(inputClass, 'h-11')}>
+                        <SelectValue placeholder="Select gender" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="male">Male</SelectItem>
+                        <SelectItem value="female">Female</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="schedule-address" className="text-foreground font-medium flex items-center gap-2">
+                    <MapPinned className="w-4 h-4 text-muted-foreground" />
+                    Address
+                  </Label>
+                  <Input
+                    id="schedule-address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Street, city, state"
+                    className={inputClass}
+                    required
+                  />
                 </div>
 
                 <div className="space-y-2">
@@ -269,10 +305,42 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                       required
                     />
                   </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <Label className="text-foreground font-medium flex items-center gap-2">
+                      <CalendarIcon className="w-4 h-4 text-muted-foreground" />
+                      Preferred date
+                    </Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            'w-full h-11 justify-start text-left font-normal rounded-xl border-border',
+                            !scheduleDate && 'text-muted-foreground'
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {scheduleDate ? format(scheduleDate, 'PPP') : 'Pick a date'}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0 rounded-xl border-border" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={scheduleDate}
+                          onSelect={setScheduleDate}
+                          disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
                   <div className="space-y-2">
                     <Label className="text-foreground font-medium flex items-center gap-2">
                       <Clock className="w-4 h-4 text-muted-foreground" />
-                      Time
+                      Preferred time
                     </Label>
                     <Input
                       id="schedule-time"
@@ -282,36 +350,6 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                       className={inputClass}
                     />
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label className="text-foreground font-medium flex items-center gap-2">
-                    <CalendarIcon className="w-4 h-4 text-muted-foreground" />
-                    Preferred date
-                  </Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          'w-full h-11 justify-start text-left font-normal rounded-xl border-border',
-                          !scheduleDate && 'text-muted-foreground'
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {scheduleDate ? format(scheduleDate, 'PPP') : 'Pick a date'}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0 rounded-xl border-border" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={scheduleDate}
-                        onSelect={setScheduleDate}
-                        disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
                 </div>
 
                 <div className="flex items-start gap-3 rounded-xl border border-border  px-3.5 py-3">

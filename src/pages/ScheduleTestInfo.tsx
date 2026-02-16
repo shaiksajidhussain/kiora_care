@@ -124,7 +124,7 @@ const ScheduleTestInfo = () => {
           {/* Pricing Cards */}
           <div className="w-full max-w-5xl mx-auto mb-12">
             <div className="grid md:grid-cols-2 gap-6">
-              {/* One Time Test Card */}
+              {/* Essential (One time test) Card */}
               <div className="bg-background rounded-2xl border-2 border-primary/30 shadow-xl p-6 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4 relative bg-gradient-to-br from-primary/8 via-background to-primary/5">
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/20 text-primary dark:text-primary">
@@ -135,7 +135,7 @@ const ScheduleTestInfo = () => {
                   <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <div className="w-6 h-6 rounded bg-primary animate-pulse"></div>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">One Time Test</h3>
+                  <h3 className="text-xl font-bold text-foreground">Essential <span className="text-base font-normal text-muted-foreground">(One time test)</span></h3>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Quick and comprehensive health assessment for immediate insights.
@@ -174,7 +174,7 @@ const ScheduleTestInfo = () => {
                 </div>
               </div>
 
-              {/* 90 Days Plan Card */}
+              {/* Signature (90 Days plan) Card */}
               <div className="bg-background rounded-2xl border border-border/50 shadow-lg p-6 hover:shadow-xl hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 animate-in fade-in slide-in-from-bottom-4 delay-150 relative bg-gradient-to-br from-purple-500/5 via-background to-background">
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-700 dark:text-purple-400">
@@ -185,7 +185,7 @@ const ScheduleTestInfo = () => {
                   <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <div className="w-6 h-6 rounded bg-purple-500 animate-pulse"></div>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">90 Days Plan</h3>
+                  <h3 className="text-xl font-bold text-foreground">Signature <span className="text-base font-normal text-muted-foreground">(90 Days plan)</span></h3>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Comprehensive care program with continuous monitoring and support.
@@ -202,7 +202,7 @@ const ScheduleTestInfo = () => {
                   Schedule Test
                 </Button>
                 <div>
-                  <p className="text-sm font-medium text-foreground mb-3">Everything in One Time Test, plus:</p>
+                  <p className="text-sm font-medium text-foreground mb-3">Everything in Essential (One time test), plus:</p>
                   <ul className="space-y-2">
                     <li className="flex items-center gap-2 text-sm text-foreground animate-in fade-in slide-in-from-left-2 duration-300 delay-100">
                       <Check className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 hover:scale-110 transition-transform" />
@@ -255,7 +255,7 @@ const ScheduleTestInfo = () => {
                         </span>
                       </div>
                       <div className="flex flex-col items-center gap-0.5 md:gap-1 pt-3 md:pt-3">
-                        <span className="text-[10px] md:text-xs font-medium text-foreground">One Time Test</span>
+                        <span className="text-[10px] md:text-xs font-medium text-foreground">Essential <span className="font-normal">(One time test)</span></span>
                         <div className="flex items-baseline gap-1 md:gap-2">
                           <span className="text-[9px] md:text-xs text-muted-foreground line-through">₹1,299</span>
                           <span className="text-xl md:text-3xl font-bold text-foreground">₹999</span>
@@ -265,7 +265,7 @@ const ScheduleTestInfo = () => {
                     </th>
                     <th className="border-[0.5px] border-border/50 px-3 py-3 md:px-6 md:py-4 text-center bg-muted/20 w-[25%]">
                       <div className="flex flex-col items-center gap-0.5 md:gap-1">
-                        <span className="text-[10px] md:text-xs font-medium text-muted-foreground">90 Days Plan</span>
+                        <span className="text-[10px] md:text-xs font-medium text-muted-foreground">Signature <span className="font-normal">(90 Days plan)</span></span>
                         <div className="flex items-baseline gap-1 md:gap-2">
                           <span className="text-[9px] md:text-xs text-muted-foreground line-through">₹4,999</span>
                           <span className="text-xl md:text-3xl font-bold text-foreground">₹3,999</span>
@@ -617,7 +617,7 @@ const ScheduleTestInfo = () => {
                   className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-75 mb-4"
                 >
                   <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
-                    What's included in the ₹999 One Time Test plan?
+                    What's included in the ₹999 Essential (One time test) plan?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground px-4">
                     <ul className="space-y-2">
@@ -645,11 +645,11 @@ const ScheduleTestInfo = () => {
                   className="rounded-lg border-b-0 border border-border/50 bg-background/50 backdrop-blur-sm shadow-sm hover:shadow-md hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-0.5 animate-in fade-in slide-in-from-bottom-2 delay-150 mb-4"
                 >
                   <AccordionTrigger className="text-left font-semibold hover:text-primary transition-colors duration-200 px-4">
-                    What's included in the ₹3,999 90 Days Plan?
+                    What's included in the ₹3,999 Signature (90 Days plan)?
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground px-4">
                     <p className="mb-4 animate-in fade-in slide-in-from-bottom-2">
-                      The 90 Days Plan includes everything in the One Time Test, plus:
+                      The Signature (90 Days plan) includes everything in Essential (One time test), plus:
                     </p>
                     <ul className="space-y-2">
                       {[
@@ -683,7 +683,7 @@ const ScheduleTestInfo = () => {
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground px-4">
                     <p className="animate-in fade-in slide-in-from-bottom-2">
-                      Results from your comprehensive health assessment are typically available within 3-5 business days. For the 90 Days Plan, you'll receive regular updates and monitoring reports throughout your care period.
+                      Results from your comprehensive health assessment are typically available within 3-5 business days. For the Signature (90 Days plan), you'll receive regular updates and monitoring reports throughout your care period.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -697,7 +697,7 @@ const ScheduleTestInfo = () => {
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground px-4">
                     <p className="animate-in fade-in slide-in-from-bottom-2">
-                      Simply click the "Schedule Test" button on your preferred plan (One Time Test or 90 Days Plan), fill out the form with your details and preferred date & time, and we'll get back to you shortly.
+                      Simply click the "Schedule Test" button on your preferred plan (Essential (One time test) or Signature (90 Days plan)), fill out the form with your details and preferred date & time, and we'll get back to you shortly.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
