@@ -50,6 +50,8 @@ type Submission = {
   message: string | null;
   selected_plan: string | null;
   agree_to_contact: boolean;
+  scheduled_date: string | null;
+  scheduled_time: string | null;
   created_at: string;
 };
 
@@ -431,7 +433,8 @@ const AdminDashboard = () => {
                         <TableHead className="font-semibold text-gray-700 min-w-[100px]">STATE</TableHead>
                         <TableHead className="font-semibold text-gray-700 min-w-[80px]">PINCODE</TableHead>
                         <TableHead className="font-semibold text-gray-700 min-w-[200px]">MESSAGE</TableHead>
-                        <TableHead className="font-semibold text-gray-700 text-right min-w-[140px] whitespace-nowrap">DATE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[160px] whitespace-nowrap">SCHEDULED DATE/TIME</TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-right min-w-[140px] whitespace-nowrap">SUBMITTED DATE</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -469,6 +472,20 @@ const AdminDashboard = () => {
                           <TableCell className="max-w-[200px] truncate text-gray-600 font-medium" title={row.message || ''}>
                             {row.message ? (
                               <span className="text-xs">{row.message}</span>
+                            ) : (
+                              <span className="text-gray-400">—</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[160px] whitespace-nowrap">
+                            {row.scheduled_date && row.scheduled_time ? (
+                              <div className="flex flex-col">
+                                <span className="font-semibold text-gray-900">
+                                  {format(new Date(row.scheduled_date + 'T00:00:00'), 'MMM d, yyyy')}
+                                </span>
+                                <span className="text-xs text-gray-500">
+                                  {row.scheduled_time === '11:00' ? '11:00 AM' : row.scheduled_time === '15:00' ? '3:00 PM' : row.scheduled_time}
+                                </span>
+                              </div>
                             ) : (
                               <span className="text-gray-400">—</span>
                             )}

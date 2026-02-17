@@ -145,10 +145,12 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
           state: state.trim() || null,
           address: address.trim() || null,
           pincode,
-          message: `Schedule a test request${selectedPlan === 'one-time' ? ' (Essential (One time test) - ₹999)' : selectedPlan === '90-days' ? ' (Signature (90 Days plan) - ₹3,999)' : ''}.\nGender: ${gender || 'Not specified'}\nAddress: ${address}\nCity: ${city}\nState: ${state}\nMap location: ${mapLocation}\nPreferred date: ${scheduleDate ? format(scheduleDate, 'PPP') : 'Not set'}\nPreferred time: ${scheduleTime ? TIME_SLOTS.find(s => s.value === scheduleTime)?.label ?? scheduleTime : 'Not set'}`,
+          message: `Schedule a test request${selectedPlan === 'one-time' ? ' (Essential (One time test) - ₹999)' : selectedPlan === '90-days' ? ' (Signature (90 Days plan) - ₹3,999)' : ''}.\nGender: ${gender || 'Not specified'}\nAddress: ${address}\nCity: ${city}\nState: ${state}\nMap location: ${mapLocation}`,
           agreeToContact,
           selectedPlan: selectedPlan || null,
           gender: gender || null,
+          scheduledDate: scheduleDate ? format(scheduleDate, 'yyyy-MM-dd') : null,
+          scheduledTime: scheduleTime || null,
         }),
       });
 
