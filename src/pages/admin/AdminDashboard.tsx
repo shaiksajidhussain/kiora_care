@@ -426,11 +426,11 @@ const AdminDashboard = () => {
                         <TableHead className="font-semibold text-gray-700 min-w-[120px]">PHONE</TableHead>
                         <TableHead className="font-semibold text-gray-700 min-w-[100px]">GENDER</TableHead>
                         <TableHead className="font-semibold text-gray-700 min-w-[100px]">PLAN</TableHead>
-                        <TableHead className="font-semibold text-gray-700 min-w-[120px] hidden lg:table-cell">ADDRESS</TableHead>
-                        <TableHead className="font-semibold text-gray-700 min-w-[100px] hidden md:table-cell">CITY</TableHead>
-                        <TableHead className="font-semibold text-gray-700 min-w-[100px] hidden lg:table-cell">STATE</TableHead>
-                        <TableHead className="font-semibold text-gray-700 min-w-[80px] hidden lg:table-cell">PINCODE</TableHead>
-                        <TableHead className="font-semibold text-gray-700 min-w-[200px] hidden xl:table-cell">MESSAGE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[120px]">ADDRESS</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[100px]">CITY</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[100px]">STATE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[80px]">PINCODE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[200px]">MESSAGE</TableHead>
                         <TableHead className="font-semibold text-gray-700 text-right min-w-[140px] whitespace-nowrap">DATE</TableHead>
                       </TableRow>
                     </TableHeader>
@@ -456,17 +456,17 @@ const AdminDashboard = () => {
                               <span className="text-gray-500 font-medium">—</span>
                             )}
                           </TableCell>
-                          <TableCell className="text-gray-600 font-medium min-w-[120px] break-words hidden lg:table-cell" title={row.address || ''}>
+                          <TableCell className="text-gray-600 font-medium min-w-[120px] break-words" title={row.address || ''}>
                             {row.address ? (
                               <span className="line-clamp-2">{row.address}</span>
                             ) : (
                               <span className="text-gray-400">—</span>
                             )}
                           </TableCell>
-                          <TableCell className="text-gray-600 font-medium min-w-[100px] hidden md:table-cell">{row.city || '—'}</TableCell>
-                          <TableCell className="text-gray-600 font-medium min-w-[100px] hidden lg:table-cell">{row.state || '—'}</TableCell>
-                          <TableCell className="text-gray-600 font-medium min-w-[80px] hidden lg:table-cell">{row.pincode || '—'}</TableCell>
-                          <TableCell className="max-w-[200px] truncate text-gray-600 font-medium hidden xl:table-cell" title={row.message || ''}>
+                          <TableCell className="text-gray-600 font-medium min-w-[100px]">{row.city || '—'}</TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[100px]">{row.state || '—'}</TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[80px]">{row.pincode || '—'}</TableCell>
+                          <TableCell className="max-w-[200px] truncate text-gray-600 font-medium" title={row.message || ''}>
                             {row.message ? (
                               <span className="text-xs">{row.message}</span>
                             ) : (
