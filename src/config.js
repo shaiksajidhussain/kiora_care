@@ -1,9 +1,11 @@
 // Configuration file for frontend backend URLs
-// Automatically switches between local and production based on environment
-// In Vite: development mode uses local, production build uses production URL
+// ============================================
+// CHANGE THIS KEYWORD TO SWITCH ENVIRONMENTS:
+//   "production" or "prod" → Uses production backend
+//   "development" or "dev" → Uses localhost backend
+// ============================================
 
-const isProduction = import.meta.env.PROD || import.meta.env.MODE === 'production';
-
+const ENVIRONMENT = 'production'; // Change to 'production' for deployment
 const config = {
   // Backend URL configuration
   backend: {
@@ -12,17 +14,23 @@ const config = {
   }
 };
 
-// Get current backend URL based on environment
-// Priority: 1. Environment variable, 2. Config based on mode, 3. Local fallback
+// Get current backend URL based on environment keyword
 export const getBackendUrl = () => {
-  // Check for explicit environment variable override
+  // Check for explicit backend URL override from environment variable (takes priority)
   const envUrl = import.meta.env.VITE_BACKEND_URL || import.meta.env.NEXT_PUBLIC_BACKEND_URL;
   if (envUrl) {
     return envUrl;
   }
   
-  // Use config based on production/development mode
-  return isProduction ? config.backend.production : config.backend.local;
+  // Use the keyword set at the top of this file
+  const envKeyword = (ENVIRONMENT || '').toLowerCase().trim();
+  
+  if (envKeyword === 'prod' || envKeyword === 'production') {
+    return config.backend.production;
+  }
+  
+  // Default to local for development or any other value
+  return config.backend.local;
 };
 
 // Export the backend URL as a constant
@@ -32,6 +40,5 @@ export const BACKEND_URL = getBackendUrl();
 export default {
   config,
   getBackendUrl,
-  BACKEND_URL,
-  isProduction
+  BACKEND_URL
 };
