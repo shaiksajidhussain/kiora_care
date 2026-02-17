@@ -1,5 +1,5 @@
-const ENVIRONMENT = 'development'; // Use 'development' for local, 'production' for local testing with prod backend
-// const ENVIRONMENT = 'production'; // Use 'development' for local, 'production' for local testing with prod backend
+// const ENVIRONMENT = 'development'; // Use 'development' for local, 'production' for local testing with prod backend
+const ENVIRONMENT = 'production'; // Use 'development' for local, 'production' for local testing with prod backend
 
 const config = {
   ENVIRONMENT: ENVIRONMENT,
