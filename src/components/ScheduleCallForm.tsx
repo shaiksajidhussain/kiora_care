@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import getInTouchImage from '@/images/getintouch.jpeg';
 
 export interface ScheduleCallFormProps {
   open: boolean;
@@ -37,12 +38,34 @@ export interface ScheduleCallFormProps {
 const inputClass =
   'h-11 rounded-xl border-border bg-background text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background transition-shadow';
 
+const TIME_SLOTS = [
+  { value: '11:00', label: '11:00 AM' },
+  { value: '15:00', label: '3:00 PM' },
+] as const;
+
+const ALLOWED_CITIES = ['greater hyderabad'];
+
+function isValidIndiaMobile(value: string): boolean {
+  const cleaned = value.replace(/\D/g, '');
+  return cleaned.length === 10 && /^[6-9]/.test(cleaned);
+}
+
+function isValidIndiaPincode(value: string): boolean {
+  return /^\d{6}$/.test(value.trim());
+}
+
+function isAllowedCity(city: string): boolean {
+  return ALLOWED_CITIES.includes(city.trim().toLowerCase());
+}
+
 const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleCallFormProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('');
   const [address, setAddress] = useState('');
+  const [city, setCity] = useState('Greater Hyderabad');
+  const [state, setState] = useState('Telangana');
   const [mapLocation, setMapLocation] = useState('');
   const [pincode, setPincode] = useState('');
   const [scheduleDate, setScheduleDate] = useState<Date | undefined>(undefined);
@@ -51,10 +74,57 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+    if (!isValidIndiaMobile(phone)) {
+      errors.phone = 'Please enter a valid 10-digit Indian mobile number (starting with 6, 7, 8 or 9).';
+    }
+    if (!isValidIndiaPincode(pincode)) {
+      errors.pincode = 'Please enter a valid 6-digit Indian pincode.';
+    }
+    if (!city.trim()) {
+      errors.city = 'Please select a city.';
+    } else if (!isAllowedCity(city)) {
+      errors.city = 'We currently serve only Hyderabad and Secunderabad.';
+    }
+    if (!scheduleTime) {
+      errors.scheduleTime = 'Please select a time slot.';
+    }
+    if (!scheduleDate) {
+      errors.scheduleDate = 'Please select a preferred date.';
+    }
+    if (!mapLocation.trim()) {
+      errors.mapLocation = 'Please enter map location or Google Maps link.';
+    }
+    if (!address.trim()) {
+      errors.address = 'Please enter your address.';
+    }
+    if (!state.trim()) {
+      errors.state = 'Please enter state.';
+    }
+    if (!name.trim()) {
+      errors.name = 'Please enter your name.';
+    }
+    if (!email.trim()) {
+      errors.email = 'Please enter your email.';
+    }
+    if (!gender) {
+      errors.gender = 'Please select gender.';
+    }
+    setFieldErrors(errors);
+    setSubmitError(Object.keys(errors).length > 0 ? 'Please correct the errors below.' : '');
+    return Object.keys(errors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError('');
+    setFieldErrors({});
+
+    if (!validateForm()) return;
+
     setIsSubmitting(true);
 
     try {
@@ -72,9 +142,11 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
           fullName: name,
           emailAddress: email,
           phoneNumber: phone,
-          city: address,
+          city: city.trim() || address,
+          state: state.trim() || null,
+          address: address.trim() || null,
           pincode,
-          message: `Schedule a test request${selectedPlan === 'one-time' ? ' (Essential (One time test) - ₹999)' : selectedPlan === '90-days' ? ' (Signature (90 Days plan) - ₹3,999)' : ''}.\nGender: ${gender || 'Not specified'}\nAddress: ${address}\nMap location: ${mapLocation}\nPreferred date: ${scheduleDate ? format(scheduleDate, 'PPP') : 'Not set'}\nPreferred time: ${scheduleTime || 'Not set'}`,
+          message: `Schedule a test request${selectedPlan === 'one-time' ? ' (Essential (One time test) - ₹999)' : selectedPlan === '90-days' ? ' (Signature (90 Days plan) - ₹3,999)' : ''}.\nGender: ${gender || 'Not specified'}\nAddress: ${address}\nCity: ${city}\nState: ${state}\nMap location: ${mapLocation}\nPreferred date: ${scheduleDate ? format(scheduleDate, 'PPP') : 'Not set'}\nPreferred time: ${scheduleTime ? TIME_SLOTS.find(s => s.value === scheduleTime)?.label ?? scheduleTime : 'Not set'}`,
           agreeToContact,
           selectedPlan: selectedPlan || null,
           gender: gender || null,
@@ -83,7 +155,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Failed to send email' }));
-        throw new Error(errorData.error || 'Failed to send email');
+        throw new Error(errorData.error || errorData.message || 'Failed to send email');
       }
 
       setSubmitSuccess(true);
@@ -92,6 +164,8 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
       setPhone('');
       setGender('');
       setAddress('');
+      setCity('Greater Hyderabad');
+      setState('Telangana');
       setMapLocation('');
       setPincode('');
       setScheduleDate(undefined);
@@ -101,8 +175,8 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
         setSubmitSuccess(false);
         onOpenChange(false);
       }, 2000);
-    } catch {
-      setSubmitError('Something went wrong. Please try again.');
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -111,6 +185,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
   const handleOpenChange = (next: boolean) => {
     if (!next && !isSubmitting) {
       setSubmitError('');
+      setFieldErrors({});
       setSubmitSuccess(false);
     }
     onOpenChange(next);
@@ -129,30 +204,29 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
         )}
       >
         <div className="flex flex-col md:flex-row md:min-h-[520px]">
-          {/* Left: visual panel — same theme as form (light/dark) */}
-          <div className="hidden md:flex md:w-[42%] flex-col justify-between rounded-l-2xl md:rounded-l-3xl overflow-hidden bg-card border-r border-border text-foreground p-8">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-6 text-foreground">
+          {/* Left: visual panel with gradient — same theme as form (light/dark) */}
+          <div className="hidden md:flex md:w-[42%] flex-col rounded-l-2xl md:rounded-l-3xl overflow-hidden border-r border-border text-foreground p-8 bg-gradient-to-b from-primary/10 via-primary/5 to-card dark:from-primary/20 dark:via-primary/10 dark:to-card">
+            <div className="shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-primary/15 dark:bg-primary/25 flex items-center justify-center mb-4 text-primary">
                 <CalendarIcon className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-semibold tracking-tight text-foreground">Schedule a test</h3>
-              <p className="text-muted-foreground text-sm mt-2 leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 Pick a date and time that works for you.
               </p>
             </div>
-            <div className="relative mt-6 rounded-xl overflow-hidden h-40 bg-muted">
+            <div className="relative mt-6 rounded-xl overflow-hidden flex-1 min-h-[240px] bg-muted shadow-inner flex items-center justify-center">
               <img
-                src="https://kimshospital.in/wp-content/uploads/2022/12/doctor-nurses-special-equipment.webp"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover opacity-95"
+                src={getInTouchImage}
+                alt="Healthcare professionals"
+                className="max-w-full max-h-full w-full h-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-card/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent pointer-events-none" />
             </div>
           </div>
 
-          {/* Right: form */}
-          <div className="flex-1 flex flex-col overflow-y-auto max-h-[100vh] md:max-h-[90vh]">
-            <DialogHeader className="sticky top-0 p-6 pb-4 pr-12 md:p-8 md:pb-6 md:pr-14 text-left border-b border-border bg-background/95 backdrop-blur">
+          {/* Right: form — same gradient as left */}
+          <div className="flex-1 flex flex-col overflow-y-auto max-h-[100vh] md:max-h-[90vh] bg-gradient-to-b from-primary/10 via-primary/5 to-card dark:from-primary/20 dark:via-primary/10 dark:to-card">
+            <DialogHeader className="sticky top-0 p-6 pb-4 pr-12 md:p-8 md:pb-6 md:pr-14 text-left border-b border-border bg-transparent backdrop-blur-sm">
               <DialogTitle className="text-xl md:text-2xl font-bold tracking-tight text-foreground">
                 Schedule a test
               </DialogTitle>
@@ -160,7 +234,7 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                 Fill in your details and preferred date & time for your test. We’ll get back to you shortly with a confirmation.
               </DialogDescription>
               <p className="text-foreground/90 text-xs md:text-sm mt-3 leading-relaxed max-w-lg">
-                Structured renal care assessment and evidence-based diagnostic pathway designed by our clinical team. Schedule your test to understand your CKD stage and personalised intervention options.
+                Live only in Hyderabad now.
               </p>
               <div className="flex items-baseline gap-2 mt-4">
                 {selectedPlan === '90-days' ? (
@@ -202,11 +276,14 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                     <Input
                       id="schedule-name"
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => { setName(e.target.value); setFieldErrors((prev) => ({ ...prev, name: '' })); }}
                       placeholder="Your full name"
-                      className={inputClass}
+                      className={cn(inputClass, fieldErrors.name && 'border-destructive')}
                       required
                     />
+                    {fieldErrors.name && (
+                      <p className="text-xs text-destructive">{fieldErrors.name}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="schedule-email" className="text-foreground font-medium flex items-center gap-2">
@@ -217,11 +294,14 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                       id="schedule-email"
                       type="email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => { setEmail(e.target.value); setFieldErrors((prev) => ({ ...prev, email: '' })); }}
                       placeholder="you@example.com"
-                      className={inputClass}
+                      className={cn(inputClass, fieldErrors.email && 'border-destructive')}
                       required
                     />
+                    {fieldErrors.email && (
+                      <p className="text-xs text-destructive">{fieldErrors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -231,25 +311,34 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                   <div className="space-y-2">
                     <Label htmlFor="schedule-phone" className="text-foreground font-medium flex items-center gap-2">
                       <Phone className="w-4 h-4 text-muted-foreground" />
-                      Phone
+                      Mobile number
                     </Label>
                     <Input
                       id="schedule-phone"
                       type="tel"
+                      inputMode="numeric"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="Phone number"
-                      className={inputClass}
+                      onChange={(e) => {
+                        const v = e.target.value.replace(/\D/g, '').slice(0, 10);
+                        setPhone(v);
+                        setFieldErrors((prev) => ({ ...prev, phone: '' }));
+                      }}
+                      placeholder="10-digit Indian mobile number"
+                      className={cn(inputClass, fieldErrors.phone && 'border-destructive')}
                       required
+                      maxLength={10}
                     />
+                    {fieldErrors.phone && (
+                      <p className="text-xs text-destructive">{fieldErrors.phone}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="schedule-gender" className="text-foreground font-medium flex items-center gap-2">
                       <User className="w-4 h-4 text-muted-foreground" />
                       Gender
                     </Label>
-                    <Select value={gender} onValueChange={setGender} required>
-                      <SelectTrigger className={cn(inputClass, 'h-11')}>
+                    <Select value={gender} onValueChange={(v) => { setGender(v); setFieldErrors((prev) => ({ ...prev, gender: '' })); }} required>
+                      <SelectTrigger className={cn(inputClass, 'h-11', fieldErrors.gender && 'border-destructive')}>
                         <SelectValue placeholder="Select gender" />
                       </SelectTrigger>
                       <SelectContent>
@@ -259,22 +348,70 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                         <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
                       </SelectContent>
                     </Select>
+                    {fieldErrors.gender && (
+                      <p className="text-xs text-destructive">{fieldErrors.gender}</p>
+                    )}
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="schedule-address" className="text-foreground font-medium flex items-center gap-2">
+                    <Label htmlFor="schedule-address" className="text-foreground font-medium flex items-center gap-2">
                     <MapPinned className="w-4 h-4 text-muted-foreground" />
-                    Address
+                    Address <span className="text-muted-foreground font-normal">(Live in Hyderabad only)</span>
                   </Label>
                   <Input
                     id="schedule-address"
                     value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    placeholder="Street, city, state"
-                    className={inputClass}
+                    onChange={(e) => { setAddress(e.target.value); setFieldErrors((prev) => ({ ...prev, address: '' })); }}
+                    placeholder="Street, area, landmark"
+                    className={cn(inputClass, fieldErrors.address && 'border-destructive')}
                     required
                   />
+                  {fieldErrors.address && (
+                    <p className="text-xs text-destructive">{fieldErrors.address}</p>
+                  )}
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="schedule-city" className="text-foreground font-medium">
+                      City
+                    </Label>
+                    <Select
+                      value={city}
+                      onValueChange={(value) => {
+                        setCity(value);
+                        setFieldErrors((prev) => ({ ...prev, city: '' }));
+                      }}
+                      required
+                    >
+                      <SelectTrigger className={cn(inputClass, 'h-11', fieldErrors.city && 'border-destructive')}>
+                        <SelectValue placeholder="Select city" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Greater Hyderabad">Greater Hyderabad</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {fieldErrors.city && (
+                      <p className="text-xs text-destructive">{fieldErrors.city}</p>
+                    )}
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="schedule-state" className="text-foreground font-medium">
+                      State
+                    </Label>
+                    <Select value={state || 'Telangana'} onValueChange={setState}>
+                      <SelectTrigger className={cn(inputClass, 'h-11', fieldErrors.state && 'border-destructive')}>
+                        <SelectValue placeholder="Telangana" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Telangana">Telangana</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {fieldErrors.state && (
+                      <p className="text-xs text-destructive">{fieldErrors.state}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -285,10 +422,14 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                   <Input
                     id="schedule-map"
                     value={mapLocation}
-                    onChange={(e) => setMapLocation(e.target.value)}
+                    onChange={(e) => { setMapLocation(e.target.value); setFieldErrors((prev) => ({ ...prev, mapLocation: '' })); }}
                     placeholder="Google Maps link or location name"
-                    className={inputClass}
+                    className={cn(inputClass, fieldErrors.mapLocation && 'border-destructive')}
+                    required
                   />
+                  {fieldErrors.mapLocation && (
+                    <p className="text-xs text-destructive">{fieldErrors.mapLocation}</p>
+                  )}
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
@@ -299,11 +440,15 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                     <Input
                       id="schedule-pincode"
                       value={pincode}
-                      onChange={(e) => setPincode(e.target.value)}
-                      placeholder="e.g. 560001"
-                      className={inputClass}
+                      onChange={(e) => { setPincode(e.target.value.replace(/\D/g, '').slice(0, 6)); setFieldErrors((prev) => ({ ...prev, pincode: '' })); }}
+                      placeholder="6-digit pincode (e.g. 500001)"
+                      className={cn(inputClass, fieldErrors.pincode && 'border-destructive')}
                       required
+                      maxLength={6}
                     />
+                    {fieldErrors.pincode && (
+                      <p className="text-xs text-destructive">{fieldErrors.pincode}</p>
+                    )}
                   </div>
                 </div>
 
@@ -316,10 +461,12 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
+                          type="button"
                           variant="outline"
                           className={cn(
                             'w-full h-11 justify-start text-left font-normal rounded-xl border-border',
-                            !scheduleDate && 'text-muted-foreground'
+                            !scheduleDate && 'text-muted-foreground',
+                            fieldErrors.scheduleDate && 'border-destructive'
                           )}
                         >
                           <CalendarIcon className="mr-2 h-4 w-4" />
@@ -330,25 +477,41 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                         <Calendar
                           mode="single"
                           selected={scheduleDate}
-                          onSelect={setScheduleDate}
-                          disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
+                          onSelect={(date) => { setScheduleDate(date ?? undefined); setFieldErrors((prev) => ({ ...prev, scheduleDate: '' })); }}
+                          disabled={(date) => {
+                            const today = new Date(new Date().setHours(0, 0, 0, 0));
+                            const isPast = date < today;
+                            const isSunday = date.getDay() === 0;
+                            return isPast || isSunday;
+                          }}
                           initialFocus
                         />
                       </PopoverContent>
                     </Popover>
+                    {fieldErrors.scheduleDate && (
+                      <p className="text-xs text-destructive">{fieldErrors.scheduleDate}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label className="text-foreground font-medium flex items-center gap-2">
                       <Clock className="w-4 h-4 text-muted-foreground" />
                       Preferred time
                     </Label>
-                    <Input
-                      id="schedule-time"
-                      type="time"
-                      value={scheduleTime}
-                      onChange={(e) => setScheduleTime(e.target.value)}
-                      className={inputClass}
-                    />
+                    <Select value={scheduleTime} onValueChange={setScheduleTime} required>
+                      <SelectTrigger className={cn(inputClass, 'h-11', fieldErrors.scheduleTime && 'border-destructive')}>
+                        <SelectValue placeholder="Select time slot" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {TIME_SLOTS.map((slot) => (
+                          <SelectItem key={slot.value} value={slot.value}>
+                            {slot.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {fieldErrors.scheduleTime && (
+                      <p className="text-xs text-destructive">{fieldErrors.scheduleTime}</p>
+                    )}
                   </div>
                 </div>
 

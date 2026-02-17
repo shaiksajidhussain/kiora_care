@@ -74,6 +74,8 @@ const generateNotificationEmail = (formData) => {
   const safePhone = escapeHtml(formData.phoneNumber);
   const safeEmail = escapeHtml(formData.emailAddress);
   const safeCity = escapeHtml(formData.city) || 'Not provided';
+  const safeState = escapeHtml(formData.state) || 'Not provided';
+  const safeAddress = escapeHtml(formData.address) || 'Not provided';
   const safePincode = escapeHtml(formData.pincode) || 'Not provided';
   const safeMessage = formData.message ? escapeHtml(formData.message).replace(/\n/g, '<br>') : 'No message provided';
   
@@ -119,7 +121,7 @@ const generateNotificationEmail = (formData) => {
           <span class="value">${safeFullName}</span>
         </div>
         <div class="field">
-          <span class="label">Phone Number:</span>
+          <span class="label">Mobile Number:</span>
           <span class="value">${safePhone}</span>
         </div>
         <div class="field">
@@ -131,8 +133,16 @@ const generateNotificationEmail = (formData) => {
           <span class="value">${escapeHtml(formData.gender).charAt(0).toUpperCase() + escapeHtml(formData.gender).slice(1).replace(/-/g, ' ')}</span>
         </div>` : ''}
         <div class="field">
+          <span class="label">Address:</span>
+          <span class="value">${safeAddress}</span>
+        </div>
+        <div class="field">
           <span class="label">City:</span>
           <span class="value">${safeCity}</span>
+        </div>
+        <div class="field">
+          <span class="label">State:</span>
+          <span class="value">${safeState}</span>
         </div>
         <div class="field">
           <span class="label">Pincode:</span>
@@ -159,6 +169,7 @@ const generateConfirmationEmail = (formData) => {
   const safeEmail = escapeHtml(formData.emailAddress);
   const safePhone = escapeHtml(formData.phoneNumber);
   const safeCity = escapeHtml(formData.city) || 'Not provided';
+  const safeState = escapeHtml(formData.state) || 'Not provided';
   const safePincode = escapeHtml(formData.pincode) || 'Not provided';
   
   const planInfo = formData.selectedPlan === 'one-time'
@@ -199,7 +210,7 @@ const generateConfirmationEmail = (formData) => {
           <p style="margin: 5px 0;">📧 Email: ${safeEmail}</p>
           <p style="margin: 5px 0;">📱 Phone: ${safePhone}</p>
           ${formData.gender ? `<p style="margin: 5px 0;">👤 Gender: ${escapeHtml(formData.gender).charAt(0).toUpperCase() + escapeHtml(formData.gender).slice(1).replace(/-/g, ' ')}</p>` : ''}
-          ${safeCity !== 'Not provided' ? `<p style="margin: 5px 0;">📍 Location: ${safeCity}${safePincode !== 'Not provided' ? ' - ' + safePincode : ''}</p>` : ''}
+          ${safeCity !== 'Not provided' || safeState !== 'Not provided' ? `<p style="margin: 5px 0;">📍 Location: ${[safeCity, safeState].filter(Boolean).join(', ')}${safePincode !== 'Not provided' ? ' - ' + safePincode : ''}</p>` : ''}
         </div>
         <div class="footer">
           <p>Best regards,<br><strong>The Kiora Care Team</strong></p>
@@ -224,7 +235,9 @@ const createTableIfNotExists = async () => {
       email_address VARCHAR(255) NOT NULL,
       phone_number VARCHAR(50) NOT NULL,
       gender VARCHAR(50),
+      address VARCHAR(512),
       city VARCHAR(255),
+      state VARCHAR(255),
       pincode VARCHAR(20),
       message TEXT,
       selected_plan VARCHAR(50),
@@ -240,6 +253,9 @@ const createTableIfNotExists = async () => {
 
   try {
     await pool.query(createTableQuery);
+    // Add state/address columns if table already existed without them (ignore if already exist)
+    await pool.query('ALTER TABLE form_submissions ADD COLUMN state VARCHAR(255)').catch((err) => { if (err.code !== '42701') throw err; });
+    await pool.query('ALTER TABLE form_submissions ADD COLUMN address VARCHAR(512)').catch((err) => { if (err.code !== '42701') throw err; });
     console.log('✅ Database table created/verified successfully');
   } catch (error) {
     console.error('❌ Error creating database table:', error.message);
@@ -303,8 +319,8 @@ app.post('/api/send-contact-email', async (req, res) => {
         const insertQuery = `
           INSERT INTO form_submissions (
             form_type, user_type, full_name, email_address, phone_number, gender,
-            city, pincode, message, selected_plan, agree_to_contact
-          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            address, city, state, pincode, message, selected_plan, agree_to_contact
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
           RETURNING id
         `;
         const result = await pool.query(insertQuery, [
@@ -314,7 +330,9 @@ app.post('/api/send-contact-email', async (req, res) => {
           body.emailAddress,
           body.phoneNumber,
           body.gender || null,
+          body.address || null,
           body.city || null,
+          body.state || null,
           body.pincode || null,
           body.message || null,
           body.selectedPlan || null,
