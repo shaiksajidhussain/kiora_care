@@ -15,6 +15,13 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import {
   LogOut,
   Mail,
   FlaskConical,
@@ -23,6 +30,7 @@ import {
   RefreshCw,
   User,
   ChevronRight,
+  Menu,
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
@@ -56,6 +64,7 @@ const AdminDashboard = () => {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState<TabId>('get-in-touch');
   const [search, setSearch] = useState('');
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const fetchData = async () => {
     const token = getAdminToken();
@@ -114,7 +123,12 @@ const AdminDashboard = () => {
         r.email_address?.toLowerCase().includes(q) ||
         r.phone_number?.includes(q) ||
         r.city?.toLowerCase().includes(q) ||
-        r.selected_plan?.toLowerCase().includes(q)
+        r.state?.toLowerCase().includes(q) ||
+        r.pincode?.includes(q) ||
+        r.address?.toLowerCase().includes(q) ||
+        r.gender?.toLowerCase().includes(q) ||
+        r.selected_plan?.toLowerCase().includes(q) ||
+        r.message?.toLowerCase().includes(q)
     );
   }, [tests, search]);
 
@@ -143,7 +157,69 @@ const AdminDashboard = () => {
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-gray-200 bg-white">
         <div className="flex h-14 items-center justify-between px-4 lg:px-6">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            {/* Mobile Drawer Menu */}
+            <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="sm" className="md:hidden p-2">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[280px] sm:w-[300px]">
+                <SheetHeader>
+                  <SheetTitle className="text-left">Menu</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6 flex flex-col gap-2">
+                  <Button
+                    variant={activeTab === 'get-in-touch' ? 'default' : 'ghost'}
+                    className="w-full justify-start gap-3 h-12"
+                    onClick={() => {
+                      setActiveTab('get-in-touch');
+                      setDrawerOpen(false);
+                    }}
+                  >
+                    <Mail className="h-5 w-5" />
+                    <span className="font-medium">Get in touch</span>
+                    {getInTouch.length > 0 && (
+                      <Badge variant="secondary" className="ml-auto">
+                        {getInTouch.length}
+                      </Badge>
+                    )}
+                  </Button>
+                  <Button
+                    variant={activeTab === 'tests' ? 'default' : 'ghost'}
+                    className="w-full justify-start gap-3 h-12"
+                    onClick={() => {
+                      setActiveTab('tests');
+                      setDrawerOpen(false);
+                    }}
+                  >
+                    <FlaskConical className="h-5 w-5" />
+                    <span className="font-medium">Tests</span>
+                    {tests.length > 0 && (
+                      <Badge variant="secondary" className="ml-auto">
+                        {tests.length}
+                      </Badge>
+                    )}
+                  </Button>
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start gap-3 h-12 text-destructive hover:text-destructive hover:bg-destructive/10"
+                      onClick={() => {
+                        handleLogout();
+                        setDrawerOpen(false);
+                      }}
+                    >
+                      <LogOut className="h-5 w-5" />
+                      <span className="font-medium">Logout</span>
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+            
             <div className="flex items-center gap-2">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">
                 K
@@ -153,6 +229,7 @@ const AdminDashboard = () => {
                 <p className="text-xs text-gray-500">Admin Portal</p>
               </div>
             </div>
+            {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1">
               <Button
                 variant={activeTab === 'get-in-touch' ? 'default' : 'ghost'}
@@ -205,7 +282,7 @@ const AdminDashboard = () => {
         </div>
       </header>
 
-      <main className="p-4 lg:p-6 max-w-6xl mx-auto bg-white">
+      <main className="p-4 lg:p-6 max-w-6xl mx-auto bg-white overflow-x-hidden">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-1 text-sm text-gray-500 mb-2 font-medium">
           <span>Home</span>
@@ -262,7 +339,7 @@ const AdminDashboard = () => {
               placeholder={
                 activeTab === 'get-in-touch'
                   ? 'Search by name, email, or phone...'
-                  : 'Search by name, email, phone, or plan...'
+                  : 'Search by name, email, phone, address, city, or plan...'
               }
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -299,32 +376,36 @@ const AdminDashboard = () => {
                   No results match your search.
                 </div>
               ) : (
-                <Table>
-                  <TableHeader>
-                    <TableRow className="bg-primary/5 hover:bg-primary/5 border-gray-200">
-                      <TableHead className="font-semibold text-gray-700">NAME</TableHead>
-                      <TableHead className="font-semibold text-gray-700">EMAIL</TableHead>
-                      <TableHead className="font-semibold text-gray-700">PHONE</TableHead>
-                      <TableHead className="font-semibold text-gray-700">MESSAGE</TableHead>
-                      <TableHead className="font-semibold text-gray-700 text-right">DATE</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredContact.map((row) => (
-                      <TableRow key={row.id} className="border-gray-100 hover:bg-primary/5">
-                        <TableCell className="font-medium text-gray-900">{row.full_name}</TableCell>
-                        <TableCell className="text-gray-600 font-medium">{row.email_address}</TableCell>
-                        <TableCell className="text-gray-900 font-medium">{row.phone_number}</TableCell>
-                        <TableCell className="max-w-[200px] truncate text-gray-600 font-medium" title={row.message || ''}>
-                          {row.message || '—'}
-                        </TableCell>
-                        <TableCell className="text-right text-gray-500 text-xs whitespace-nowrap font-medium">
-                          {format(new Date(row.created_at), 'MMM d, yyyy, h:mm a')}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                  <div className="inline-block min-w-full align-middle">
+                    <Table className="w-full">
+                      <TableHeader>
+                        <TableRow className="bg-primary/5 hover:bg-primary/5 border-gray-200">
+                          <TableHead className="font-semibold text-gray-700 min-w-[120px]">NAME</TableHead>
+                          <TableHead className="font-semibold text-gray-700 min-w-[180px]">EMAIL</TableHead>
+                          <TableHead className="font-semibold text-gray-700 min-w-[120px]">PHONE</TableHead>
+                          <TableHead className="font-semibold text-gray-700 min-w-[150px] hidden md:table-cell">MESSAGE</TableHead>
+                          <TableHead className="font-semibold text-gray-700 text-right min-w-[140px] whitespace-nowrap">DATE</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {filteredContact.map((row) => (
+                          <TableRow key={row.id} className="border-gray-100 hover:bg-primary/5">
+                            <TableCell className="font-medium text-gray-900 min-w-[120px] break-words">{row.full_name}</TableCell>
+                            <TableCell className="text-gray-600 font-medium min-w-[180px] break-all">{row.email_address}</TableCell>
+                            <TableCell className="text-gray-900 font-medium min-w-[120px] whitespace-nowrap">{row.phone_number}</TableCell>
+                            <TableCell className="max-w-[200px] truncate text-gray-600 font-medium hidden md:table-cell" title={row.message || ''}>
+                              {row.message || '—'}
+                            </TableCell>
+                            <TableCell className="text-right text-gray-500 text-xs whitespace-nowrap font-medium min-w-[140px]">
+                              {format(new Date(row.created_at), 'MMM d, yyyy, h:mm a')}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
               )
             ) : tests.length === 0 ? (
               <div className="p-8 text-center text-gray-500 text-sm font-medium">
@@ -335,40 +416,72 @@ const AdminDashboard = () => {
                 No results match your search.
               </div>
             ) : (
-              <Table>
-                <TableHeader>
-                  <TableRow className="bg-primary/5 hover:bg-primary/5 border-gray-200">
-                    <TableHead className="font-semibold text-gray-700">NAME</TableHead>
-                    <TableHead className="font-semibold text-gray-700">EMAIL</TableHead>
-                    <TableHead className="font-semibold text-gray-700">PHONE</TableHead>
-                    <TableHead className="font-semibold text-gray-700">PLAN</TableHead>
-                    <TableHead className="font-semibold text-gray-700">CITY</TableHead>
-                    <TableHead className="font-semibold text-gray-700 text-right">DATE</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredTests.map((row) => (
-                    <TableRow key={row.id} className="border-gray-100 hover:bg-primary/5">
-                      <TableCell className="font-medium text-gray-900">{row.full_name}</TableCell>
-                      <TableCell className="text-gray-600 font-medium">{row.email_address}</TableCell>
-                      <TableCell className="text-gray-900 font-medium">{row.phone_number}</TableCell>
-                      <TableCell>
-                        {row.selected_plan ? (
-                          <Badge className="font-medium bg-primary/10 text-primary border-0">
-                            {row.selected_plan}
-                          </Badge>
-                        ) : (
-                          <span className="text-gray-500 font-medium">—</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="text-gray-600 font-medium">{row.city || '—'}</TableCell>
-                      <TableCell className="text-right text-gray-500 text-xs whitespace-nowrap font-medium">
-                        {format(new Date(row.created_at), 'MMM d, yyyy, h:mm a')}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+                <div className="inline-block min-w-full align-middle">
+                  <Table className="w-full">
+                    <TableHeader>
+                      <TableRow className="bg-primary/5 hover:bg-primary/5 border-gray-200">
+                        <TableHead className="font-semibold text-gray-700 min-w-[120px]">NAME</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[180px]">EMAIL</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[120px]">PHONE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[100px]">GENDER</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[100px]">PLAN</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[120px] hidden lg:table-cell">ADDRESS</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[100px] hidden md:table-cell">CITY</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[100px] hidden lg:table-cell">STATE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[80px] hidden lg:table-cell">PINCODE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 min-w-[200px] hidden xl:table-cell">MESSAGE</TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-right min-w-[140px] whitespace-nowrap">DATE</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredTests.map((row) => (
+                        <TableRow key={row.id} className="border-gray-100 hover:bg-primary/5">
+                          <TableCell className="font-medium text-gray-900 min-w-[120px] break-words">{row.full_name}</TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[180px] break-all">{row.email_address}</TableCell>
+                          <TableCell className="text-gray-900 font-medium min-w-[120px] whitespace-nowrap">{row.phone_number}</TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[100px]">
+                            {row.gender ? (
+                              <span className="capitalize">{row.gender.replace(/-/g, ' ')}</span>
+                            ) : (
+                              <span className="text-gray-400">—</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="min-w-[100px]">
+                            {row.selected_plan ? (
+                              <Badge className="font-medium bg-primary/10 text-primary border-0">
+                                {row.selected_plan === 'one-time' ? 'Essential (₹999)' : row.selected_plan === '90-days' ? 'Signature (₹3,999)' : row.selected_plan}
+                              </Badge>
+                            ) : (
+                              <span className="text-gray-500 font-medium">—</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[120px] break-words hidden lg:table-cell" title={row.address || ''}>
+                            {row.address ? (
+                              <span className="line-clamp-2">{row.address}</span>
+                            ) : (
+                              <span className="text-gray-400">—</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[100px] hidden md:table-cell">{row.city || '—'}</TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[100px] hidden lg:table-cell">{row.state || '—'}</TableCell>
+                          <TableCell className="text-gray-600 font-medium min-w-[80px] hidden lg:table-cell">{row.pincode || '—'}</TableCell>
+                          <TableCell className="max-w-[200px] truncate text-gray-600 font-medium hidden xl:table-cell" title={row.message || ''}>
+                            {row.message ? (
+                              <span className="text-xs">{row.message}</span>
+                            ) : (
+                              <span className="text-gray-400">—</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="text-right text-gray-500 text-xs whitespace-nowrap font-medium min-w-[140px]">
+                            {format(new Date(row.created_at), 'MMM d, yyyy, h:mm a')}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
             )}
           </CardContent>
         </Card>
