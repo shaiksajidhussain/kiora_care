@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import getInTouchImage from '../images/getintouch.jpeg';
 import { getBackendUrl } from '@/config';
 
@@ -329,7 +330,10 @@ const ContactForm = () => {
                       required
                     />
                     <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                      You agree to Kiora getting in touch with you
+                      I consent to Kiora contacting me via phone, SMS, WhatsApp, or email. I confirm that I have read and agree to the{' '}
+                      <Link to="/terms" className="text-primary hover:underline font-medium">Terms of Use</Link>
+                      {' '}and{' '}
+                      <Link to="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>.
                     </span>
                   </label>
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
+import { Link } from 'react-router-dom';
 import { CalendarIcon, MapPin, Clock, User, Mail, Phone, MapPinned, CheckCircle2 } from 'lucide-react';
 import { getBackendUrl } from '@/config';
 
@@ -527,7 +528,11 @@ const ScheduleCallForm = ({ open, onOpenChange, selectedPlan = null }: ScheduleC
                     className="text-xs sm:text-xs text-muted-foreground leading-relaxed"
                   >
                     I consent to Kiora contacting me via phone, SMS, WhatsApp, or email regarding this test
-                    booking and related care. I understand that I can withdraw this consent at any time.
+                    booking and related care. I confirm that I have read and agree to the{' '}
+                    <Link to="/terms" className="text-primary hover:underline font-medium">Terms of Use</Link>
+                    {' '}and{' '}
+                    <Link to="/privacy" className="text-primary hover:underline font-medium">Privacy Policy</Link>.
+                    I understand that I can withdraw this consent at any time.
                   </label>
                 </div>
 

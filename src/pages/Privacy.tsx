@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Link } from 'react-router-dom';
 
 const Privacy = () => {
   return (
@@ -8,67 +9,37 @@ const Privacy = () => {
       <Header />
       
       <main className="w-full flex flex-col items-center max-w-[1200px] mx-auto mt-[120px] md:mt-[180px] px-4 md:px-8 pb-20">
-        <div className="w-full max-w-[900px]">
+        <div className="w-full max-w-[900px] prose prose-slate dark:prose-invert max-w-none">
           {/* Title */}
           <h1 className="text-foreground text-[clamp(42px,5.5vw,68px)] font-medium leading-none tracking-tight mb-4">
             Privacy Policy
           </h1>
           
           <p className="text-muted-foreground text-base md:text-lg mb-8">
-            Kendall Square Technology and Services Pvt. Ltd.
+            Kendall Square Technology and Services Private Limited
           </p>
           
           <p className="text-muted-foreground text-sm md:text-base mb-12">
-            Last updated: 19th November 2025
+            Last updated: February 2026
           </p>
-
-          {/* Introduction */}
-          <div className="mb-12">
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              At Kiora Care, your trust matters to us. This Privacy Policy explains how we collect, use, store, and protect information when you visit kiora.care, operated by Kendall Square Technology and Services Pvt. Ltd. ("we", "us", "our"). By using our Website, you agree to the practices described below.
-            </p>
-          </div>
 
           {/* Section 1 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              1. Information We Collect
+              1. INTRODUCTION
             </h2>
-            
-            <div className="mb-6">
-              <h3 className="text-foreground text-[clamp(20px,2.5vw,24px)] font-semibold mb-4">
-                1.1. Information You Provide
-              </h3>
-              <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-                When you submit the contact form, we collect:
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>1.1</strong> This Privacy Policy ("Policy") is issued by Kendall Square Technology and Services Private Limited ("Kiora", "we", "our", or "us") in accordance with applicable data protection and privacy laws in India ("Applicable Laws"). This Policy applies to all individuals whose Personal Data is collected, received, generated, or otherwise processed by Kiora, including users, visitors, and viewers of the Digital Platform. This Policy describes the types of personal information we may collect from you or that you may provide through Digital Platforms and other interactions including when availing services ("Services").
               </p>
-              <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4">
-                <li>Name</li>
-                <li>Email address</li>
-                <li>Phone number</li>
-                <li>Address</li>
-                <li>Any message or information you voluntarily share</li>
-              </ul>
-              <p className="text-foreground text-base md:text-lg leading-relaxed mt-4">
-                We use this information to respond to your request or to provide information you have asked for.
+              <p>
+                <strong>1.2</strong> Our aim is to detail how we process Personal Data (as defined below) of individuals in India through Digital Platform and other interactions including: (i) Kiora website available at www.kiora.care (the "Website"); (ii) through social media platforms and (iii) other communication channels such as WhatsApp, emails, surveys, mobile or telephone.
               </p>
-            </div>
-
-            <div className="mb-6">
-              <h3 className="text-foreground text-[clamp(20px,2.5vw,24px)] font-semibold mb-4">
-                1.2. Information Collected Automatically
-              </h3>
-              <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-                When you browse the Website, we may collect:
+              <p>
+                <strong>1.3</strong> By accessing our website, mobile application, WhatsApp communication channel, customer-support services, home-visit interface, or by otherwise interacting with any of our digital or offline services, you acknowledge that you have read and understood this Policy. Your Personal Data will be processed only after you provide Consent (as defined below) in accordance this Policy. This Policy applies within the territory of India and to all individuals whose Personal Information is processed by Kiora.
               </p>
-              <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4">
-                <li>IP address</li>
-                <li>Browser and device details</li>
-                <li>Pages visited, links clicked, and time spent</li>
-                <li>Cookies and analytics data (through tools like Google Analytics or similar platforms)</li>
-              </ul>
-              <p className="text-foreground text-base md:text-lg leading-relaxed mt-4">
-                This helps us improve the Website and understand usage patterns. We do not collect any medical or health information through the public website.
+              <p>
+                <strong>1.4</strong> This Policy shall be read in conjunction with the Terms of Use applicable to Digital Platform, where such Terms of Use are relevant and agreed by you while registering on the Kiora digital platform(s) for availing the Services. In the event of any inconsistency, this Privacy Policy shall prevail with respect to matters relating to the processing of Personal Data.
               </p>
             </div>
           </section>
@@ -76,161 +47,300 @@ const Privacy = () => {
           {/* Section 2 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              2. How We Use Your Information
+              2. DEFINITIONS
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-              Your information may be used to:
-            </p>
-            <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4 mb-4">
-              <li>Respond to enquiries submitted through the contact form</li>
-              <li>Improve Website content, design, and user experience</li>
-              <li>Monitor Website traffic and performance</li>
-              <li>Enhance Website security</li>
-              <li>Comply with legal obligations under Indian law, including the Digital Personal Data Protection (DPDP) Act, 2023</li>
-            </ul>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              We do not sell or rent your information to third parties.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                For the purposes of interpreting this Policy, the following terms shall have the meanings assigned to them below. Any terms that are not defined expressly herein shall be interpreted in accordance with the Digital Personal Data Protection Act, 2023 and The Digital Personal Data Protection Rules, 2025 and, where relevant, with other applicable laws and regulations.
+              </p>
+              <p>
+                <strong>2.1. "AI-Generated Output"</strong> refers to analytical summaries, trend evaluations, risk indicators, or interpretive suggestions generated by authorised artificial intelligence systems. These outputs are assistive and subject to clinician review and do not constitute medical advice, diagnosis, or treatment decisions.
+              </p>
+              <p>
+                <strong>2.2. "Child"</strong> refers to an individual who has not completed eighteen years of age.
+              </p>
+              <p>
+                <strong>2.3. "Consent"</strong> refers to a freely given, specific, informed, unconditional, and unambiguous indication of the Data Principal's agreement to the processing of their Personal Data provided through a clear and explicit affirmative action.
+              </p>
+              <p>
+                <strong>2.4. "Data Fiduciary"</strong> refers to Kiora, which determines the purposes and means of processing the Personal Data.
+              </p>
+              <p>
+                <strong>2.5. "Data Principal"</strong> refers to the individual to whom the Personal Data relates and includes: (a) The parents or lawful guardians of Child (an individual who has not completed eighteen years of age); and (b) The lawful guardians of persons with disabilities who are unable to provide consent independently. For simplicity and readability, the terms "you," "your," and "Data Principal" refer to the Data Principal as defined above.
+              </p>
+              <p>
+                <strong>2.6. "Data Processor"</strong> refers to any person that processes Personal Data on behalf of Kiora in accordance with Kiora's instructions and includes cloud service providers, diagnostic partners, payment gateways, nursing agencies, analytics vendors, IT infrastructure providers, and other technical service providers engaged to support Kiora's operations and Services.
+              </p>
+              <p>
+                <strong>2.7. "Digital Platform"</strong> refers to all Kiora's digital systems, including the mobile application, website, backend cloud services, support channels, and third-party integrations.
+              </p>
+              <p>
+                <strong>2.8. "Grievance Officer"</strong> refers to the individual designated by Kiora to address grievances, rights requests, corrections, erasure requests, and consent withdrawal.
+              </p>
+              <p>
+                <strong>2.9. "Personal Data"</strong> means any data in digital form about an identifiable individual, whether directly or indirectly identifiable. This includes any information that Kiora collects, generates, receives, or processes in connection with its operations, Digital Platform, Services, or other interactions that relates to an identifiable Data Principal. For the purposes of this Policy, the categories of Personal Data collected by Kiora are described in Section 3 of this Policy.
+              </p>
+              <p>
+                <strong>2.10. "Processing"</strong> means any wholly or partly automated operation performed on Personal Data. Processing includes activities such as collecting, recording, organising, structuring, storing, adapting, altering, retrieving, using, aligning, combining, indexing, sharing, distributing, disclosing, and erasing or destroying Personal Data.
+              </p>
+            </div>
           </section>
 
           {/* Section 3 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              3. Cookies and Tracking Technologies
+              3. CATEGORIES OF PERSONAL DATA COLLECTED
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-              We use cookies and similar technologies to:
-            </p>
-            <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4 mb-4">
-              <li>Make the Website function properly</li>
-              <li>Understand how visitors engage with content</li>
-              <li>Improve performance and user experience</li>
-            </ul>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              You may choose to disable cookies in your browser settings, though some features may not work as intended.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>3.1. General Notice</strong><br />
+                Kiora provides clear notice of the categories of Personal Data it collects and processes in accordance with the Applicable Law. The specific categories collected depend on the nature of your interaction with Digital Platform, operations, or other interactions (including as a patient, caregiver, nominee, or healthcare professional).
+              </p>
+              <p>
+                <strong>3.2. Categories of Personal Data</strong><br />
+                The following categories of personal data may be collected, generated, or received by Digital Platform, operations, services, or other interactions.
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>(a) Name, gender, date of birth, address, mobile number, email address, emergency contacts, caregiver details, and guardian information.</li>
+                <li>(b) Medical and health-related information of the Data Principal shared with Kiora, including medical records such as diagnosis, prescription, medical tests, bills, etc.,</li>
+                <li>(c) Technical and Communication Information related to the following:
+                  <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
+                    <li>(i) IP addresses, device identifiers, application logs, location metadata, browser information, timestamps, cookies, analytics data, and performance logs.</li>
+                    <li>(ii) Data collected through WhatsApp, SMS, email, telephonic interactions, teleconsultation platforms, and customer-support systems.</li>
+                    <li>(iii) Financial and transactional Information related to payment timestamps, subscription details, transaction identifiers, and other transaction metadata</li>
+                    <li>(iv) Data shared by attending doctors, caregivers, diagnostic partners, nursing organisations, or hospitals</li>
+                    <li>(v) CCTV footage from visits to Kiora premises and photographs or video recordings captured during Kiora-organised events or activities.</li>
+                  </ul>
+                </li>
+              </ul>
+              <p>
+                <strong>3.3.</strong> When a healthcare professional engages with Kiora, we may also collect:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>(a) Professional credentials, educational background, affiliations, work history, and information provided through résumés or CVs</li>
+                <li>(b) Details of participation in Kiora programs, product-related activities, or professional engagements.</li>
+                <li>(c) Information about professional interactions with Kiora, prescribing behaviour relating to Kiora products, and the agreements or financial interactions executed with Kiora.</li>
+                <li>(d) Any information voluntarily shared by the Healthcare Professional about themselves or their household</li>
+                <li>(e) Information collected during Kiora-hosted events, trainings, or activities attended by the Healthcare Professional.</li>
+                <li>(f) Publicly available information relevant to professional practice, such as licensing details, disciplinary records, prior litigation, regulatory proceedings, and due diligence-related data.</li>
+              </ul>
+              <p>
+                <strong>3.4.</strong> Where Kiora collects any sensitive information (such as health data, payment information, biometrics, etc.), we will do so only with the Data Principal's consent and in accordance with Applicable Laws.
+              </p>
+              <p>
+                <strong>3.5.</strong> The information may be collected using various technologies, such as cookies and Internet tags.
+              </p>
+            </div>
           </section>
 
           {/* Section 4 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              4. Sharing of Information
+              4. PURPOSE OF PROCESSING PERSONAL DATA
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-              We may share your information only in the following situations:
-            </p>
-            <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4 mb-4">
-              <li><strong>Service Providers:</strong> Vendors who support Website hosting, analytics, email communication, or related infrastructure.</li>
-              <li><strong>Legal Requirements:</strong> If required by law, regulation, or governmental authority.</li>
-              <li><strong>Business Changes:</strong> In the event of a merger, acquisition, or restructuring, your information may be transferred to the new entity.</li>
-            </ul>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              We do not share your information with third parties for marketing or advertising purposes.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>4.1.</strong> Kiora will use Personal Data to provide Services, where applicable, respond to queries, provide customer service, for audits, trainings, quality improvements, and to fulfil legal and regulatory obligations, ensure security and to communicate with the Data Principal.
+              </p>
+              <p>
+                <strong>4.2.</strong> Where Data Principal avails Services, Kiora will process Personal Data to deliver the Services. This includes recording and analysing medical conditions, coordinating nurse visits, enabling nutritional support, and generating clinical summaries. Kiora processes Personal Data to coordinate diagnostic investigations, schedule laboratory tests, receive diagnostic results, evaluate reports, and maintain a longitudinal clinical record for continuity of care.
+              </p>
+              <p>
+                <strong>4.3.</strong> AI-assisted systems will be used to generate analytical insights, risk summaries, trend evaluations, and pattern recognition, strictly as assistive clinical tools. All such processing will be done only with explicit consent, where such consent is required under Applicable Law and outputs will be reviewed by qualified clinicians to ensure alignment with the law.
+              </p>
+              <p>
+                <strong>4.4.</strong> Personal Data will be processed to manage platform operations, authenticate user accounts, schedule appointments, generate reminders, and support service delivery.
+              </p>
+              <p>
+                <strong>4.5.</strong> Kiora may aggregate and/or de-identify data about customers and site visitors and use it to conduct research, data analysis, and to help us develop new products and enhance services at Kiora.
+              </p>
+              <p>
+                <strong>4.6.</strong> Kiora will also identify usage trends, recognize new or past visitors and their preferences to determine the effectiveness its promotional campaigns, personalize content and offer Data Principal the opportunity to receive notifications and participate in surveys about Kiora's products or services, our special promotions, unless Kiora receives written notice of Data Principal's intention to opt out of receiving all Kiora's direct marketing communications. To opt out, review Section 6 below.
+              </p>
+              <p>
+                <strong>4.7.</strong> Kiora may also process the Data Principal's health and medical information to manage, conduct research, provide patient support programs, distribute and market its products, manage compassionate use and expanded access programs and track adverse event reports subject to applicable consent requirements under Applicable Laws.
+              </p>
+            </div>
           </section>
 
           {/* Section 5 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              5. How We Secure Your Data
+              5. SHARING OF PERSONAL INFORMATION
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-              We take the protection of your information seriously. Kiora Care uses a combination of technical, organisational, and process-level safeguards to secure your data, including:
-            </p>
-            <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4 mb-4">
-              <li>Encrypted connections between your browser and our servers</li>
-              <li>Access-controlled storage systems that limit data visibility to authorised personnel</li>
-              <li>Regular security reviews and continuous monitoring for potential vulnerabilities</li>
-              <li>Role-based access controls ensuring information is handled only for legitimate purposes</li>
-              <li>Due-diligence checks on third-party vendors to ensure strong data protection standards</li>
-              <li>Data minimisation and limited retention, collecting only what is necessary and retaining it only as long as needed</li>
-              <li>Secure backup and recovery processes to prevent accidental loss</li>
-            </ul>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              These safeguards help ensure that your personal information is handled responsibly and protected in accordance with applicable Indian data protection laws.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>5.1. Authorised Disclosures:</strong> Kiora may disclose or provide access to the Personal Data of Data Principal strictly on a need-to-know basis to its authorised Service Providers, contractors, and third parties ("Service Provider") who are engaged to perform functions necessary for the delivery, operation, Digital Platform, Services, or other lawful business purposes described in this Policy. Such Service Providers include, without limitation:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>(a) empanelled doctors, nurses, nutritionists, and care-management personnel (whether engaged directly by Kiora or through third-party nursing organisations) for the purposes of monitoring, teleconsultations, home visits, nutritional assessment, and other clinically relevant activities.</li>
+                <li>(b) technology and infrastructure partners, including cloud hosting services, WhatsApp and telecommunications platforms, analytics and support vendors, device integration partners, and IT security providers.</li>
+                <li>(c) payment processors and financial transaction partners for payment processing and subscription management</li>
+              </ul>
+              <p>
+                <strong>5.2. Service Integrations:</strong> For certain services, Personal Data may be shared with laboratory partners, diagnostic networks, hospitals, or insurance companies solely for enabling diagnostic assessments, integrating health records, facilitating claims, or providing service-specific functionalities.
+              </p>
+              <p>
+                <strong>5.3. Contractual Safeguards:</strong> Every Service Provider receiving Personal Data shall be bound by a written contract or enforceable legal obligation requiring such Service Provider to: (a) maintain the confidentiality of Personal Data; (b) Implement administrative, technical, and organisational safeguards consistent with Applicable Law; (c) process Personal Data exclusively on Kiora's documented instructions and for no other purpose; (d) refrain from retaining, using, disclosing, or transferring Personal Data except to the extent necessary to perform contracted services or purposes described in this Policy; and (e) securely delete or return all Personal Data to Kiora upon termination or expiry of the engagement.
+              </p>
+              <p>
+                <strong>5.4. Prohibition on Sale:</strong> Kiora does not sell, rent, license, or otherwise commercially monetise Personal Data. Personal Data may, however, be transferred in the context of a merger, acquisition, investment transaction, corporate restructuring, or sale of Kiora's assets or service lines, provided that the recipient entity assumes the same data-protection obligations set out in this Privacy Policy and processes the Personal Data exclusively for lawful and legitimate purposes consistent with those for which it was initially collected.
+              </p>
+              <p>
+                <strong>5.5. Mandatory Legal Disclosures:</strong> Kiora may disclose Personal Data, where required, to comply with Applicable Law, including lawful requests from governmental authorities, law enforcement agencies, regulatory bodies, courts, or tribunal orders. Disclosures may also be made to external professional advisers, such as auditors or legal counsel, to the extent strictly necessary for compliances, dispute resolution, regulatory filings, or legal claims.
+              </p>
+              <p>
+                <strong>5.6. No Unauthorised Sharing:</strong> Except as expressly provided in this Clause 5, Kiora shall not disclose Personal Data to any third party without obtaining the specific, and informed consent from the Data Principal, unless such sharing is otherwise permitted under Applicable Law.
+              </p>
+              <p>
+                <strong>5.7</strong> If Data Principal chooses not to share their Personal Data with us, it will affect or limit Kiora's ability to respond to queries, engage with them, or provide the requested products, services, or functionalities, as applicable.
+              </p>
+            </div>
           </section>
 
           {/* Section 6 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              6. Data Retention
+              6. CONSENT MECHANISM
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-              We retain your information:
-            </p>
-            <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4 mb-4">
-              <li>Only for as long as necessary to fulfil the purpose for which it was collected</li>
-              <li>For improving or analysing Website performance</li>
-              <li>As required by applicable laws and regulations</li>
-            </ul>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              After this period, your information is securely deleted or anonymised.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>6.1.</strong> Kiora obtains consent through explicit and verifiable affirmative actions, such as OTP authentication, digital checkbox confirmations, or digitally recorded acknowledgements. Consent is specific, informed, and freely revocable in accordance with the law.
+              </p>
+              <p>
+                <strong>6.2.</strong> Upon withdrawal of consent, Kiora shall cease further processing of the relevant Personal Data, except to the limited extent that retention or continued processing is required or permitted under Applicable Law.
+              </p>
+            </div>
           </section>
 
           {/* Section 7 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              7. Your Rights
+              7. PERSONAL DATA OF CHILD AND PERSONS WITH DISABILITIES
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-              Under Indian law, including the DPDP Act, you have the right to:
-            </p>
-            <ul className="list-disc list-inside text-foreground text-base md:text-lg leading-relaxed space-y-2 ml-4 mb-4">
-              <li>Access the personal information we hold about you</li>
-              <li>Request corrections or updates</li>
-              <li>Ask for deletion of your personal information</li>
-              <li>Withdraw consent for communication</li>
-            </ul>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              You may exercise these rights by writing to: <a href="mailto:care@kiora.care" className="text-primary hover:underline">care@kiora.care</a>
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>7.1</strong> Kiora will need to process the Personal Data of a Child and of persons with disabilities who are unable to provide valid Consent independently. In such cases, the Consent provided by the parent or lawful guardian, as the case may be, will be treated as the consent of the Data Principal
+              </p>
+              <p>
+                <strong>7.2</strong> Parents or lawful guardians may review, correct, or request deletion of the Personal Data of the Child or the person with a disability by contacting us through the grievance redressal mechanism provided in this Policy.
+              </p>
+              <p>
+                <strong>7.3</strong> Where a Child attains the age of eighteen years, or a person with a disability becomes capable of providing valid Consent, Kiora may require fresh Consent from that individual for the continued processing of their Personal Data.
+              </p>
+            </div>
           </section>
 
           {/* Section 8 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              8. Third-Party Websites
+              8. CROSS-BORDER DATA TRANSFERS
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              Our Website may link to external sites. We are not responsible for their privacy practices or content. We encourage you to review their respective privacy policies.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>8.1.</strong> The Personal Data provided to Kiora in connection with Digital Platform, operations, Services, or other interactions may be transferred by Kiora or processed, transferred, stored or disclosed to recipients in a jurisdiction outside India. Such transfers are undertaken for the purpose described under Section 4 of this Policy.
+              </p>
+              <p>
+                <strong>8.2.</strong> The Personal Data may be transferred to any jurisdiction worldwide that may not provide the same level of data protection as in India. Where such a transfer happens, Kiora will employ contractual or other reasonable means to ensure appropriate safeguards are in place to protect the data in accordance with our policies and applicable privacy and data protection laws and related cross-border requirements.
+              </p>
+              <p>
+                <strong>8.3.</strong> Where Personal Data is processed on cloud infrastructure located outside India, Kiora will ensure compliance with Applicable Laws.
+              </p>
+            </div>
           </section>
 
           {/* Section 9 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              9. Children's Privacy
+              9. DATA RETENTION
             </h2>
             <p className="text-foreground text-base md:text-lg leading-relaxed">
-              The Website is intended for use by adults. We do not knowingly collect personal information from individuals under 18 years of age.
+              Kiora shall retain Personal Data only for as long as is necessary to fulfil the purposes for which it was collected, including for providing Services, responding to enquiries, complying with legal and regulatory obligations, tax purposes, resolving disputes, enforcing agreements, or for other lawful purposes described in this Policy. Personal Data shall be deleted or anonymised once such purposes are fulfilled, unless retention is required or permitted under Applicable Law.
             </p>
           </section>
 
           {/* Section 10 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              10. Changes to This Privacy Policy
+              10. RIGHTS OF DATA PRINCIPALS
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed">
-              We may update this Privacy Policy periodically. Any changes will be posted here with an updated "Last updated" date. We encourage you to review this page occasionally.
-            </p>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>10.1.</strong> Subject to the Applicable Laws, the Data Principal has the right to access the Personal Data processed by Kiora, request correction of inaccurate or incomplete Personal Data, withdraw consent where processing is based on consent, and request deletion of Personal Data that is no longer required for the purposes for which it was collected or where continued processing is unlawful. Data Principal also has the right to seek grievance redressal from Kiora's designated grievance officer or Data Protection Officer. The Data Principal also has the right to nominate another individual to exercise their rights under this Policy in accordance with Applicable Laws.
+              </p>
+              <p>
+                <strong>10.2.</strong> Kiora may verify the Data Principal's identity before responding to any request relating to the Personal Data, to ensure that such Personal Data is disclosed only to the individual to whom it pertains or to an authorised representative. Where a request is submitted through an authorised representative, Kiora may require documentation establishing the representative's authority.
+              </p>
+              <p>
+                <strong>10.3.</strong> Kiora may decline a Data Principal's request for access, correction, erasure, or any other request made under this Privacy Policy, for any one of the following: if Kiora is unable to reasonably verify the identity of the requester or, if the request falls within an exception permitted under Applicable Laws or, if Kiora is required to retain or continue processing the Personal Data in order to comply with legal or regulatory obligations or, for purposes such as dispute resolution or the establishment, exercise, or defence of legal claims. Where a request is refused, Kiora will make reasonable efforts to inform the Data Principal of the same.
+              </p>
+              <p>
+                <strong>10.4.</strong> The Data Principal may submit requests relating to their privacy rights through the channels specified in Section 14 of this Privacy Policy. Kiora may retain specific Personal Data submitted in connection with transactions or record-keeping requirements, even after a deletion request, where permitted by Applicable Law.
+              </p>
+            </div>
           </section>
 
           {/* Section 11 */}
           <section className="mb-10">
             <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
-              11. Contact Us
+              11. THIRD PARTY LINKS
             </h2>
-            <p className="text-foreground text-base md:text-lg leading-relaxed ">
-              For questions, concerns, or privacy-related requests, please reach out to:
-            </p>
             <p className="text-foreground text-base md:text-lg leading-relaxed">
-              Kendall Square Technology and Services Pvt. Ltd.
+              Kiora's digital properties may contain links to websites, applications, or services operated by third parties. Kiora does not control or assume responsibility for the privacy practices of any third parties. Individuals are advised to review the privacy policies of any third-party services before agreeing to submit Personal Data.
             </p>
+          </section>
+
+          {/* Section 12 */}
+          <section className="mb-10">
+            <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
+              12. DATA BREACH MANAGEMENT
+            </h2>
             <p className="text-foreground text-base md:text-lg leading-relaxed">
-              Email: <a href="mailto:care@kiora.care" className="text-primary hover:underline">care@kiora.care</a>
+              In the event of a Personal Data breach that is likely to cause immense harm to Data Principals, Kiora will notify the concerned and the Data Protection Board of India. Kiora will take appropriate remedial and corrective measures to contain, investigate, and mitigate such breach.
+            </p>
+          </section>
+
+          {/* Section 13 */}
+          <section className="mb-10">
+            <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
+              13. COOKIES AND TRACKING TECHNOLOGIES
+            </h2>
+            <div className="space-y-4 text-foreground text-base md:text-lg leading-relaxed">
+              <p>
+                <strong>13.1</strong> When You use the Digital Platform, our servers (which may be hosted by a third-party service provider) may collect information indirectly and automatically about your activities on the Digital Platform, for instance by way of cookies, web beacons or web analytics. This information is maintained distinctly and is not ordinarily used by Kiora to directly identify you except where such information is voluntarily provided by You through the Digital Platform and processed in accordance with this Policy.
+              </p>
+              <p>
+                <strong>13.2</strong> In some cases, we collect this information through cookies, pixel tags, and similar technologies that create and maintain unique identifiers for functional, analytical, and security-related purposes, in accordance with this Policy. Web beacons are graphic image files embedded in a web page that provides information from the user's browser. This allows us to monitor and ascertain the number of users using the Digital Platform and, where applicable, the effectiveness of Digital Platform features and content.
+              </p>
+              <p>
+                <strong>13.3</strong> Web analytics are services provided by third parties in connection with a website. We may use these services to identify usability issues and improve our Digital Platform Experience. These services process technical and usage information in an aggregated manner and are not used by Kiora to track individual browsing behaviour across unrelated websites or applications.
+              </p>
+              <p>
+                <strong>13.4</strong> We will store small text files called cookies in your device to enable certain features of the Digital Platform. These are used to store user preferences experience. You have the option to change your browser or device settings to accept or decline the cookies. Where applicable, users may also manage cookie preferences through controls made available on the Digital Platform. Please note that disabling certain cookies is likely to affect the functionality of the Digital Platform. Any information collected through cookies is used for purposes consistent with this Policy.
+              </p>
+              <p>
+                <strong>13.5</strong> When you provide your mobile phone number and/or e-mail address, Kiora or its authorised service providers may contact you in connection with your use of the Services, Digital Platform, or other lawful interactions with Kiora. Such Service Providers are contractually required to maintain confidentiality and to use the Personal Information only for the purpose it is disclosed. The use of cookies or similar technologies by these third-party service providers is governed by their respective privacy policies and is not covered by this Policy.
+              </p>
+            </div>
+          </section>
+
+          {/* Section 14 */}
+          <section className="mb-10">
+            <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
+              14. CHANGES TO THE POLICY
+            </h2>
+            <p className="text-foreground text-base md:text-lg leading-relaxed">
+              Kiora reserves the right to amend this Privacy Policy at any time. Changes will be posted on our website, including the update date. We may also communicate with Data Principals through other channels to inform them about any changes in this Policy.
+            </p>
+          </section>
+
+          {/* Section 15 */}
+          <section className="mb-10">
+            <h2 className="text-foreground text-[clamp(28px,4vw,36px)] font-semibold mb-6">
+              15. GRIEVANCE OFFICER
+            </h2>
+            <p className="text-foreground text-base md:text-lg leading-relaxed">
+              Data Principals may contact us for any grievances or privacy-related requests at <a href="mailto:care@kiora.care" className="text-primary hover:underline">care@kiora.care</a>.
             </p>
           </section>
         </div>
@@ -244,5 +354,3 @@ const Privacy = () => {
 };
 
 export default Privacy;
-
-
